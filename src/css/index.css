@@ -1,0 +1,26 @@
+/**Reset CSS
+ * This is a CSS reset that removes default browser styles
+ * and sets a consistent baseline for styling across all elements.
+*/
+* {
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+  box-sizing: border-box;
+  font-family: 'Arial', sans-serif;
+  text-decoration: none;
+  list-style: none;
+  border: none;
+  cursor: default;
+  font-weight: normal;
+  box-sizing: border-box;
+}
+
+/**Global Styles
+ * This section contains global styles that apply to the entire application.
+ * It includes styles for the body, headings, and links.
+*/
+body {
+  color: #f0f0f0;
+  background-color: #132738;
+}
