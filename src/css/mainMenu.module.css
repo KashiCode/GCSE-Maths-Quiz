@@ -4,8 +4,8 @@
 .background{
     position:relative;
     display: inline-block;
-    background: #000000;
-    background: linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(3, 22, 26, 1) 12%, rgba(37, 77, 107, 1) 71%, rgba(59, 114, 125, 1) 100%);
+    background: #0b2633;
+    background: linear-gradient(180deg, rgba(11, 38, 51, 1) 0%, rgba(19, 39, 56, 1) 12%, rgba(26, 53, 82, 1) 71%, rgba(52, 87, 117, 1) 100%);
     position: absolute;
     width: 100%;
     min-height: 69em;
