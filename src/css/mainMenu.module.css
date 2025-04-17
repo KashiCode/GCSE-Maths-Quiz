@@ -23,14 +23,14 @@
 
 .bubbles span{
     position: relative;
-    width: 20px;
-    height: 20px;
+    width: 1.5em;
+    height: 1.5em;
     margin: 1.3vw;
     border-radius: 50%;
     background-color: aqua;
-    box-shadow: 0 0 0 10px rgba(8, 100, 128, 0.5),
-    0 0 50px rgba(0, 255, 255,0.5),
-    0 0 100px rgba(0, 255, 255,0.5);
+    box-shadow: 0 0 0 0.8em rgba(8, 100, 128, 0.5),
+    0 0 3.5em rgba(0, 255, 255,0.5),
+    0 0 7em rgba(0, 255, 255,0.5);
     animation: animate 35s linear infinite;
     animation-delay: calc(-1s * var(--i));
     --xDirection: 1;
@@ -67,7 +67,7 @@
 
 @keyframes animate{
     0%{
-        transform: translateY(100vh) translateX(0px) scale(0.3);
+        transform: translateY(60em) translateX(0px) scale(0.3);
         opacity: 0;
     }
     25%{
@@ -141,4 +141,29 @@
     /* background-color: black;
     border-color: black; */
     color: white;
+}
+
+@media (max-width: 600px) {
+    .bubbles span{
+        width: 0.6em;
+        height: 0.6em;
+        box-shadow: 0 0 0 0.4em rgba(8, 100, 128, 0.5),
+        0 0 1.75em rgba(0, 255, 255,0.5),
+        0 0 3.5em rgba(0, 255, 255,0.5);
+    }
+
+    .mainMenuContainer{
+        width: 90%;
+        top: 5em;
+    }
+    .mainMenuContainer h1{
+        font-size: 2rem;
+    }
+    .button{
+        font-size: 1.5em;
+    }
+    .text{
+        font-size: 1.2em;
+    }
+    
 }
