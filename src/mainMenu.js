@@ -40,7 +40,7 @@ const MainMenu = () => {
       <div className={styles.mainMenuContainer}>
         <h1>Welcome</h1>
         <p className={styles.text}>This is the main menu.</p>
-        <p className={styles.button}>Option A</p>
+        <p className={styles.button} onClick={() => navigate("/genericquiz")}>Option A</p>
         <p className={styles.button}>Option B</p>
         <p className={styles.button}>Option C</p>
         <p className={styles.button}>Option D</p>
