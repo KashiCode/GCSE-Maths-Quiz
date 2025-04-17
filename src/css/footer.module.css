@@ -41,12 +41,17 @@
     font-style: italic;
 }
 
+/**Media queries for smaller screen sizes
+ * Footer now changes to be more appropriate for smaller screen sizes
+*/
 @media only screen and (max-width: 600px) {
+    /*Size of footer improved*/
     .footer {
         height: 15em;
         padding: 0.4em;
     }
 
+    /*Arrangement of footer links improved*/
     .footer a {
         font-size: 1em;
         display: block;
