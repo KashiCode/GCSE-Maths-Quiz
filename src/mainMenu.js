@@ -6,11 +6,19 @@ import Footer from './footer.js';
 
 const MainMenu = () => {
 
+  const [animate,setAnimate] = React.useState(false);
+
   const navigate = useNavigate();
+
+  const triggerAnimation = () => {
+    setAnimate(true);
+
+    setTimeout(() => navigate("/genericquiz"), 750);
+  }
 
   return (
     <div className={styles.background}>
-      <div className={styles.bubbles}>
+      <div className={styles.bubbles + " " + (animate ? styles.fadeoutBubbles: "")}>
         <span style={{ "--i":12}}></span>
         <span style={{ "--i":7}}></span>
         <span style={{ "--i":21}}></span>
@@ -37,10 +45,10 @@ const MainMenu = () => {
         <span style={{"--i":11}}></span>
         <span style={{"--i":7}}></span>
       </div>
-      <div className={styles.mainMenuContainer}>
+      <div className={styles.mainMenuContainer + " " + (animate ? styles.fadeoutContainer: "")}>
         <h1>Welcome</h1>
         <p className={styles.text}>This is the main menu.</p>
-        <p className={styles.button} onClick={() => navigate("/genericquiz")}>Option A</p>
+        <p className={styles.button} onClick={() => triggerAnimation()}>Option A</p>
         <p className={styles.button}>Option B</p>
         <p className={styles.button}>Option C</p>
         <p className={styles.button}>Option D</p>

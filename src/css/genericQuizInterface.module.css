@@ -11,6 +11,7 @@
     min-height: 66em;
     height: 100vh;
     overflow-x: hidden;
+    overflow-y: hidden;
 }
 
 /**This is the css to create the main appearance for the quiz
@@ -27,6 +28,39 @@
     border-radius: 15px;
     padding: 20px;
     background-color: rgb(106, 120, 139);
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+/**This is the css to animate the quiz in upon loading the page
+ * It causes the quiz to fade in from the bottom of the screen
+*/
+@keyframes fadeIn{
+    0%{
+        opacity:0;
+        transform: translateY(100%) translateX(-50%);
+    }
+    100%{
+        opacity:1;
+    }
+}
+
+/**This is the css to animate the quiz out upon leaving the page
+ * It causes the quiz to fade out from the bottom of the screen
+*/
+.fadeOutContainer{
+    animation: fadeOut 0.7s ease-in-out;
+}
+
+@keyframes fadeOut{
+    0%{
+        opacity:1;
+        transform: translateY(0%) translateX(-50%);
+    }
+    100%{
+        opacity:0;
+        transform: translateY(-200%) translateX(-50%);
+    }
+    
 }
 
 .quizHeader{

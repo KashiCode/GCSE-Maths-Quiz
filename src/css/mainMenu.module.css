@@ -11,6 +11,7 @@
     min-height: 69em;
     height: 100vh;
     overflow-x: hidden;
+    overflow-y: hidden;
 }
 
 /**The css to create the animated bubbles background
@@ -19,6 +20,7 @@
 .bubbles{
     position: relative;
     display: flex;
+    animation: fadeinBubbles 0.7s ease-in-out forwards;
 }
 
 .bubbles span{
@@ -88,6 +90,37 @@
     }
 }
 
+/**This creates the fadein animation for the bubbles when the main menu is opened
+ * It causes the bubbles of the main menu to fade in and move up the screen
+*/
+@keyframes fadeinBubbles{
+    0%{
+        opacity: 0;
+        transform: translateY(500%);
+    }
+    100%{
+        opacity: 1;
+        transform: translateY(0%);
+    }
+}
+
+/**This creates the fadeout animation for the bubbles when the main menu is closed
+ * It causes the bubbles of the main menu to fade out and move up the screen
+*/
+.fadeoutBubbles{
+    animation: fadeoutBubbles 0.7s ease-in-out forwards;
+}
+
+@keyframes fadeoutBubbles{
+    0%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
+        transform: translateY(-500%);
+    }
+}
+
 /**This is the css to create the main appearance for the main menu
  * Creates the main menu container and the buttons of the main menu
 */
@@ -101,6 +134,38 @@
     border-radius: 15px;
     padding: 20px;
     /* background-color: rgba(180, 180, 180, 0.3); */
+    animation: fadeinContainer 0.5s ease-in-out forwards;
+}
+
+/**This creates the fadein animation for the container when the main menu is opened
+ * It causes the main menu to fade in and move up the screen
+*/
+@keyframes fadeinContainer{
+    0%{
+        opacity: 0;
+        transform: translateY(350%) translateX(-50%);
+    }
+    100%{
+        opacity: 1;
+        transform: translateY(0%) translateX(-50%);
+    }
+}
+
+/**This is the css to create the fadeout animation for the main menu
+ * Causes the main menu to fade out and move up the screen when the quiz is started
+*/
+.fadeoutContainer{
+    animation: fadeoutContainer 0.7s ease-in-out forwards;
+}
+
+@keyframes fadeoutContainer{
+    0%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
+        transform: translateY(-500%) translateX(-50%);
+    }
 }
 
 .mainMenuContainer h1{
