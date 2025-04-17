@@ -2,6 +2,8 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './css/mainMenu.module.css';
 
+import Footer from './footer.js';
+
 const MainMenu = () => {
 
   const navigate = useNavigate();
@@ -44,6 +46,7 @@ const MainMenu = () => {
         <p className={styles.button}>Option D</p>
         <p className={styles.button}>Option E</p>
       </div>
+      <Footer />
     </div>
   );
 }

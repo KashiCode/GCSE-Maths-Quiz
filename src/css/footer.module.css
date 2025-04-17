@@ -1,0 +1,42 @@
+/**General footer container
+ * Creates the dimensions for the footer that holds the footer links
+*/
+.footer{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 8em;
+    background-color: rgb(40, 38, 81);
+    text-align: center;
+    overflow-y: hidden;
+    padding: 2em;
+}
+
+/**Styling of footer links
+ * Creates the styling for the footer links and the hover and active states
+*/
+.footer a{
+    color: rgb(172, 172, 172);
+    margin:3.5em;
+    font-size: 1.2em;
+}
+
+.footer a:hover{
+    text-decoration: underline;
+}
+
+.footer a:active{
+    color: rgb(37, 80, 160)
+}
+
+/**Styling for footer text
+ * Creates styling for the footer text describing website author
+*/
+.footer p{
+    color: rgb(94, 94, 94);
+    font-size: 0.9em;
+    margin: 1.5em;
+    padding: 0.5em;
+    text-align: center;
+    font-style: italic;
+}
