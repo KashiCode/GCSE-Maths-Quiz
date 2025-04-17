@@ -8,10 +8,17 @@ const Footer = () => {
 
   return (
     <div className={styles.footer}>
-        <a href="https://www.linkedin.com/in/dawidpaluch/">LinkedIn</a>
-        <a href="https://github.com/dawid-paluch">Github</a>
-        <a href="">Email</a>
-        <p>Website made by Dawid Paluch</p>
+        <div className={styles.links + " " + styles.footerContent}>
+          <p className={styles.footerTitle}>Links</p>
+          <a href="https://www.linkedin.com/in/dawidpaluch/">LinkedIn</a>
+          <a href="https://github.com/dawid-paluch">Github</a>
+        </div>
+        <hr className={styles.line}/>
+        <div className={styles.contactDetails + " " + styles.footerContent}>
+          <p className={styles.footerTitle}>Contact Details</p>
+          <p className={styles.contactDetail}>Email: dawid1paluch@gmail.com</p>
+        </div>
+        <p className={styles.credits}>Website made by Dawid Paluch</p>
     </div>
   );
 }

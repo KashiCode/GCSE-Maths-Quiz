@@ -5,20 +5,47 @@
     position: absolute;
     bottom: 0;
     width: 100%;
-    height: 8em;
+    height: 12em;
     background-color: rgb(50, 55, 104);
     text-align: center;
     overflow-y: hidden;
-    padding: 2em;
+    padding: 0.5em 0;
 }
 
-/**Styling of footer links
- * Creates the styling for the footer links and the hover and active states
+/**Styling for general footer elements
+ * This includes some general styling for the footer elements such as the text color
 */
+.footer *{
+    color: rgb(172, 172, 172);
+    font-size: 1em;
+    text-align: left;
+}
+
+/**Styling of footer contents
+ * Creates the styling for the footer content and footer links and the hover and active states
+*/
+
+/*Styling for the container of the footer links*/
+.footerContent{
+    width: 100%;
+    display: inline-block;
+    padding-left: 5.5em;
+}
+
+.footerTitle{
+    margin: 0.5em 0em;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.footerContent a, .contactDetail{
+    font-size: 1em;
+    margin-right: 12em;
+    margin-left: 2em;
+}
+
 .footer a{
     color: rgb(172, 172, 172);
-    margin:3.5em;
-    font-size: 1.2em;
 }
 
 .footer a:hover{
@@ -32,13 +59,20 @@
 /**Styling for footer text
  * Creates styling for the footer text describing website author
 */
-.footer p{
+.credits{
     color: rgb(94, 94, 94);
     font-size: 0.9em;
-    margin: 1.5em;
+    margin: 0 1.5em;
     padding: 0.5em;
     text-align: center;
     font-style: italic;
+}
+
+.line{
+    border: 0;
+    border-bottom: solid rgb(26, 33, 46) 2px;
+    width: 95%;
+    margin: 0.5em auto;
 }
 
 /**Media queries for smaller screen sizes
@@ -47,12 +81,12 @@
 @media only screen and (max-width: 600px) {
     /*Size of footer improved*/
     .footer {
-        height: 15em;
+        height: 20em;
         padding: 0.4em;
     }
 
     /*Arrangement of footer links improved*/
-    .footer a {
+    .footer a, .contactDetail{
         font-size: 1em;
         display: block;
         width: 100%;
