@@ -63,7 +63,7 @@ const RatioQuiz = () => {
         question += " The ratio of red to blue is " + num1 + ":" + num2;
         question += " and the ratio of blue to green is " + num3 + ":" + num4 + ". What is the ratio of red to green?";
 
-        return [question, [correctRed, correctBlue, correctGreen]];
+        return [question, [correctRed, correctBlue, correctGreen, num1, num2, num3, num4]];
     }
 
     //Creating the answer section that should allow users to input their answers
@@ -107,10 +107,9 @@ const RatioQuiz = () => {
         }
         console.log(correctAnswers);
         if (red == correctAnswers[0] && blue == correctAnswers[1] && green == correctAnswers[2]) {
-            alert("Correct!");
             return true;
         } else {
-            alert("Incorrect. The correct answer is " + correctAnswers[0] + ":" + correctAnswers[1] + ":" + correctAnswers[2]);
+            document.getElementById("answerFeedback").innerHTML = "Incorrect. When the ratio of red to blue is " + correctAnswers[3] + ":" + correctAnswers[4] + " and the ratio of blue to green is " + correctAnswers[5] + ":" + correctAnswers[6] + ". " + "The correct answer is " + correctAnswers[0] + ":" + correctAnswers[1] + ":" + correctAnswers[2];
             return false;
         }
     }

@@ -93,7 +93,10 @@ const GenericQuiz = (props) => {
                 <p className={styles.quizQuestion}>{question}</p>
                 <div className={styles.quizAnswerSection}>{answerSection}</div>
                 <hr className={styles.line} />
-                <span className={styles.submitButton} onClick={()=>submitAnswer()}>Submit</span>
+                <div>
+                  <p id="answerFeedback" className={styles.answerFeedback}></p>
+                  <span className={styles.submitButton} onClick={()=>submitAnswer()}>Submit</span>
+                </div>
             </div>
         </div>
         <Footer />
