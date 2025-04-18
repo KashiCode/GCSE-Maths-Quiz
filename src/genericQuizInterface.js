@@ -22,14 +22,22 @@ const GenericQuiz = (props) => {
   const [quizTitle,setQuizTitle] = React.useState(props.quizTitle ? props.quizTitle : "Quiz Unknown");
   const [animate,setAnimate] = React.useState(false);
 
-  const [question,setQuestion] = React.useState(props.question ? props.question : "There is no question yet.");
+  const questionFunction = props.questionFunction ? props.questionFunction : () => {
+    return ["Question function is missing. Quiz is not functional."];
+  }
+  const [question,setQuestion] = React.useState("There is no question yet.");
+  const checkAnswerFunction = props.checkAnswerFunction ? props.checkAnswerFunction : () => {
+    return "There is no answer checking function yet.";
+  }
   const [answerSection, setAnswerSection] = React.useState(props.answerSection ? props.answerSection : "There is no answer section yet.");
+  const [currentAnswer, setCurrentAnswer] = React.useState([]);
   const [totalTimer,setTotalTimer] = React.useState(0);
   const [questionTimer,setQuestionTimer] = React.useState(0);
   const [correctCount,setCorrectCount] = React.useState(0);
   const [incorrectCount,setIncorrectCount] = React.useState(0);
 
   useEffect(() => {
+
     const timer = setInterval(() => {
       setTotalTimer((prev) => prev + 1);
       setQuestionTimer((prev) => prev + 1);
@@ -37,6 +45,13 @@ const GenericQuiz = (props) => {
 
     return () => clearInterval(timer); // Clean up on unmount
   }, [totalTimer, questionTimer]);
+
+  useEffect(() => {
+    let questionReturn = questionFunction();
+
+    setQuestion(questionReturn[0]);
+    setCurrentAnswer(questionReturn[1]);
+  }, []);
 
   const navigate = useNavigate();
 
@@ -47,13 +62,17 @@ const GenericQuiz = (props) => {
   }
 
   const submitAnswer = () => {
-    const isCorrect = true; // Replace with actual answer checking logic
-    if (isCorrect) {
+    if (checkAnswerFunction(currentAnswer)) {
       setCorrectCount((prev) => prev + 1);
     } else {
       setIncorrectCount((prev) => prev + 1);
     }
     setQuestionTimer(0);
+
+    let questionReturn = questionFunction();
+
+    setQuestion(questionReturn[0]);
+    setCurrentAnswer(questionReturn[1]);
   }
   return (
     <div className={styles.background}>

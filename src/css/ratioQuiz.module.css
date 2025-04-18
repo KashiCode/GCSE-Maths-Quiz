@@ -1,0 +1,21 @@
+.inputDiv{
+    /* width: 100%; */
+    display: grid;
+    grid-template-columns: 20% 35%;
+    margin-left: 4%;
+    margin-bottom: 1.5em;
+}
+
+label, input{
+    font-size: 1.5em;
+    padding: 0.5em;
+    border-radius: 15px;
+}
+
+input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+  }
+  
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
