@@ -1,11 +1,42 @@
-import React from 'react';
+import React, { use } from 'react';
+import { useEffect } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './css/genericQuizInterface.module.css';
 
 import Footer from './footer.js';
 
+const formatTime = (totalSeconds) => {
+  const hours = Math.floor(totalSeconds / 3600);
+  const minutes = Math.floor((totalSeconds % 3600) / 60);
+  const seconds = totalSeconds % 60;
+
+  // Pad with leading zeros if needed
+  const pad = (num) => String(num).padStart(2, '0');
+
+  return `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
+};
+
+
 const GenericQuiz = () => {
+  const [quizTitle,setQuizTitle] = React.useState("Quiz Unknown");
   const [animate,setAnimate] = React.useState(false);
+
+  const [question,setQuestion] = React.useState("There is no question yet.");
+  const [answerSection, setAnswerSection] = React.useState("There is no answer section yet.");
+  const [totalTimer,setTotalTimer] = React.useState(0);
+  const [questionTimer,setQuestionTimer] = React.useState(0);
+  const [correctCount,setCorrectCount] = React.useState(0);
+  const [incorrectCount,setIncorrectCount] = React.useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTotalTimer((prev) => prev + 1);
+      setQuestionTimer((prev) => prev + 1);
+    }, 1000);
+
+    return () => clearInterval(timer); // Clean up on unmount
+  }, [totalTimer, questionTimer]);
 
   const navigate = useNavigate();
 
@@ -14,24 +45,36 @@ const GenericQuiz = () => {
 
     setTimeout(() => navigate("/"), 650);
   }
+
+  const submitAnswer = () => {
+    const isCorrect = true; // Replace with actual answer checking logic
+    if (isCorrect) {
+      setCorrectCount((prev) => prev + 1);
+    } else {
+      setIncorrectCount((prev) => prev + 1);
+    }
+    setQuestionTimer(0);
+  }
   return (
     <div className={styles.background}>
         <div className={styles.quizContainer + " " + (animate ? styles.fadeOutContainer: "")}>
             <div className={styles.quizHeader}>
                 <span className={styles.returnButton} onClick={()=>triggerAnimation()}><span className={"material-symbols-outlined " + styles.backIcon}>arrow_back</span>  Return</span>
-               <h1>Quiz A</h1>
+               <h1>{quizTitle}</h1>
             </div>
             <hr className={styles.line} />
             <div className={styles.quizContent}>
                 <div className={styles.quizInfo}>
-                    <p>Total Timer</p>
-                    <p>Question Timer</p>
-                    <p>Correct Count</p>
-                    <p>Incorrect Count</p>
+                    <p>Total Timer: {formatTime(totalTimer)}</p>
+                    <p>Question Timer: {formatTime(questionTimer)}</p>
+                    <p>Correct Count: {correctCount}</p>
+                    <p>Incorrect Count: {incorrectCount}</p>
                 </div>
                 <hr className={styles.line} />
-                <p className={styles.quizQuestion}>This is a quiz question</p>
-                <span className={styles.submitButton}>Submit</span>
+                <p className={styles.quizQuestion}>{question}</p>
+                <div className={styles.quizAnswerSection}>{answerSection}</div>
+                <hr className={styles.line} />
+                <span className={styles.submitButton} onClick={()=>submitAnswer()}>Submit</span>
             </div>
         </div>
         <Footer />

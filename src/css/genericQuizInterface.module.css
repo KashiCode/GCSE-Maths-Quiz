@@ -138,10 +138,15 @@
 }
 
 .quizQuestion{
-    width: 100%;
-    min-height: 2.5em;
+    height: 40%;
     max-height: 10em;
     padding: 0.7em;
+    text-align: left;
+}
+
+.quizAnswerSection{
+    height: 52%;
+    width: 100%;
     text-align: left;
 }
 
