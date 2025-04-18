@@ -18,12 +18,12 @@ const formatTime = (totalSeconds) => {
 };
 
 
-const GenericQuiz = () => {
-  const [quizTitle,setQuizTitle] = React.useState("Quiz Unknown");
+const GenericQuiz = (props) => {
+  const [quizTitle,setQuizTitle] = React.useState(props.quizTitle ? props.quizTitle : "Quiz Unknown");
   const [animate,setAnimate] = React.useState(false);
 
-  const [question,setQuestion] = React.useState("There is no question yet.");
-  const [answerSection, setAnswerSection] = React.useState("There is no answer section yet.");
+  const [question,setQuestion] = React.useState(props.question ? props.question : "There is no question yet.");
+  const [answerSection, setAnswerSection] = React.useState(props.answerSection ? props.answerSection : "There is no answer section yet.");
   const [totalTimer,setTotalTimer] = React.useState(0);
   const [questionTimer,setQuestionTimer] = React.useState(0);
   const [correctCount,setCorrectCount] = React.useState(0);

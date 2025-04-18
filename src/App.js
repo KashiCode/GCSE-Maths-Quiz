@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './css/App.css';
 import MainMenu from './mainMenu.js';
 import GenericQuiz from './genericQuizInterface.js';
+import RatioQuiz from './ratioQuiz.js';
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
         <Routes>
           <Route path="/" element={<MainMenu />} />
           <Route path="/genericquiz" element={<GenericQuiz />} />
+          <Route path="/ratio-quiz" element={<RatioQuiz />} />
         </Routes>
       </BrowserRouter>
     </div>

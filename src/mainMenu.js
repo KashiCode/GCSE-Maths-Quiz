@@ -10,10 +10,10 @@ const MainMenu = () => {
 
   const navigate = useNavigate();
 
-  const triggerAnimation = () => {
+  const triggerAnimation = (navigationLink) => {
     setAnimate(true);
 
-    setTimeout(() => navigate("/genericquiz"), 750);
+    setTimeout(() => navigate(navigationLink), 750);
   }
 
   return (
@@ -53,8 +53,8 @@ const MainMenu = () => {
           Currently the website is in development and only a few quizzes are available
           but in due time we hope to cover a wide variety of topics to help advance your maths skills.
         </p>
-        <p className={styles.button} onClick={() => triggerAnimation()}>Option A</p>
-        <p className={styles.button}>Option B</p>
+        <p className={styles.button} onClick={() => triggerAnimation("/genericquiz")}>Option A</p>
+        <p className={styles.button} onClick={() => triggerAnimation("/ratio-quiz")}>Ratio Quiz</p>
         <p className={styles.button}>Option C</p>
         <p className={styles.button}>Option D</p>
         <p className={styles.button}>Option E</p>
