@@ -135,7 +135,7 @@ const GenericQuiz = (props) => {
         </div>
         <div className={styles.alertContainer + " " + (incorrectAnimation ? styles.animateAlertContainer : "")}>
           <div className={styles.incorrectAlert + " " + (incorrectAnimation ? styles.animateIncorrectAlertIn : "")}>
-            <span onClick={() => closeIncorrectAnimation()}>x</span>
+            <span class="material-symbols-outlined" onClick={() => closeIncorrectAnimation()}>close</span>
             <h1>INCORRECT ANSWER</h1>
             <hr className={styles.line}/>
             <p id="answerFeedback"></p>
