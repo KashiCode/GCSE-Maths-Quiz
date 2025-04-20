@@ -109,16 +109,16 @@ const GenericQuiz = (props) => {
     <div className={styles.background}>
         <div className={styles.quizContainer + " " + (animate ? styles.fadeOutContainer: "")}>
             <div className={styles.quizHeader}>
-                <span className={styles.returnButton} onClick={()=>triggerAnimation()}><span className={"material-symbols-outlined " + styles.backIcon}>arrow_back</span>  Return</span>
+                <span className={styles.returnButton} onClick={()=>triggerAnimation()}><span className={"material-symbols-outlined " + styles.backIcon}>arrow_back</span><span className={styles.backIcon + " " + styles.returnText}>  Return</span></span>
                <h1>{quizTitle}</h1>
             </div>
             <hr className={styles.line} />
             <div className={styles.quizContent}>
                 <div className={styles.quizInfo}>
-                    <p>Total Timer: {formatTime(totalTimer)}</p>
-                    <p>Question Timer: {formatTime(questionTimer)}</p>
-                    <p>Correct Count: {correctCount}</p>
-                    <p>Incorrect Count: {incorrectCount}</p>
+                    <p className={styles.totalTimer}><span className={styles.smallerScreenText}>Total Timer: </span>{formatTime(totalTimer)}</p>
+                    <p className={styles.questionTimer}>Question Timer: {formatTime(questionTimer)}</p>
+                    <p className={styles.correctCount}>Correct<span className={styles.smallerScreenText}> Count</span>: {correctCount}</p>
+                    <p className={styles.incorrectCount}>Incorrect Count: {incorrectCount}</p>
                 </div>
                 <hr className={styles.line} />
                 <p className={styles.quizQuestion}>{question}</p>

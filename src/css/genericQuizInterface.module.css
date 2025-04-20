@@ -140,7 +140,7 @@
     padding: 0.7em;
 }
 
-.quizInfo p{
+.totalTimer, .questionTimer, .correctCount, .incorrectCount{
     font-size: 1.25em;
     color: rgb(209, 209, 209);
     width: 24.8%;
@@ -150,13 +150,17 @@
     line-height: 1.8em;
 }
 
+/*Maintain the text size for text that isn't relevant on smaller screens*/
+.smallerScreenText{
+    font-size: 1em;
+}
+
 .quizInfo p:last-child{
     border-right: none;
 }
 
 .quizQuestion{
     height: 27%;
-    max-height: 10em;
     padding: 0.5em;
     text-align: left;
     font-size: 1.5em;
@@ -191,10 +195,13 @@
 */
 
 .submitButton{
+    position: absolute;
+    bottom: 0.5em;
+    right: 1.5em;
     background-color: rgb(29, 167, 43);
     display: block;
     height: 3em;
-    width: 80%;
+    width: 12em;
     line-height: 3em;
     border-radius: 25px;
     font-size: 1.2em;
@@ -226,8 +233,6 @@
     font-weight: bold;
     text-align: center;
     line-height: 4em;
-    opacity: 0;
-    transform-origin: 100%,50%;
     display:hidden;
     z-index: -10;
 }
@@ -368,5 +373,161 @@
     100%{
         opacity:1;
         scale: 1;
+    }
+}
+
+/**Styling for smaller screen sizes
+ * This makes the quiz appropraite for smaller screens that may be used to play the quiz
+*/
+@media (max-width: 1070px) and (min-width: 600px) {
+    /*Appropriate size of the overall page on smaller screens*/
+    .background{
+        min-height: 85em;
+    }
+
+    /*Appropriate changes to the return button
+    Text of button is removed further down*/
+    .returnButton{
+        width: 4em;
+        margin-bottom: 1em;
+    }
+
+    /*Changes to the title of the quiz*/
+    .quizContainer h1{
+        font-size: 1.4em;
+        padding-right: 0.5em;
+    }
+
+    /*Remove less relevant information for smaller screens that have less space*/
+    .returnText, .smallerScreenText, .questionTimer, .incorrectCount{
+        display: none;
+    }
+
+    .correctCount{
+        border-right: none;
+    }
+
+    .quizInfo p{
+        width: 49%;
+    }
+
+    /*Appropriate sizing of the general areas of the quiz*/
+    .quizContent{
+        height: 52em;
+    }
+
+    .quizContainer{
+        width: 96%;
+        height: 60em;
+    }
+
+    .quizQuestion{
+        height: 35%;
+    }
+
+    /*Appropriate changes to the submit button*/
+    .submitButton{
+        width: 8em;
+        height: 2.5em;
+        line-height: 2.5em;
+        font-size: 1em;
+    }
+    
+    /*Changes to the correct alert*/
+    .correctAlert{
+        width: 40vw;
+        left:30vw;
+    }
+
+    /*Changes to the incorrect alert*/
+    .incorrectAlert{
+        left: 25vw;
+        width: 50vw;
+        height: 16em;
+    }
+}
+
+/***Styling for even smaller screen sizes
+ * This styling is designed for mobile phones and other small devices
+*/
+@media (max-width: 600px) {
+    /*Appropriate size of the overall page on smaller screens*/
+    .background{
+        min-height: 90em;
+    }
+
+    /*Changes to the title of the quiz*/
+    .quizContainer h1{
+        font-size: 1.4em;
+        padding-right: 0.5em;
+    }
+
+    /*Appropriate changes to the return button
+    Text of button is removed further down*/
+    .returnButton{
+        width: 4em;
+        margin-bottom: 1em;
+    }
+
+    /*Remove less relevant information for smaller screens that have less space*/
+    .returnText, .questionTimer, .incorrectCount{
+        display: none;
+    }
+
+    /*Appropriate changes for improved formatting of the quiz info section*/
+    .quizInfo{
+        display: grid;
+        grid-template-rows: auto auto;
+        height: 6em;
+        padding: 0;
+    }
+
+    .totalTimer, .correctCount{
+        display: block;
+        width: 100%;
+        border-right: none;
+        line-height: 2em;
+    }
+
+    .totalTimer{
+        border-bottom: solid white 2px;
+    }
+
+    /*Appropriate sizing of the general areas of the quiz*/
+    .quizContainer{
+        width: 96%;
+        height: 60em;
+    }
+
+    .quizQuestion{
+        height: 45%;
+    }
+
+    .quizAnswerSection{
+        height: 70%;
+    }
+
+    /*Appropriate changes made for the submit button*/
+    .submitButton{
+        width: 70%;
+        height: 2.5em;
+        font-size: 1.5em;
+        line-height: 2.5em;
+        transform: translateX(-50%);
+        margin: 0;
+        left: 50%;
+    }
+    
+    /*Changes to the correct alert*/
+    .correctAlert{
+        width: 60vw;
+        left:20vw;
+    }
+
+    /*Changes to the incorrect alert*/
+    .incorrectAlert{
+        left: 10vw;
+        width: 80vw;
+        height: 16em;
     }
 }
