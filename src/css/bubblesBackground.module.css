@@ -5,6 +5,7 @@
     position: relative;
     display: flex;
     animation: fadeinBubbles 0.7s ease-in-out forwards;
+    z-index: -1;
 }
 
 .bubbles span{
@@ -28,6 +29,33 @@
     box-shadow: 0 0 0 10px rgba(36, 67, 146, 0.5),
     0 0 50px rgba(0, 42, 255, 0.5),
     0 0 100px rgba(0, 42, 255, 0.5);
+}
+
+
+/**Styling for the bubbles when red option is selected
+ * This style is used primarily for the no page error page
+*/
+.red span{
+    position: relative;
+    width: 1.5em;
+    height: 1.5em;
+    margin: 1.3vw;
+    border-radius: 50%;
+    background-color: rgb(223, 5, 27);
+    box-shadow: 0 0 0 0.8em rgb(72, 32, 40),
+    0 0 3.5em rgb(197, 13, 50),
+    0 0 7em rgb(197, 13, 50);
+    animation: animate 35s linear infinite;
+    animation-delay: calc(-1s * var(--i));
+    --xDirection: 1;
+    --xFactor: 1;
+}
+
+.red span:nth-child(even){
+    background-color: rgb(211, 72, 22);
+    box-shadow: 0 0 0 10px rgb(83, 65, 44),
+    0 0 50px rgb(211, 72, 22),
+    0 0 100px rgb(211, 72, 22);
 }
 
 .bubbles span:nth-child(4n){
@@ -118,3 +146,4 @@
         0 0 3.5em rgba(0, 255, 255,0.5);
     }
 }
+
