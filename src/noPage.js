@@ -19,8 +19,8 @@ const MissingPage = (props) => {
           <p>This page has been entered wrong or does not exist.</p>
           <span className={styles.button} onClick={() => navigate("/")}>Return to Homepage</span>
           <span className={styles.button + " " + styles.previousPage} onClick={() => navigate(-1)}>Return to Previous Page</span>
-          <Footer />
         </div>
+        <Footer />
     </div>
   );
 }
