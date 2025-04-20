@@ -1,3 +1,6 @@
+/**Sets the styling specific for the input divs in the ratio quiz interface
+ * 
+*/
 .inputDiv{
     display: grid;
     grid-template-columns: 20% 35%;

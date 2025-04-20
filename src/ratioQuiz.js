@@ -102,7 +102,7 @@ const RatioQuiz = () => {
         document.querySelector('input[placeholder="Green"]').value = "";
         
         if (red === "" || blue === "" || green === "") {
-            alert("Please fill in all fields.");
+            document.getElementById("answerFeedback").innerHTML = "Incorrect. Please fill in all fields to answer the question.";
             return false;
         }
         console.log(correctAnswers);

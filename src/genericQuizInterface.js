@@ -19,9 +19,11 @@ const formatTime = (totalSeconds) => {
 
 
 const GenericQuiz = (props) => {
-  const [quizTitle,setQuizTitle] = React.useState(props.quizTitle ? props.quizTitle : "Quiz Unknown");
+  //Setting general quiz variables
+  const quizTitle = props.quizTitle ? props.quizTitle : "Quiz Unknown";
   const [animate,setAnimate] = React.useState(false);
 
+  //Setting variables specific to the given version of the quiz
   const questionFunction = props.questionFunction ? props.questionFunction : () => {
     return ["Question function is missing. Quiz is not functional."];
   }
@@ -29,13 +31,19 @@ const GenericQuiz = (props) => {
   const checkAnswerFunction = props.checkAnswerFunction ? props.checkAnswerFunction : () => {
     return "There is no answer checking function yet.";
   }
-  const [answerSection, setAnswerSection] = React.useState(props.answerSection ? props.answerSection : "There is no answer section yet.");
+  const answerSection =props.answerSection ? props.answerSection : "There is no answer section yet.";
   const [currentAnswer, setCurrentAnswer] = React.useState([]);
   const [totalTimer,setTotalTimer] = React.useState(0);
   const [questionTimer,setQuestionTimer] = React.useState(0);
   const [correctCount,setCorrectCount] = React.useState(0);
   const [incorrectCount,setIncorrectCount] = React.useState(0);
 
+  //Setting variables for the correct and incorrect answer animations
+  const [correctAnimation,setCorrectAnimation] = React.useState(false);
+  const [incorrectAnimation,setIncorrectAnimation] = React.useState(false);
+
+  //Setting the timer for the quiz
+  //This timer will run every second and update the total time and question time
   useEffect(() => {
 
     const timer = setInterval(() => {
@@ -43,9 +51,10 @@ const GenericQuiz = (props) => {
       setQuestionTimer((prev) => prev + 1);
     }, 1000);
 
-    return () => clearInterval(timer); // Clean up on unmount
+    return () => clearInterval(timer);
   }, [totalTimer, questionTimer]);
 
+  //This sets the question and current answer when the quiz is first loaded
   useEffect(() => {
     let questionReturn = questionFunction();
 
@@ -55,17 +64,39 @@ const GenericQuiz = (props) => {
 
   const navigate = useNavigate();
 
+  //Animation function for returning to the main page
   const triggerAnimation = () => {
     setAnimate(true);
 
     setTimeout(() => navigate("/"), 650);
   }
 
+  //Animation function for the correct answer
+  const triggerCorrectAnimation = () => {
+    setCorrectAnimation(true);
+    setTimeout(() => {
+      setCorrectAnimation(false);
+    }, 1500);
+  }
+
+  //Animation function for the incorrect answer
+  const triggerIncorrectAnimation = () => {
+    setIncorrectAnimation(true);
+  }
+
+  //This function closes the incorrect answer animation and clears the feedback message
+  const closeIncorrectAnimation = () => {
+    setIncorrectAnimation(false);
+    document.getElementById("answerFeedback").innerHTML = "";
+  }
+
   const submitAnswer = () => {
     if (checkAnswerFunction(currentAnswer)) {
       setCorrectCount((prev) => prev + 1);
+      triggerCorrectAnimation();
     } else {
       setIncorrectCount((prev) => prev + 1);
+      triggerIncorrectAnimation();
     }
     setQuestionTimer(0);
 
@@ -93,11 +124,22 @@ const GenericQuiz = (props) => {
                 <p className={styles.quizQuestion}>{question}</p>
                 <div className={styles.quizAnswerSection}>{answerSection}</div>
                 <hr className={styles.line} />
-                <div>
-                  <p id="answerFeedback" className={styles.answerFeedback}></p>
+                <div className={styles.quizFooter}>
+                  <p className={styles.answerFeedback}></p>
                   <span className={styles.submitButton} onClick={()=>submitAnswer()}>Submit</span>
                 </div>
             </div>
+        </div>
+        <div className={styles.correctAlert + " " + (correctAnimation ? styles.animateCorrectAlert : "")}>
+          <h1>CORRECT ANSWER</h1>
+        </div>
+        <div className={styles.alertContainer + " " + (incorrectAnimation ? styles.animateAlertContainer : "")}>
+          <div className={styles.incorrectAlert + " " + (incorrectAnimation ? styles.animateIncorrectAlertIn : "")}>
+            <span onClick={() => closeIncorrectAnimation()}>x</span>
+            <h1>INCORRECT ANSWER</h1>
+            <hr className={styles.line}/>
+            <p id="answerFeedback"></p>
+          </div>
         </div>
         <Footer />
     </div>

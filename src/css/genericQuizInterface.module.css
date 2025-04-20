@@ -23,7 +23,7 @@
     left:50%;
     transform:translateX(-50%);
     width: 90%;
-    height: 45em;
+    height: 46em;
     text-align: center;
     border-radius: 15px;
     padding: 20px;
@@ -67,6 +67,9 @@
     display:flex;
 }
 
+/**Styling of the return button to go back to the main menu from a quiz
+ * Creates general appearance of the button appropriate for the icon and text of it
+*/
 .returnButton{
     background-color: rgb(112, 182, 225);
     color: black;
@@ -98,6 +101,10 @@
     transition: 0.1s;
 }
 
+/**Styling of the title of the quiz
+ * Creates general appearance of the title of the quiz
+*/
+
 .quizContainer h1{
     font-size: 2.5em;
     font-weight: bold;
@@ -108,10 +115,18 @@
     width: 100%;
 }
 
+/**Styling of the line that separates the title from the rest of the quiz
+ * Creates general appearance of the line that separates the title from the rest of the quiz
+*/
+
 .line{
     border: 0;
     border-bottom: solid white 2px;
 }
+
+/**Styling of the quiz content area
+ * Creates general appearance of the quiz content area including question, info and answer sections
+*/
 
 .quizContent{
     height:37em;
@@ -120,17 +135,18 @@
 .quizInfo{
     display: flex;
     width: 100%;
-    height: 2.5em;
+    height: 3.5em;
     padding: 0.7em;
 }
 
 .quizInfo p{
-    font-size: 0.95em;
+    font-size: 1.25em;
     color: rgb(209, 209, 209);
     width: 24.8%;
     font-style: italic;
     border-right: solid white 2px;
     padding-left: 1.5em;
+    line-height: 1.8em;
 }
 
 .quizInfo p:last-child{
@@ -151,27 +167,38 @@
     text-align: left;
 }
 
-.answerFeedback{
-    font-size: 1em;
-    color: white;
-    padding: 0.5em;
-    margin-top: 1em;
-    text-align: left;
-    width: 85%;
-    height: 4em;
+/**Styling for the bottom of the quiz container
+ * Includes the submit button and the previous answer feedback area
+*/
+
+.quizFooter{
+    display: grid;
+    grid-template-columns: 85% 15%;
+    margin-top: 0.5em;
 }
 
+.answerFeedback{
+    font-size: 1.3em;
+    color: white;
+    padding: 0.2em;
+    text-align: left;
+    height: 3.5em;
+}
+
+/**Styling for submit button of the quiz
+ * Creates general appearance of the submit button including hover and active states
+*/
+
 .submitButton{
-    position: absolute;
-    bottom: 1.5em;
-    right: 1.5em;
     background-color: rgb(29, 167, 43);
+    display: block;
     height: 3em;
-    width: 8em;
+    width: 80%;
     line-height: 3em;
     border-radius: 25px;
     font-size: 1.2em;
     font-weight: bold;
+    margin: 0.5em auto;
 }
 
 .submitButton:hover{
@@ -181,4 +208,164 @@
 
 .submitButton:active{
     background-color: green;
+}
+
+/**Styling for the correct alert that appears when the answer is correct
+ * Creates general appearance of the correct alert as well as the animations appropriate for it
+*/
+.correctAlert{
+    position: fixed;
+    top: 20vh;
+    left: 40vw;
+    width: 20vw;
+    height: 4em;
+    background-color: rgb(30, 160, 43);
+    border: solid 2px rgb(22, 112, 31);
+    border-radius: 10px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 4em;
+    opacity: 0;
+    transform-origin: 100%,50%;
+    display:hidden;
+    z-index: -10;
+}
+
+.animateCorrectAlert{
+    display: block;
+    animation: correctAlert 1.5s ease-in-out;
+    z-index: 100;
+}
+
+@keyframes correctAlert {
+    0%{
+        opacity:0;
+        transform: translateY(0%);
+        scale: 0;
+    }
+    10%{
+        opacity:1;
+        scale: 1;
+        transform: translateY(0%);
+    }
+    100%{
+        opacity:0;
+        transform: translateY(-50%);
+    }
+}
+
+.correctAlert h1{
+    font-size: 1em;
+    font-weight: bold;
+    color: white;
+}
+
+/***Styling for the incorrect alert that appears when the answer is incorrect
+ * Creates general appearance of the incorrect alert as well as the animations appropriate for it
+ * Also includes container for the alert to prevent the rest of the page from being accessed when the alert is open
+*/
+.alertContainer{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(57, 59, 61, 0.7);
+    display: none;
+}
+
+.incorrectAlert{
+    background-color: rgb(171, 7, 7);
+    border: solid 3px rgb(114, 8, 8);
+    border-radius: 15px;
+    position: absolute;
+    top: 20vh;
+    left: 35vw;
+    width: 30vw;
+    height: 13em;
+    text-align: center;
+    display: none;
+}
+
+.incorrectAlert span{
+    position: absolute;
+    top: 5%;
+    right: 1%;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: rgb(175, 175, 175);
+    background-color: rgb(128, 0, 0);
+    border-radius: 30px;
+    border: transparent 2px solid;
+    height: 1.5em;
+    width: 1.5em;
+    line-height: 1.15em;
+}
+
+.incorrectAlert span:hover{
+    background-color: rgb(171, 7, 7);
+    border-color: white;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.incorrectAlert span:active{
+    background-color: rgb(114, 8, 8);
+    color: rgb(121, 35, 35);
+    border-color: rgb(121, 35, 35);
+    transition: 0.1s;
+}
+
+.incorrectAlert h1{
+    font-size: 115%;
+    font-weight: bold;
+    color: white;
+    margin: 0.2em auto;
+}
+
+.incorrectAlert hr{
+    width: 80%;
+    margin: 0 auto;
+}
+
+.incorrectAlert p{
+    height: 72%;
+    width: 98%;
+    margin: 0.1em auto;
+    margin-top: 1.25em;
+    text-align: center;
+}
+
+.animateAlertContainer{
+    display: block;
+    z-index: 100;
+    animation: incorrectAlertContainerPopup 0.1s ease-in-out;
+}
+
+.animateIncorrectAlertIn{
+    display: block;
+    animation-delay: 0.1s;
+    animation: incorrectAlertPopup 0.15s ease-in-out;
+}
+
+@keyframes incorrectAlertContainerPopup {
+    0%{
+        opacity:0;
+    }
+    100%{
+        opacity:1;
+    }
+    
+}
+
+@keyframes incorrectAlertPopup {
+    0%{
+        opacity:0;
+        scale: 0;
+    }
+    100%{
+        opacity:1;
+        scale: 1;
+    }
 }
