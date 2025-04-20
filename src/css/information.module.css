@@ -1,0 +1,128 @@
+/**The css that creates the background for the main menu
+ * Sets a gradient background colour
+*/
+.background{
+    position:relative;
+    display: inline-block;
+    background: #0b2633;
+    background: linear-gradient(180deg, rgba(11, 38, 51, 1) 0%, rgba(19, 39, 56, 1) 12%, rgba(26, 53, 82, 1) 71%, rgba(52, 87, 117, 1) 100%);
+    position: absolute;
+    width: 100%;
+    min-height: 74em;
+    height: 100vh;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    z-index: -10;
+}
+
+/**This is the css to create the main appearance for the main menu
+ * Creates the main menu container and the buttons of the main menu
+*/
+.informationContainer{
+    position:absolute;
+    top:9em;
+    left:50%;
+    transform:translateX(-50%);
+    width: 80%;
+    text-align: center;
+    border-radius: 15px;
+    padding: 20px;
+    /* background-color: rgba(180, 180, 180, 0.3); */
+    animation: fadeinContainer 0.5s ease-in-out forwards;
+}
+
+/**This creates the fadein animation for the container when the main menu is opened
+ * It causes the main menu to fade in and move up the screen
+*/
+@keyframes fadeinContainer{
+    0%{
+        opacity: 0;
+        transform: translateY(350%) translateX(-50%);
+    }
+    100%{
+        opacity: 1;
+        transform: translateY(0%) translateX(-50%);
+    }
+}
+
+/**This is the css to create the fadeout animation for the main menu
+ * Causes the main menu to fade out and move up the screen when the quiz is started
+*/
+.fadeoutContainer{
+    animation: fadeoutContainer 0.7s ease-in-out forwards;
+}
+
+@keyframes fadeoutContainer{
+    0%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
+        transform: translateY(-500%) translateX(-50%);
+    }
+}
+
+.informationContainer h1{
+    color: rgb(190, 190, 190);
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-top: 2.5em;
+    margin-bottom: 20px;
+}
+
+.text{
+    color: rgb(190, 190, 190);
+    font-size: 1.5em;
+}
+
+.button{
+    font-size: 1.4em;
+    display: inline-block;
+    width: 80%;
+    margin: 3em 0px;
+    color: rgb(190, 190, 190);
+    border-radius: 25px;
+    padding: 0.8em 0px;
+    border: 2px solid rgb(190, 190, 190);
+}
+
+.button:hover{
+    background-color: rgb(190, 190, 190);
+    color: black;
+    transition: 0.3s ease-in-out;
+}
+
+.button:active{
+    background-color: green;
+    color: rgb(190, 190, 190);
+    transition: 0.1s ease-in-out;
+}
+
+/**Media queries for smaller screen sizes
+ * Webpage rearranges to appear better on smaller screens
+*/
+@media (max-width: 800px) {
+    /*Size of background overall works better now*/
+    .background{
+        min-height: 79em;
+        height: 100vh;
+    }
+
+    /*Container for main menu is positioned mored appropriately now*/
+    .informationContainer{
+        width: 90%;
+        top: 5em;
+    }
+
+    /*Improvements to the elements of the main menu within the container*/
+    .mainMenuContainer h1{
+        font-size: 2rem;
+    }
+    .button{
+        font-size: 1.5em;
+    }
+    .text{
+        font-size: 1.2em;
+    }
+    
+}

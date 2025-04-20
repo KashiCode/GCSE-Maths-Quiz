@@ -12,6 +12,7 @@ const Footer = () => {
           <p className={styles.footerTitle}>Links</p>
           <a href="https://www.linkedin.com/in/dawidpaluch/">LinkedIn</a>
           <a href="https://github.com/dawid-paluch">Github</a>
+          <a onClick={() => navigate("/information")}>Information</a>
         </div>
         <hr className={styles.line}/>
         <div className={styles.contactDetails + " " + styles.footerContent}>

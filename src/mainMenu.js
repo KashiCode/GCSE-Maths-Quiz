@@ -22,17 +22,15 @@ const MainMenu = () => {
       <BubblesBackground animate={animate}/>
       <div className={styles.mainMenuContainer + " " + (animate ? styles.fadeoutContainer: "")}>
         <h1>Welcome to PaceMaths</h1>
-        <p className={styles.text}>This is the main menu.
+        <p className={styles.text}>
           This website is made to train various maths skills.
-          You can choose from a variety of quizzes and challenges as shown below.
-          Currently the website is in development and only a few quizzes are available
-          but in due time we hope to cover a wide variety of topics to help advance your maths skills.
+          If this is your first time here, please read the information page to learn more about the website.
         </p>
-        <p className={styles.button} onClick={() => triggerAnimation("/genericquiz")}>Option A</p>
+        <p className={styles.button} onClick={() => triggerAnimation("/information")}>Information Page</p>
         <p className={styles.button} onClick={() => triggerAnimation("/ratio-quiz")}>Ratio Quiz</p>
-        <p className={styles.button}>Option C</p>
-        <p className={styles.button}>Option D</p>
-        <p className={styles.button}>Option E</p>
+        <p className={styles.button} onClick={() => triggerAnimation("/generic-quiz")}>Empty Quiz</p>
+        <p className={styles.button}>Option Not Available</p>
+        <p className={styles.button}>Option Not Available</p>
       </div>
       <Footer />
     </div>

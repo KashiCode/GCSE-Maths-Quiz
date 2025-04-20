@@ -58,6 +58,32 @@
     0 0 100px rgb(211, 72, 22);
 }
 
+/**Styling for the bubbles when green option is selected
+ * This style is used primarily for the information page
+*/
+.green span{
+    position: relative;
+    width: 1.5em;
+    height: 1.5em;
+    margin: 1.3vw;
+    border-radius: 50%;
+    background-color: rgb(8, 140, 41);
+    box-shadow: 0 0 0 0.8em rgb(28, 99, 45),
+    0 0 3.5em rgb(8, 140, 41),
+    0 0 7em rgb(8, 140, 41);
+    animation: animate 35s linear infinite;
+    animation-delay: calc(-1s * var(--i));
+    --xDirection: 1;
+    --xFactor: 1;
+}
+
+.green span:nth-child(even){
+    background-color: rgb(161, 221, 11);
+    box-shadow: 0 0 0 10px rgb(56, 135, 8),
+    0 0 50px rgb(161, 221, 11),
+    0 0 100px rgb(161, 221, 11);
+}
+
 .bubbles span:nth-child(4n){
     --xDirection: -1;
 }.bubbles span:nth-child(4n+1){

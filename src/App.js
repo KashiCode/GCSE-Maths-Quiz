@@ -4,6 +4,7 @@ import MainMenu from './mainMenu.js';
 import GenericQuiz from './genericQuizInterface.js';
 import RatioQuiz from './ratioQuiz.js';
 import MissingPage from './noPage.js';
+import Information from './information.js';
 
 function App() {
   return (
@@ -11,7 +12,8 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<MainMenu />} />
-          <Route path="/genericquiz" element={<GenericQuiz />} />
+          <Route path="/information" element={<Information />} />
+          <Route path="/generic-quiz" element={<GenericQuiz />} />
           <Route path="/ratio-quiz" element={<RatioQuiz />} />
           <Route path="*" element={<MissingPage />} />
         </Routes>

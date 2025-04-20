@@ -1,6 +1,4 @@
-import React, { use } from 'react';
-import { useEffect } from 'react';
-import { useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './css/noPage.module.css';
 

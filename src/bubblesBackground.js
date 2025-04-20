@@ -4,10 +4,10 @@ import styles from './css/bubblesBackground.module.css';
 
 import Footer from './footer.js';
 
-const BubblesBackground = ({animate, red}) => {
+const BubblesBackground = ({animate, red, green}) => {
 
   return (
-  <div className={styles.bubbles + " " + (red ? styles.red: "") + " " + (animate ? styles.fadeoutBubbles: "")}>
+  <div className={styles.bubbles + " " + (red ? styles.red: "") + (green ? styles.green: "") + " " + (animate ? styles.fadeoutBubbles: "")}>
     <span style={{ "--i":12}}></span>
     <span style={{ "--i":7}}></span>
     <span style={{ "--i":21}}></span>
