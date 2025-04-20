@@ -18,28 +18,26 @@
 /**This creates the styling for the majority of the page
  * Helps design the text of the page
 */
-*{
-    color: rgb(209, 199, 202);
-}
-
-h1{
+.error404Container h1{
     font-size: 10em;
     font-weight: bold;
     z-index: 1;
     margin-left: 10%;
     margin-top: 1em;
+    color: rgb(209, 199, 202);
 }
 
-p{
+.error404Container p{
     font-size: 1.8em;
     z-index: 1;
     margin-left: 15%;
+    color: rgb(209, 199, 202);
 }
 
 /**Sets the styling for the error page buttons
  * Adds the general style as well as the hover and active states
 */
-.button{
+.error404Container .button{
     display: inline-block;
     background-color: rgb(95, 6, 119);
     font-size: 1.5em;
@@ -52,18 +50,19 @@ p{
     margin-right: 3%;
     margin-left: 13%;
     border: solid 5px transparent;
+    color: rgb(209, 199, 202);
 }
 
-.button:hover{
+.error404Container .button:hover{
     border-color: rgb(56, 33, 70);
     text-decoration: underline;
 }
 
-.button:active{
+.error404Container .button:active{
     color:rgb(222, 85, 161)
 }
 
-.previousPage{
+.error404Container .previousPage{
     margin-left: 0%;
 }
 
@@ -71,17 +70,17 @@ p{
  * Makes the entire page more responsive
 */
 @media (max-width: 800px) {
-    h1{
+    .error404Container h1{
         font-size: 5em;
     }
-    p{
+    .error404Container p{
         font-size: 1em;
     }
-    .button{
+    .error404Container .button{
         font-size: 1em;
         display: block;
     }
-    .previousPage{
+    .error404Container .previousPage{
         margin-left: 13%;
     }
 }

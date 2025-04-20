@@ -70,16 +70,16 @@ const RatioQuiz = () => {
     const answerSection = (
         <div>
             <div className={styles.inputDiv}>
-                <label>Red: </label>
-                <input type='number' placeholder='Red' onWheel={disableScroll}/>
+                <label class={styles.ratioQuizLabel}>Red: </label>
+                <input class={styles.ratioQuizInput} type='number' placeholder='Red' onWheel={disableScroll}/>
             </div>
             <div className={styles.inputDiv}>
-                <label>Blue: </label>
-                <input type='number' placeholder='Blue' onWheel={disableScroll}/>
+                <label class={styles.ratioQuizLabel}>Blue: </label>
+                <input class={styles.ratioQuizInput} type='number' placeholder='Blue' onWheel={disableScroll}/>
             </div>
             <div className={styles.inputDiv}>
-                <label>Green: </label>
-                <input type='number' placeholder='Green' onWheel={disableScroll}/>
+                <label class={styles.ratioQuizLabel}>Green: </label>
+                <input class={styles.ratioQuizInput} type='number' placeholder='Green' onWheel={disableScroll}/>
             </div>
         </div>
     );

@@ -14,11 +14,13 @@ const MissingPage = (props) => {
   return (
     <div className={styles.background}>
         <BubblesBackground red={true}/>
-        <h1>ERROR 404</h1>
-        <p>This page has been entered wrong or does not exist.</p>
-        <span className={styles.button} onClick={() => navigate("/")}>Return to Homepage</span>
-        <span className={styles.button + " " + styles.previousPage} onClick={() => navigate(-1)}>Return to Previous Page</span>
-        <Footer />
+        <div className={styles.error404Container}>
+          <h1>ERROR 404</h1>
+          <p>This page has been entered wrong or does not exist.</p>
+          <span className={styles.button} onClick={() => navigate("/")}>Return to Homepage</span>
+          <span className={styles.button + " " + styles.previousPage} onClick={() => navigate(-1)}>Return to Previous Page</span>
+          <Footer />
+        </div>
     </div>
   );
 }

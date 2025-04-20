@@ -1,6 +1,5 @@
 import {  BrowserRouter, Routes, Route } from 'react-router-dom';
 import logo from './logo.svg';
-import './css/App.css';
 import MainMenu from './mainMenu.js';
 import GenericQuiz from './genericQuizInterface.js';
 import RatioQuiz from './ratioQuiz.js';

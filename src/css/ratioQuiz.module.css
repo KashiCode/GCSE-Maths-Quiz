@@ -8,7 +8,7 @@
     margin-bottom: 1.5em;
 }
 
-label, input{
+.ratioQuizLabel, .ratioQuizInput{
     font-size: 1.5em;
     padding: 0.5em;
     border-radius: 15px;
@@ -16,8 +16,8 @@ label, input{
 
 input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
     -webkit-appearance: none;
-  }
+}
   
-  input[type="number"] {
+input[type="number"] {
     -moz-appearance: textfield;
-  }
+}
