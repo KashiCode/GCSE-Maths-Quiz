@@ -15,7 +15,7 @@
 */
 :root{
     --animationTime: 0.4s;
-    --animationOpacity: 0.25;
+    --animationOpacity: 0.75;
 }
 
 /**Styling for the background animation of the info hover
