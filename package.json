@@ -1,7 +1,7 @@
 {
   "name": "maths-quiz-website",
   "version": "0.1.0",
-  "homepage": "https://dawid-paluch.github.io/maths-quiz-website",
+  "homepage": "https://https://dawid-paluch.github.io/gcse-maths-quiz-website/",
   "private": true,
   "dependencies": {
     "@testing-library/dom": "^10.4.0",
