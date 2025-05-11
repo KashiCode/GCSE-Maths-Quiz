@@ -7,8 +7,7 @@
     background: #0b2633;
     background: linear-gradient(180deg, rgba(11, 38, 51, 1) 0%, rgba(19, 39, 56, 1) 12%, rgba(26, 53, 82, 1) 71%, rgba(52, 87, 117, 1) 100%);
     width: 100%;
-    /* min-height: 74em; */
-    min-height: 162em;
+    min-height: 195em;
     height: 100vh;
     overflow-x: hidden;
     overflow-y: hidden;
@@ -21,7 +20,7 @@
 .informationContainer{
     position:absolute;
     display: block;
-    top:30em;
+    top:50em;
     left:50%;
     width: 100%;
     animation: fadeinContainer 0.5s ease-in-out forwards;
@@ -51,6 +50,7 @@
 @keyframes fadeoutContainer{
     0%{
         opacity: 1;
+        transform: translateX(-50%);
     }
     100%{
         opacity: 0;
@@ -58,43 +58,53 @@
     }
 }
 
-/**Media queries for smaller screen sizes
- * Webpage rearranges to appear better on smaller screens
+/**This is the css for the title of the page
+ * Creates the text visible upon loading the page
 */
-@media (max-width: 800px) {
-    /*Size of background overall works better now*/
-    .background{
-        min-height: 79em;
-        height: 100vh;
-    }
-
-    /*Container for main menu is positioned mored appropriately now*/
-    .informationContainer{
-        width: 90%;
-        top: 5em;
-    }
-
-    /*Improvements to the elements of the main menu within the container*/
-    .mainMenuContainer h1{
-        font-size: 2rem;
-    }
-    .button{
-        font-size: 1.5em;
-    }
-    .text{
-        font-size: 1.2em;
-    }
-    
-}
-
 .webpageTitle{
+    position: relative;
     color: rgb(190, 190, 190);
     font-size: 5em;
     font-weight: bold;
-    margin-top: 1em;
+    margin-top: 3em;
     text-align: center;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
+/**This is the css for the homepage button visible on the page to return to the homepage
+ * Creates the button used to return to the homepage including the hover and active states
+*/
+.homepageButton{
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    display: block;
+    margin: 1.5em 0;
+    font-size: 1.8em;
+    width: 24em;
+    text-align: center;
+    padding: 0.8em 0;
+    background-color: transparent;
+    border-radius: 1em;
+    border: solid white 0.1em;
+}
+
+.homepageButton:hover{
+    background-color: rgb(53, 154, 53);
+    transition: 0.3s ease-in-out;
+}
+
+.homepageButton:active{
+    background-color: rgb(255, 255, 255);
+    color: rgb(53, 154, 53);
+    border-color: rgb(53, 154, 53);
+    transition: 0.1s ease-in-out;
+}
+
+/**This is the css for the sections of the info page as well as the contents for these section on the page as well
+ * It sets the two types of sections that exist on the page and also the animation for the contents when scrolling the page
+*/
 .informationContainer > div{
     width: 100%;
     padding: 8em 5em;
@@ -151,4 +161,81 @@
         transform: translateY(0%);
     }
     
+}
+
+/**This is the css for the button specifc to the bottom of the page
+ * The css is primarily for the purpose of ensuring that the button is positioned at the correct height on the page
+*/
+.bottomHomepageButton{
+    top:75em;
+}
+
+
+
+/**Media queries for smaller screen sizes
+ * Webpage rearranges to appear better on smaller screens
+*/
+@media (max-width: 900px) {
+    /*Size of background overall works better now*/
+    .background{
+        min-height: 205em;
+    }
+
+    /*Container for main menu is positioned mored appropriately now*/
+    .informationContainer{
+        top: 60em;
+    }
+
+    /*Title appears better on smaller screens appropriately*/
+    .webpageTitle{
+        font-size: 4em;
+        margin-top: 5em;
+    }
+
+    /*Heading for each section is more appropriate*/
+    .informationContainer h1{
+        font-size: 2em;
+    }
+    
+    /*Better sizing for section text of smaller screen*/
+    .informationContainer p{
+        font-size: 1.2em;
+    }
+
+    /*Button are improved to be seen better when used on smaller screens*/
+    .homepageButton{
+        width: 18em;
+        font-size: 1.5em;
+    }
+
+    /*Button at bottom of the page is positioned more appropriately*/
+    .bottomHomepageButton{
+        top: 98em;
+    }
+}
+@media (max-width: 600px) {
+    /*Size of background overall works better now*/
+    .background{
+        min-height: 255em;
+    }
+    
+    /*Title appears better on smaller screens appropriately*/
+    .webpageTitle{
+        font-size: 3em;
+    }
+
+    /*Sizings of the sections for the info page now fit all the text better when viewed on a smaller screen*/
+    .informationContainer > div{
+        height: 40em;
+    }
+    
+    /*Button are improved to be seen better when used on smaller screens*/
+    .homepageButton{
+        width: 70vw;
+    }
+
+    /*Button at bottom of the page is positioned more appropriately*/
+    .bottomHomepageButton{
+        top: 125em;
+    }
 }

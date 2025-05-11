@@ -28,13 +28,13 @@ const Information = () => {
       if (window.scrollY > 0) {
         setScrollAnimateDesc(true);
       }
-      if (window.scrollY > 300) {
+      if (window.scrollY > 500) {
         setScrollAnimateAuthor(true);
       }
-      if (window.scrollY > 700) {
+      if (window.scrollY > 900) {
         setScrollAnimateFeatures(true);
       }
-      if (window.scrollY > 1100) {
+      if (window.scrollY > 1300) {
         setScrollAnimateImprovements(true);
       }
     };
@@ -51,9 +51,12 @@ const Information = () => {
   return (
     <div className={styles.background}>
       <BubblesBackground green={true} animate={animate}/>
-      <h1 className={styles.webpageTitle}>
+      <h1 className={styles.webpageTitle + " " + (animate ? styles.fadeoutContainer: "")}>
         Pace Maths Information
       </h1>
+      <span className={styles.homepageButton + " " + (animate ? styles.fadeoutContainer: "")} onClick={triggerAnimation}>
+        Return to Homepage
+      </span>
       <div className={styles.informationContainer + " " + (animate ? styles.fadeoutContainer: "")}>
         <div className={styles.infoSectionBox}>
           <h1 className={(scrollAnimateDesc ? styles.animateSectionContents : "")}>Website Information</h1>
@@ -89,6 +92,9 @@ const Information = () => {
           </p>
         </div>
       </div>
+      <span className={styles.homepageButton + " " + styles.bottomHomepageButton + " " + (animate ? styles.fadeoutContainer: "")} onClick={triggerAnimation}>
+        Return to Homepage
+      </span>
       <Footer />
     </div>
   );
