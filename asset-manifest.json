@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "//dawid-paluch.github.io/gcse-maths-quiz-website/static/css/main.dd6f2983.css",
-    "main.js": "//dawid-paluch.github.io/gcse-maths-quiz-website/static/js/main.dfbcdadc.js",
+    "main.js": "//dawid-paluch.github.io/gcse-maths-quiz-website/static/js/main.9d75cf58.js",
     "static/js/453.ab9f6532.chunk.js": "//dawid-paluch.github.io/gcse-maths-quiz-website/static/js/453.ab9f6532.chunk.js",
     "static/media/logo.svg": "//dawid-paluch.github.io/gcse-maths-quiz-website/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
     "index.html": "//dawid-paluch.github.io/gcse-maths-quiz-website/index.html",
     "main.dd6f2983.css.map": "//dawid-paluch.github.io/gcse-maths-quiz-website/static/css/main.dd6f2983.css.map",
-    "main.dfbcdadc.js.map": "//dawid-paluch.github.io/gcse-maths-quiz-website/static/js/main.dfbcdadc.js.map",
+    "main.9d75cf58.js.map": "//dawid-paluch.github.io/gcse-maths-quiz-website/static/js/main.9d75cf58.js.map",
     "453.ab9f6532.chunk.js.map": "//dawid-paluch.github.io/gcse-maths-quiz-website/static/js/453.ab9f6532.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.dd6f2983.css",
-    "static/js/main.dfbcdadc.js"
+    "static/js/main.9d75cf58.js"
   ]
 }
