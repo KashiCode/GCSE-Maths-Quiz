@@ -55,7 +55,7 @@ const Information = () => {
         Pace Maths Information
       </h1>
       <div className={styles.informationContainer + " " + (animate ? styles.fadeoutContainer: "")}>
-        <div className={styles.infoSectionBox + " " + "websiteDesc"}>
+        <div className={styles.infoSectionBox}>
           <h1 className={(scrollAnimateDesc ? styles.animateSectionContents : "")}>Website Information</h1>
           <p className={(scrollAnimateDesc ? styles.animateSectionContents : "")}>
             Pace Maths is a website designed for the purpose of aiding in sharpening your maths skills across a variety of topics.
@@ -64,7 +64,7 @@ const Information = () => {
             engaging, allowing for a more enjoyable experience while learning.
           </p>
         </div>
-        <div className={styles.sectionBox + "authorDesc"}>
+        <div className={styles.sectionBox}>
           <h1 className={(scrollAnimateAuthor ? styles.animateSectionContents : "")}>Author Information</h1>
           <p className={(scrollAnimateAuthor ? styles.animateSectionContents : "")}>
             This website was created by Dawid Paluch, computer science student at Queen Mary University of London. The website is
@@ -72,14 +72,14 @@ const Information = () => {
             that will aid the development of the website.
           </p>
         </div>
-        <div className={styles.sectionBox + "existingFeatures"}>
+        <div className={styles.sectionBox}>
           <h1 className={(scrollAnimateFeatures ? styles.animateSectionContents : "")}>Existing Features</h1>
           <p className={(scrollAnimateFeatures ? styles.animateSectionContents : "")}>
             This website currently only has a quiz to practice ratio questions. The questions are very limited currently, only
             being in a single format with the same style of problem solving and randomly generated numbers for this question type.
           </p>
         </div>
-        <div className={styles.sectionBox + "futureImprovements"}>
+        <div className={styles.sectionBox}>
           <h1  className={(scrollAnimateImprovements ? styles.animateSectionContents : "")}>Future Improvements</h1>
           <p className={(scrollAnimateImprovements ? styles.animateSectionContents : "")}>
             The website is planned to be improved in the future with the addition of more quizzes and question types. This will allow
