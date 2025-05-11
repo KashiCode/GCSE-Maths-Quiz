@@ -68,7 +68,7 @@ const GenericQuiz = (props) => {
   const triggerAnimation = () => {
     setAnimate(true);
 
-    setTimeout(() => navigate("/"), 650);
+    setTimeout(() => navigate("/gcse-maths-quiz-website"), 650);
   }
 
   //Animation function for the correct answer

@@ -11,10 +11,10 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<MainMenu />} />
-          <Route path="/information" element={<Information />} />
-          <Route path="/generic-quiz" element={<GenericQuiz />} />
-          <Route path="/ratio-quiz" element={<RatioQuiz />} />
+          <Route path="/gcse-maths-quiz-website" element={<MainMenu />} />
+          <Route path="/gcse-maths-quiz-website/information" element={<Information />} />
+          <Route path="/gcse-maths-quiz-website/generic-quiz" element={<GenericQuiz />} />
+          <Route path="/gcse-maths-quiz-website/ratio-quiz" element={<RatioQuiz />} />
           <Route path="*" element={<MissingPage />} />
         </Routes>
       </BrowserRouter>

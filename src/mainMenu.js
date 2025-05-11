@@ -33,14 +33,14 @@ const MainMenu = () => {
           If this is your first time here, please read the information page to learn more about the website.
         </p>
         <p className={styles.button}
-          onClick={() => triggerAnimation("/information")}
+          onClick={() => triggerAnimation("/gcse-maths-quiz-website/information")}
           onMouseEnter={() => setInfoHover(true)}
           onMouseLeave={() => setInfoHover(false)}>Information Page</p>
         <p className={styles.button} 
-          onClick={() => triggerAnimation("/ratio-quiz")}
+          onClick={() => triggerAnimation("/gcse-maths-quiz-website/ratio-quiz")}
           onMouseEnter={() => setRatioHover(true)}
           onMouseLeave={() => setRatioHover(false)}>Ratio Quiz</p>
-        <p className={styles.button} onClick={() => triggerAnimation("/generic-quiz")}>Empty Quiz</p>
+        <p className={styles.button} onClick={() => triggerAnimation("/gcse-maths-quiz-website/generic-quiz")}>Empty Quiz</p>
         <p className={styles.button}>Option Not Available</p>
         <p className={styles.button}>Option Not Available</p>
       </div>

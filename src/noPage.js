@@ -15,7 +15,7 @@ const MissingPage = (props) => {
         <div className={styles.error404Container}>
           <h1>ERROR 404</h1>
           <p>This page has been entered wrong or does not exist.</p>
-          <span className={styles.button} onClick={() => navigate("/")}>Return to Homepage</span>
+          <span className={styles.button} onClick={() => navigate("/gcse-maths-quiz-website")}>Return to Homepage</span>
           <span className={styles.button + " " + styles.previousPage} onClick={() => navigate(-1)}>Return to Previous Page</span>
         </div>
         <Footer />

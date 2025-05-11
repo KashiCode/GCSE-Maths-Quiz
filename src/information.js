@@ -14,7 +14,7 @@ const Information = () => {
   const triggerAnimation = () => {
     setAnimate(true);
 
-    setTimeout(() => navigate("/"), 750);
+    setTimeout(() => navigate("/gcse-maths-quiz-website"), 750);
   }
 
   return (

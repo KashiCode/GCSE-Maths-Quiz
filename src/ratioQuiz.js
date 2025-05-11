@@ -1,7 +1,4 @@
 import React, { use } from 'react';
-import { useEffect } from 'react';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import styles from './css/ratioQuiz.module.css';
 
 import GenericQuiz from './genericQuizInterface';
