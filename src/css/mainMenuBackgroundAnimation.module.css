@@ -15,7 +15,7 @@
 */
 :root{
     --animationTime: 0.4s;
-    --animationOpacity: 0.75;
+    --animationOpacity: 0.40;
 }
 
 /**Styling for the background animation of the info hover
@@ -34,12 +34,12 @@
 @keyframes infoSpanShow1 {
     0%{
         opacity: 0;
-        transform: translateX(0vw) translateY(0vh) rotate(-90deg);
+        transform: translateX(0vw) translateY(0vh) rotate(-450deg);
         scale: 0
     }
     100%{
         opacity: 1;
-        transform: translateX(30vw) translateY(-35vh) rotate(0deg);
+        transform: translateX(10vw) translateY(-35vh) rotate(0deg);
         scale: 1;
     }
 }
@@ -58,7 +58,7 @@
 }
 
 .infoSpan2 span{
-    font-size: 30vw;
+    font-size: 15vw;
 }
 
 @keyframes infoSpanShow2 {
@@ -69,7 +69,7 @@
     }
     100%{
         opacity: 1;
-        transform: translateX(-25vw) translateY(-45vh) rotate(-30deg);
+        transform: translateX(25vw) translateY(-25vh) rotate(-30deg);
         scale: 1;
     }
 }
