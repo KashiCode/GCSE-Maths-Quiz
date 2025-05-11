@@ -6,13 +6,13 @@
     display: inline-block;
     background: #0b2633;
     background: linear-gradient(180deg, rgba(11, 38, 51, 1) 0%, rgba(19, 39, 56, 1) 12%, rgba(26, 53, 82, 1) 71%, rgba(52, 87, 117, 1) 100%);
-    position: absolute;
     width: 100%;
-    min-height: 74em;
+    /* min-height: 74em; */
+    min-height: 162em;
     height: 100vh;
     overflow-x: hidden;
     overflow-y: hidden;
-    z-index: -10;
+    z-index: 0;
 }
 
 /**This is the css to create the main appearance for the main menu
@@ -20,14 +20,10 @@
 */
 .informationContainer{
     position:absolute;
-    top:9em;
+    display: block;
+    top:30em;
     left:50%;
-    transform:translateX(-50%);
-    width: 80%;
-    text-align: center;
-    border-radius: 15px;
-    padding: 20px;
-    /* background-color: rgba(180, 180, 180, 0.3); */
+    width: 100%;
     animation: fadeinContainer 0.5s ease-in-out forwards;
 }
 
@@ -62,42 +58,6 @@
     }
 }
 
-.informationContainer h1{
-    color: rgb(190, 190, 190);
-    font-size: 2.5rem;
-    font-weight: bold;
-    margin-top: 2.5em;
-    margin-bottom: 20px;
-}
-
-.text{
-    color: rgb(190, 190, 190);
-    font-size: 1.5em;
-}
-
-.button{
-    font-size: 1.4em;
-    display: inline-block;
-    width: 80%;
-    margin: 3em 0px;
-    color: rgb(190, 190, 190);
-    border-radius: 25px;
-    padding: 0.8em 0px;
-    border: 2px solid rgb(190, 190, 190);
-}
-
-.button:hover{
-    background-color: rgb(190, 190, 190);
-    color: black;
-    transition: 0.3s ease-in-out;
-}
-
-.button:active{
-    background-color: green;
-    color: rgb(190, 190, 190);
-    transition: 0.1s ease-in-out;
-}
-
 /**Media queries for smaller screen sizes
  * Webpage rearranges to appear better on smaller screens
 */
@@ -123,6 +83,72 @@
     }
     .text{
         font-size: 1.2em;
+    }
+    
+}
+
+.webpageTitle{
+    color: rgb(190, 190, 190);
+    font-size: 5em;
+    font-weight: bold;
+    margin-top: 1em;
+    text-align: center;
+}
+
+.informationContainer > div{
+    width: 100%;
+    padding: 8em 5em;
+    height: 29em;
+    background-color: rgba(36, 78, 79, 0.4);
+    border-radius: 1.5em;
+    backdrop-filter: blur(4px);
+}
+
+.informationContainer > div:nth-child(even){
+    background-color: rgba(19, 47, 51, 0.4);
+    text-align: right;
+}
+
+.informationContainer h1{
+    font-size: 2.5em;
+    margin-bottom: 0.5em;
+    font-weight: bold;
+    text-decoration: underline;
+    opacity: 0;
+}
+
+.informationContainer p{
+    font-size: 1.6em;
+    width: 98%;
+    margin: 0 auto;
+    line-height: 1.4em;
+    opacity: 0;
+}
+
+.informationContainer a{
+    color: white;
+    text-decoration: underline;
+    font-size: 1em;
+}
+
+.informationContainer a:hover{
+    color: rgb(152, 173, 193);
+    transition: 0.3s ease-in-out;
+}
+
+.animateSectionContents{
+    animation: scrollInSectionContents 1.2s ease-in forwards;
+    opacity: 1;
+}
+
+@keyframes scrollInSectionContents{
+    0%{
+        opacity: 0;
+        transform: translateY(40%);
+    }
+    100%{
+        opacity: 1;
+        transform: translateY(0%);
     }
     
 }

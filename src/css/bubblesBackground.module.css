@@ -57,6 +57,10 @@
     box-shadow: 0 0 0 0.8em rgb(28, 99, 45),
     0 0 3.5em rgb(8, 140, 41),
     0 0 7em rgb(8, 140, 41);
+    animation: greenAnimate 70s linear infinite;
+    animation-delay: calc(-2s * var(--i));
+    --xDirection: 1;
+    --xFactor: 1;
 }
 
 .green span:nth-child(even){
@@ -64,6 +68,29 @@
     box-shadow: 0 0 0 10px rgb(56, 135, 8),
     0 0 50px rgb(161, 221, 11),
     0 0 100px rgb(161, 221, 11);
+}
+
+@keyframes greenAnimate{
+    0%{
+        transform: translateY(160em) translateX(0px) scale(0.3);
+        opacity: 0;
+    }
+    25%{
+        transform: translateY(120em) translateX(calc(2px * var(--i) * var(--xDirection) * var(--xFactor))) scale(1);
+        opacity: 0.7;
+    }
+    50%{
+        transform: translateY(80em) translateX(0px) scale(0.5);
+        opacity: 0.4;
+    }
+    75%{
+        transform: translateY(40em) translateX(calc(-2px * var(--i) * var(--xDirection) * var(--xFactor))) scale(0.8);
+        opacity: 0.7;
+    }
+    100%{
+        transform: translateY(-10em) translateX(0px) scale(1);
+        opacity: 0.1;
+    }
 }
 
 .bubbles span:nth-child(4n){
