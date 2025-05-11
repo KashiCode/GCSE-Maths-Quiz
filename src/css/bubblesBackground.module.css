@@ -3,7 +3,8 @@
 */
 .bubbles{
     position: relative;
-    display: flex;
+    display: block;
+    width: 100%;
     animation: fadeinBubbles 0.7s ease-in-out forwards;
     z-index: -1;
 }
@@ -31,6 +32,9 @@
     0 0 100px rgba(0, 42, 255, 0.5);
 }
 
+.hiddenBubbles{
+    display: none;
+}
 
 /**Styling for the bubbles when red option is selected
  * This style is used primarily for the no page error page
@@ -70,21 +74,73 @@
     0 0 100px rgb(161, 221, 11);
 }
 
+.extraGreenBubbles{
+    display: flex;
+    width: 100%;
+    /* margin-top: 5em; */
+}
+
 @keyframes greenAnimate{
     0%{
-        transform: translateY(160em) translateX(0px) scale(0.3);
+        transform: translateY(190em) translateX(0px) scale(0.3);
         opacity: 0;
     }
     25%{
-        transform: translateY(120em) translateX(calc(2px * var(--i) * var(--xDirection) * var(--xFactor))) scale(1);
+        transform: translateY(142.5em) translateX(calc(2px * var(--i) * var(--xDirection) * var(--xFactor))) scale(1);
         opacity: 0.7;
     }
     50%{
-        transform: translateY(80em) translateX(0px) scale(0.5);
+        transform: translateY(95em) translateX(0px) scale(0.5);
         opacity: 0.4;
     }
     75%{
-        transform: translateY(40em) translateX(calc(-2px * var(--i) * var(--xDirection) * var(--xFactor))) scale(0.8);
+        transform: translateY(47.5em) translateX(calc(-2px * var(--i) * var(--xDirection) * var(--xFactor))) scale(0.8);
+        opacity: 0.7;
+    }
+    100%{
+        transform: translateY(-10em) translateX(0px) scale(1);
+        opacity: 0.1;
+    }
+}
+
+@keyframes greenAnimate900{
+    0%{
+        transform: translateY(205em) translateX(0px) scale(0.3);
+        opacity: 0;
+    }
+    25%{
+        transform: translateY(153.75em) translateX(calc(2px * var(--i) * var(--xDirection) * var(--xFactor))) scale(1);
+        opacity: 0.7;
+    }
+    50%{
+        transform: translateY(102.5em) translateX(0px) scale(0.5);
+        opacity: 0.4;
+    }
+    75%{
+        transform: translateY(51.25em) translateX(calc(-2px * var(--i) * var(--xDirection) * var(--xFactor))) scale(0.8);
+        opacity: 0.7;
+    }
+    100%{
+        transform: translateY(-10em) translateX(0px) scale(1);
+        opacity: 0.1;
+    }
+}
+
+@keyframes greenAnimate600{
+    0%{
+        transform: translateY(255em) translateX(0px) scale(0.3);
+        opacity: 0;
+    }
+    25%{
+        transform: translateY(191.25em) translateX(calc(2px * var(--i) * var(--xDirection) * var(--xFactor))) scale(1);
+        opacity: 0.7;
+    }
+    50%{
+        transform: translateY(127.5em) translateX(0px) scale(0.5);
+        opacity: 0.4;
+    }
+    75%{
+        transform: translateY(63.75em) translateX(calc(-2px * var(--i) * var(--xDirection) * var(--xFactor))) scale(0.8);
         opacity: 0.7;
     }
     100%{
@@ -171,6 +227,14 @@
 /**Media queries for smaller screen sizes
  * Webpage rearranges to appear better on smaller screens
 */
+@media (max-width: 900px) {
+    .green span{
+        animation: greenAnimate900 80s linear infinite;
+        animation-delay: calc(-4s * var(--i));
+        --xDirection: 1;
+        --xFactor: 1;
+    }
+}
 @media (max-width: 600px) {
     /*Size of bubbles in the background now appear more appropriate for smaller screens*/
     .bubbles span{
@@ -180,5 +244,11 @@
         0 0 1.75em rgba(0, 255, 255,0.5),
         0 0 3.5em rgba(0, 255, 255,0.5);
     }
-}
 
+    .green span{
+        animation: greenAnimate600 90s linear infinite;
+        animation-delay: calc(-2s * var(--i));
+        --xDirection: 1;
+        --xFactor: 1;
+    }
+}
