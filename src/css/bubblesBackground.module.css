@@ -11,14 +11,14 @@
 
 .bubbles span{
     position: relative;
-    width: 1.5em;
-    height: 1.5em;
+    width: 1.5vw;
+    height: 1.5vw;
     margin: 1.3vw;
     border-radius: 50%;
     background-color: aqua;
-    box-shadow: 0 0 0 0.8em rgba(8, 100, 128, 0.5),
-    0 0 3.5em rgba(0, 255, 255,0.5),
-    0 0 7em rgba(0, 255, 255,0.5);
+    box-shadow: 0 0 0 0.8vw rgba(8, 100, 128, 0.5),
+    0 0 2.8vw rgba(0, 255, 255,0.5),
+    0 0 5.6vw rgba(0, 255, 255,0.5);
     animation: animate 35s linear infinite;
     animation-delay: calc(-1s * var(--i));
     --xDirection: 1;
@@ -27,9 +27,9 @@
 
 .bubbles span:nth-child(even){
     background-color: rgb(0, 42, 255);
-    box-shadow: 0 0 0 10px rgba(36, 67, 146, 0.5),
-    0 0 50px rgba(0, 42, 255, 0.5),
-    0 0 100px rgba(0, 42, 255, 0.5);
+    box-shadow: 0 0 0 0.8vw rgba(36, 67, 146, 0.5),
+    0 0 2.8vw rgba(0, 42, 255, 0.5),
+    0 0 5.6vw rgba(0, 42, 255, 0.5);
 }
 
 .hiddenBubbles{
@@ -41,16 +41,16 @@
 */
 .red span{
     background-color: rgb(223, 5, 27);
-    box-shadow: 0 0 0 0.8em rgb(72, 32, 40),
-    0 0 3.5em rgb(197, 13, 50),
-    0 0 7em rgb(197, 13, 50);
+    box-shadow: 0 0 0 0.8vw rgb(72, 32, 40),
+    0 0 2.8vw rgb(197, 13, 50),
+    0 0 5.6vw rgb(197, 13, 50);
 }
 
 .red span:nth-child(even){
     background-color: rgb(211, 72, 22);
-    box-shadow: 0 0 0 10px rgb(83, 65, 44),
-    0 0 50px rgb(211, 72, 22),
-    0 0 100px rgb(211, 72, 22);
+    box-shadow: 0 0 0 1.4vw rgb(83, 65, 44),
+    0 0 3.5vw rgb(211, 72, 22),
+    0 0 6.5vw rgb(211, 72, 22);
 }
 
 /**Styling for the bubbles when green option is selected
@@ -58,9 +58,9 @@
 */
 .green span{
     background-color: rgb(8, 140, 41);
-    box-shadow: 0 0 0 0.8em rgb(28, 99, 45),
-    0 0 3.5em rgb(8, 140, 41),
-    0 0 7em rgb(8, 140, 41);
+    box-shadow: 0 0 0 0.8vw rgb(28, 99, 45),
+    0 0 2.8vw rgb(8, 140, 41),
+    0 0 5.6vw rgb(8, 140, 41);
     animation: greenAnimate 70s linear infinite;
     animation-delay: calc(-2s * var(--i));
     --xDirection: 1;
@@ -69,9 +69,9 @@
 
 .green span:nth-child(even){
     background-color: rgb(161, 221, 11);
-    box-shadow: 0 0 0 10px rgb(56, 135, 8),
-    0 0 50px rgb(161, 221, 11),
-    0 0 100px rgb(161, 221, 11);
+    box-shadow: 0 0 0 0.8vw rgb(56, 135, 8),
+    0 0 2.4vw rgb(161, 221, 11),
+    0 0 5.6vw rgb(161, 221, 11);
 }
 
 .extraGreenBubbles{
@@ -236,15 +236,6 @@
     }
 }
 @media (max-width: 600px) {
-    /*Size of bubbles in the background now appear more appropriate for smaller screens*/
-    .bubbles span{
-        width: 0.6em;
-        height: 0.6em;
-        box-shadow: 0 0 0 0.4em rgba(8, 100, 128, 0.5),
-        0 0 1.75em rgba(0, 255, 255,0.5),
-        0 0 3.5em rgba(0, 255, 255,0.5);
-    }
-
     .green span{
         animation: greenAnimate600 90s linear infinite;
         animation-delay: calc(-2s * var(--i));
