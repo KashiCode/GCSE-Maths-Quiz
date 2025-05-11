@@ -28,13 +28,13 @@ const Information = () => {
       if (window.scrollY > 0) {
         setScrollAnimateDesc(true);
       }
-      if (window.scrollY > 500) {
+      if (window.scrollY > 600) {
         setScrollAnimateAuthor(true);
       }
-      if (window.scrollY > 900) {
+      if (window.scrollY > 1000) {
         setScrollAnimateFeatures(true);
       }
-      if (window.scrollY > 1300) {
+      if (window.scrollY > 1500) {
         setScrollAnimateImprovements(true);
       }
     };
