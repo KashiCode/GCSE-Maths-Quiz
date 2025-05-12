@@ -23,16 +23,40 @@ const GenericQuiz = (props) => {
   const quizTitle = props.quizTitle ? props.quizTitle : "Quiz Unknown";
   const [animate,setAnimate] = React.useState(false);
 
-  //Setting variables specific to the given version of the quiz
-  const questionFunction = props.questionFunction ? props.questionFunction : () => {
-    return ["Question function is missing. Quiz is not functional."];
-  }
-  const [question,setQuestion] = React.useState("There is no question yet.");
-  const checkAnswerFunction = props.checkAnswerFunction ? props.checkAnswerFunction : () => {
-    return "There is no answer checking function yet.";
-  }
-  const answerSection =props.answerSection ? props.answerSection : "There is no answer section yet.";
-  const [currentAnswer, setCurrentAnswer] = React.useState([]);
+  //Setting the quiz states for the different quiz questions
+  const [question,setQuestion] = React.useState();
+  const [answerSection,setAnswerSection] = React.useState();
+  const [currentAnswer, setCurrentAnswer] = React.useState();
+
+  const [questionStyle, setQuestionStyle] = React.useState(0);
+  const [questionTypes, setQuestionTypes] = React.useState(() => [() => {}]);
+  const [answerTypes, setAnswerTypes] = React.useState(() => [null]);
+  const [checkAnswerTypes, setCheckAnswerTypes] = React.useState(() => [() => true]);
+
+  //Getting the props for the quiz
+  useEffect(() => {
+    setQuestionTypes(props.questionFunction ? props.questionFunction : [() => {
+      return ["Question function is missing. Quiz is not functional.",null]}]);
+    setAnswerTypes(props.answerSection ? props.answerSection : ["There is no answer section yet."]);
+    setCheckAnswerTypes(props.checkAnswerFunction ? props.checkAnswerFunction : [() => {
+    return true}]);
+
+    let currentAnswer;
+    let currentFunction;
+    if (props.questionFunction) {
+      currentFunction = props.questionFunction[0];
+      currentAnswer = props.answerSection[0]
+    } else {
+      currentFunction = () => {return ["Question function is missing. Quiz is not functional.",null];};
+      currentAnswer = "There is no answer section yet."
+    }
+
+    let questionReturn = currentFunction();
+    setQuestion(questionReturn[0]);
+    setCurrentAnswer(questionReturn[1]);
+    setAnswerSection(currentAnswer);
+  }, []);
+
   const [totalTimer,setTotalTimer] = React.useState(0);
   const [questionTimer,setQuestionTimer] = React.useState(0);
   const [correctCount,setCorrectCount] = React.useState(0);
@@ -52,14 +76,6 @@ const GenericQuiz = (props) => {
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [totalTimer, questionTimer]);
-
-  //This sets the question and current answer when the quiz is first loaded
-  useEffect(() => {
-    let questionReturn = questionFunction();
-
-    setQuestion(questionReturn[0]);
-    setCurrentAnswer(questionReturn[1]);
   }, []);
 
   const navigate = useNavigate();
@@ -91,7 +107,7 @@ const GenericQuiz = (props) => {
   }
 
   const submitAnswer = () => {
-    if (checkAnswerFunction(currentAnswer)) {
+    if (checkAnswerTypes[questionStyle](currentAnswer)) {
       setCorrectCount((prev) => prev + 1);
       triggerCorrectAnimation();
     } else {
@@ -100,10 +116,13 @@ const GenericQuiz = (props) => {
     }
     setQuestionTimer(0);
 
-    let questionReturn = questionFunction();
+    const newIndex = Math.floor(Math.random() * questionTypes.length);
+    setQuestionStyle(newIndex);
+    let questionReturn = questionTypes[newIndex]();
 
     setQuestion(questionReturn[0]);
     setCurrentAnswer(questionReturn[1]);
+    setAnswerSection(answerTypes[newIndex]);
   }
   return (
     <div className={styles.background}>
