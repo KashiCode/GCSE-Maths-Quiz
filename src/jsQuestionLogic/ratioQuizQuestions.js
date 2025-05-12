@@ -1,14 +1,14 @@
-import styles from './css/ratioQuiz.module.css';
+import { toWords } from 'number-to-words';
+import styles from '../css/ratioQuiz.module.css';
+
+//Function to disable scrolling when using the number input
+function disableScroll(event) {
+    event.preventDefault();
+    event.target.blur();
+}
 
 //Function to generate a question based off ratios in the first style
 export const setQuestionStyle1 = () => {
-    //Function to disable scrolling when using the number input
-    function disableScroll(event) {
-        event.preventDefault();
-        event.target.blur();
-    }
-
-
     // Logic to set the question and answer options
     //Function to generate a random number
     const getRandomInt = (min, max) => {
@@ -110,6 +110,8 @@ export const checkAnswerStyle1 = (correctAnswers) => {
 
 export const ratioQuestionStyle1 = [setQuestionStyle1, answerSectionStyle1, checkAnswerStyle1];
 
+
+
 //Function to create the second question style for ratio questions
 const setQuestionStyle2 = () => {
     // Logic to set the question and answer options
@@ -190,3 +192,98 @@ const checkAnswerStyle2 = (correctAnswers) => {
 }
 
 export const ratioQuestionStyle2 = [setQuestionStyle2, answerSectionStyle2, checkAnswerStyle2];
+
+
+
+
+//Function to create the second question style for ratio questions
+const setQuestionStyle3 = () => {
+    // Logic to set the question and answer options
+    //Function to generate a random number
+    const getRandomInt = (min, max) => {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    };
+
+    const generateIngredient = () => {
+        const ingredients = ["flour", "sugar", "butter", "eggs", "milk", "salt", "baking powder", "vanilla extract", "chocolate chips", "nuts", "fruit", "yogurt", "honey", "jam", "cream cheese", "peanut butter"];
+        let num1 = Math.floor(Math.random() * ingredients.length);
+        let ingredient1 = ingredients[num1];
+        let num2 = Math.floor(Math.random() * ingredients.length);
+        while (num1 == num2) {
+            let num2 = Math.floor(Math.random() * ingredients.length);
+        }
+        let ingredient2 = ingredients[num2];
+        let num3 = Math.floor(Math.random() * ingredients.length);
+        while (num1 == num3 || num2 == num3) {
+            let num3 = Math.floor(Math.random() * ingredients.length);
+        }
+        let ingredient3 = ingredients[num3];
+        return [ingredient1, ingredient2, ingredient3];
+    }
+
+    let num1 = 1;
+    let num2 = 1;
+    let num3 = 1;
+    while (num1 == num2 || num1 == num3 || num2 == num3){
+        num1 = getRandomInt(1, 10);
+        num2 = getRandomInt(1, 10);
+        num3 = getRandomInt(1, 10);
+    }
+
+    let amount2 = num2 * 2.5 * getRandomInt(1, 40);
+
+    let amountUnit = amount2 / num2;
+    let amount1 = amountUnit * num1;
+    let amount3 = amountUnit * num3;
+
+    //Creating the question string
+    let generatedIngredients = generateIngredient();
+    let question = "A recipe uses " + toWords(num1) + " parts " + generatedIngredients[0] + " for " + toWords(num2) + " parts ";
+    question += generatedIngredients[1] + " and " + toWords(num3) + " parts " + generatedIngredients[2] + ".";
+    question += " When preparing for a party, the chef uses " + amount2 + "g of " + generatedIngredients[1] + ", ";
+    question += "how much " + generatedIngredients[0] + " and " + generatedIngredients[2] + " do they need?";
+
+    return [question, [generatedIngredients[0], generatedIngredients[1], generatedIngredients[2], num1, num2, num3, amount2, amountUnit, amount1, amount3]];
+}
+
+//Creating the answer section that should allow users to input their answers
+const answerSectionStyle3 = (
+    <div>
+        <div className={styles.inputDiv}>
+            <label class={styles.ratioQuizLabel}>Ingredient 1(g): </label>
+            <input class={styles.ratioQuizInput} type='number' placeholder='Ingredient 1' onWheel={disableScroll}/>
+        </div>
+        <div className={styles.inputDiv}>
+            <label class={styles.ratioQuizLabel}>Ingredient 3(g): </label>
+            <input class={styles.ratioQuizInput} type='number' placeholder='Ingredient 3' onWheel={disableScroll}/>
+        </div>
+    </div>
+);
+
+//Function to check the answer and return true or false based on the answer given
+//Also clears the input fields after checking the answer
+const checkAnswerStyle3 = (correctAnswers) => {
+    const amount1 = document.querySelector('input[placeholder="Ingredient 1"]').value;
+    const amount3 = document.querySelector('input[placeholder="Ingredient 3"]').value;
+
+    document.querySelector('input[placeholder="Ingredient 1"]').value = "";
+    document.querySelector('input[placeholder="Ingredient 3"]').value = "";
+        
+    if (amount1 === "" || amount3 === "") {
+        document.getElementById("answerFeedback").innerHTML = "Incorrect. Please fill in all fields to answer the question.";
+        return false;
+    }
+    if (amount1 == correctAnswers[8] && amount3 == correctAnswers[9]) {
+        return true;
+    } else {
+        let newFeedback = "Incorrect. Your answer is " + amount1 + "g of " + correctAnswers[0] + " and " + amount3 + "g of ";
+        newFeedback += correctAnswers[2] + ". When the ratio of " + correctAnswers[0] + ":" + correctAnswers[1] + ":";
+        newFeedback +=correctAnswers[2] + " is used, the amount of " + correctAnswers[1] + " used is " + correctAnswers[6];
+        newFeedback += "g. The correct amounts are " + correctAnswers[8] + "g of " + correctAnswers[0] + " and " + correctAnswers[9];
+        newFeedback += "g of " + correctAnswers[2];
+        document.getElementById("answerFeedback").innerHTML = newFeedback;
+        return false;
+    }
+}
+
+export const ratioQuestionStyle3 = [setQuestionStyle3, answerSectionStyle3, checkAnswerStyle3];
