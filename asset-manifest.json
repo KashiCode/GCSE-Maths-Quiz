@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/gcse-maths-quiz-website/static/css/main.fed2605e.css",
-    "main.js": "/gcse-maths-quiz-website/static/js/main.0484a6fe.js",
+    "main.css": "/gcse-maths-quiz-website/static/css/main.419276ab.css",
+    "main.js": "/gcse-maths-quiz-website/static/js/main.e7eb015c.js",
     "static/js/453.ab9f6532.chunk.js": "/gcse-maths-quiz-website/static/js/453.ab9f6532.chunk.js",
     "static/media/logo.svg": "/gcse-maths-quiz-website/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
     "index.html": "/gcse-maths-quiz-website/index.html",
-    "main.fed2605e.css.map": "/gcse-maths-quiz-website/static/css/main.fed2605e.css.map",
-    "main.0484a6fe.js.map": "/gcse-maths-quiz-website/static/js/main.0484a6fe.js.map",
+    "main.419276ab.css.map": "/gcse-maths-quiz-website/static/css/main.419276ab.css.map",
+    "main.e7eb015c.js.map": "/gcse-maths-quiz-website/static/js/main.e7eb015c.js.map",
     "453.ab9f6532.chunk.js.map": "/gcse-maths-quiz-website/static/js/453.ab9f6532.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.fed2605e.css",
-    "static/js/main.0484a6fe.js"
+    "static/css/main.419276ab.css",
+    "static/js/main.e7eb015c.js"
   ]
 }
