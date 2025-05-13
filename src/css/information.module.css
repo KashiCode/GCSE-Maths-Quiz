@@ -131,10 +131,11 @@
 
 .informationContainer p{
     font-size: 1.6em;
-    width: 98%;
+    width: 92%;
     margin: 0 auto;
     line-height: 1.4em;
     opacity: 0;
+    text-align: justify;
 }
 
 .informationContainer a{
