@@ -8,7 +8,7 @@
     background: linear-gradient(180deg, rgba(11, 38, 51, 1) 0%, rgba(19, 39, 56, 1) 12%, rgba(26, 53, 82, 1) 71%, rgba(52, 87, 117, 1) 100%);
     position: absolute;
     width: 100%;
-    min-height: 70em;
+    min-height: 75em;
     height: 100vh;
     overflow-x: hidden;
     overflow-y: hidden;
@@ -417,7 +417,7 @@
     }
 
     .quizContainer{
-        width: 96%;
+        width: 94%;
         height: 60em;
     }
 
@@ -453,7 +453,7 @@
 @media (max-width: 600px) {
     /*Appropriate size of the overall page on smaller screens*/
     .background{
-        min-height: 90em;
+        min-height: 95em;
     }
 
     /*Changes to the title of the quiz*/

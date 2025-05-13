@@ -5,7 +5,7 @@
     position: absolute;
     bottom: 0;
     width: 100%;
-    height: 12em;
+    height: 14.5em;
     background-color: rgb(50, 55, 104);
     text-align: center;
     overflow-y: hidden;
@@ -30,6 +30,7 @@
     width: 100%;
     display: inline-block;
     padding-left: 5.5em;
+    margin-top: 1em;
 }
 
 .footerTitle{
@@ -81,7 +82,7 @@
 @media only screen and (max-width: 600px) {
     /*Size of footer improved*/
     .footer {
-        height: 20em;
+        height: 27em;
         padding: 0.4em;
     }
 
