@@ -261,7 +261,7 @@
     /*Title appears better on smaller screens appropriately*/
     .webpageTitle{
         font-size: 3em;
-        top: 9em;
+        top: 7.5em;
     }
 
     /*Sizings of the sections for the info page now fit all the text better when viewed on a smaller screen*/
