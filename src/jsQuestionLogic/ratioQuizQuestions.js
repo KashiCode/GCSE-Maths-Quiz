@@ -7,14 +7,14 @@ function disableScroll(event) {
     event.target.blur();
 }
 
+//Function to generate a random number
+const getRandomInt = (min, max) => {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+};
+
 //Function to generate a question based off ratios in the first style
 export const setQuestionStyle1 = () => {
     // Logic to set the question and answer options
-    //Function to generate a random number
-    const getRandomInt = (min, max) => {
-        return Math.floor(Math.random() * (max - min + 1)) + min;
-    };
-
     //Function to find the highest common factor of two numbers
     const hcf2 = (a, b) => {
         while (b) {
@@ -115,11 +115,6 @@ export const ratioQuestionStyle1 = [setQuestionStyle1, answerSectionStyle1, chec
 //Function to create the second question style for ratio questions
 const setQuestionStyle2 = () => {
     // Logic to set the question and answer options
-    //Function to generate a random number
-    const getRandomInt = (min, max) => {
-        return Math.floor(Math.random() * (max - min + 1)) + min;
-    };
-
     const generateName = () => {
         const names = ["Lucy", "Fred", "Bob", "Adam", "Max", "Aaron", "Jack", "Jake", "Frank", "Will", "Tom", "Sam", "Ben", "Joe", "James", "John", "Charlie", "Harry", "George", "Henry"];
         let num1 = Math.floor(Math.random() * names.length);
@@ -199,11 +194,6 @@ export const ratioQuestionStyle2 = [setQuestionStyle2, answerSectionStyle2, chec
 //Function to create the second question style for ratio questions
 const setQuestionStyle3 = () => {
     // Logic to set the question and answer options
-    //Function to generate a random number
-    const getRandomInt = (min, max) => {
-        return Math.floor(Math.random() * (max - min + 1)) + min;
-    };
-
     const generateIngredient = () => {
         const ingredients = ["flour", "sugar", "butter", "eggs", "milk", "salt", "baking powder", "vanilla extract", "chocolate chips", "nuts", "fruit", "yogurt", "honey", "jam", "cream cheese", "peanut butter"];
         let num1 = Math.floor(Math.random() * ingredients.length);
@@ -293,11 +283,6 @@ export const ratioQuestionStyle3 = [setQuestionStyle3, answerSectionStyle3, chec
 //Function to create the fourth question style for ratio questions
 const setQuestionStyle4 = () => {
     // Logic to set the question and answer options
-    //Function to generate a random number
-    const getRandomInt = (min, max) => {
-        return Math.floor(Math.random() * (max - min + 1)) + min;
-    };
-
     const generateGroup = () => {
         const groups = [["men", "women"], ["students", "teachers"], ["children", "adults"], ["employees", "managers"], ["cyclists", "drivers"], ["pilots", "passengers"]];
         let num1 = Math.floor(Math.random() * groups.length);
