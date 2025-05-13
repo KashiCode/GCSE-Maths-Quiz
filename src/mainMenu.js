@@ -13,6 +13,7 @@ const MainMenu = () => {
   //Use state to trigger the background animation for the button hovers
   const [infoHover, setInfoHover] = React.useState(false);
   const [ratioHover, setRatioHover] = React.useState(false);
+  const [probabilityHover, setProbabilityHover] = React.useState(false);
 
   const navigate = useNavigate();
 
@@ -25,7 +26,7 @@ const MainMenu = () => {
   return (
     <div className={styles.background}>
       <BubblesBackground animate={animate}/>
-      <MainMenuBackgoundAnimation animate={animate} info={infoHover} ratio={ratioHover}/>
+      <MainMenuBackgoundAnimation animate={animate} info={infoHover} ratio={ratioHover} probability={probabilityHover}/>
       <div className={styles.mainMenuContainer + " " + (animate ? styles.fadeoutContainer: "")}>
         <h1>Welcome to PaceMaths</h1>
         <p className={styles.text}>
@@ -42,8 +43,8 @@ const MainMenu = () => {
           onMouseLeave={() => setRatioHover(false)}>Ratio Quiz</p>
         <p className={styles.button}
           onClick={() => triggerAnimation("/gcse-maths-quiz-website/probability-quiz")}
-          onMouseEnter={() => { return false; }}
-          onMouseLeave={() => { return false; }}>Probability Quiz</p>
+          onMouseEnter={() => setProbabilityHover(true)}
+          onMouseLeave={() => setProbabilityHover(false)}>Probability Quiz</p>
         <p className={styles.button} onClick={() => triggerAnimation("/gcse-maths-quiz-website/generic-quiz")}>Empty Quiz</p>
         <p className={styles.button}
           onClick={() => triggerAnimation("/gcse-maths-quiz-website/universal-quiz")}

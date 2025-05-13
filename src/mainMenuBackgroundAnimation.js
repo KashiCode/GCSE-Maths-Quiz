@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './css/mainMenuBackgroundAnimation.module.css';
 
-const MainMenuBackgroundAnimation = ({animate,info, ratio }) => {
+const MainMenuBackgroundAnimation = ({animate, info, ratio, probability}) => {
     return (
     <div className={styles.backgroundAnimation + " " + (animate ? styles.fadeout : "")}>
         <span className={styles.infoSpan1 + " " + (info ? styles.animateInfo1: "")}>INFO</span>
@@ -10,6 +10,9 @@ const MainMenuBackgroundAnimation = ({animate,info, ratio }) => {
 
         <span className={styles.ratioSpan1 + " " + (ratio ? styles.animateRatio1 : "")}>1:2</span>
         <span className={styles.ratioSpan2 + " " + (ratio ? styles.animateRatio2 : "")}>3:2</span>
+
+        <span className={styles.probabilitySpan1 + " " + (probability ? styles.animateProbability1 : "")}>P(A) = 0.2</span>
+        <span className={styles.probabilitySpan2 + " " + (probability ? styles.animateProbability2 : "")}>35%</span>
     </div>
     );
 }

@@ -140,6 +140,66 @@
     animation: ratioSpanShow2 var(--animationTime) ease forwards;
 }
 
+/**Styling for the background animation of the probability hover
+ * Includes the two spans and their animations
+*/
+
+.probabilitySpan1{
+    font-size: 4vw;
+    color: rgba(146, 79, 183, var(--animationOpacity));
+    position: absolute;
+    left:0;
+    transform: translateX(-200%);
+    display: none;
+}
+
+@keyframes probabilitySpanShow1 {
+    0%{
+        opacity: 0;
+        transform: translateX(-200%) translateY(0vh) rotate(600deg);
+        scale: 0
+    }
+    100%{
+        opacity: 1;
+        transform: translateX(-30%) translateY(15vh) rotate(270deg);
+        scale: 1;
+    }
+}
+
+
+.animateProbability1{
+    display: inline-block;
+    animation: probabilitySpanShow1 var(--animationTime) ease forwards;
+}
+
+.probabilitySpan2{
+    font-size: 14vw;
+    color: rgba(198, 134, 79, calc(var(--animationOpacity) * 1.3));
+    position: relative;
+    left: 100vw;
+    top: 0;
+    transform: translateX(-100%);
+    display: none;
+}
+
+@keyframes probabilitySpanShow2 {
+    0%{
+        opacity: 0;
+        transform: translateX(0) translateY(155vh) rotate(1200deg);
+        scale: 0
+    }
+    100%{
+        opacity: 1;
+        transform: translateX(-30vw) translateY(55vh) rotate(30deg);
+        scale: 1;
+    }
+}
+
+.animateProbability2{
+    display: inline-block;
+    animation: probabilitySpanShow2 var(--animationTime) ease forwards;
+}
+
 /**To make background animation dissapear
  * Animation used when the user clicks on a link to go to another page causing the background animation to disappear
 */
