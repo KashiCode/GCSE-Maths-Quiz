@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import MainMenu from './mainMenu.js';
 import GenericQuiz from './genericQuizInterface.js';
 import RatioQuiz from './ratioQuiz.js';
+import ProbabilityQuiz from './probabilityQuiz.js';
 import MissingPage from './noPage.js';
 import Information from './information.js';
 
@@ -15,6 +16,7 @@ function App() {
           <Route path="/gcse-maths-quiz-website/information" element={<Information />} />
           <Route path="/gcse-maths-quiz-website/generic-quiz" element={<GenericQuiz />} />
           <Route path="/gcse-maths-quiz-website/ratio-quiz" element={<RatioQuiz />} />
+          <Route path="/gcse-maths-quiz-website/probability-quiz" element={<ProbabilityQuiz />} />
           <Route path="*" element={<MissingPage />} />
         </Routes>
       </BrowserRouter>
