@@ -66,7 +66,7 @@
     color: rgb(190, 190, 190);
     font-size: 2.5rem;
     font-weight: bold;
-    margin-bottom: 20px;
+    margin-bottom: 0.5em;
     text-decoration: underline;
 }
 
@@ -107,7 +107,7 @@
 @media (max-width: 600px) {
     /*Size of background overall works better now*/
     .background{
-        min-height: 79em;
+        min-height: 84em;
         height: 100vh;
     }
 
@@ -117,15 +117,23 @@
         top: 5em;
     }
 
+    .text{
+        font-size: 1.2em;
+        width: 90%;
+    }
+
     /*Improvements to the elements of the main menu within the container*/
     .mainMenuContainer h1{
         font-size: 2rem;
     }
     .button{
-        font-size: 1.5em;
+        font-size: 1.4em;
     }
-    .text{
-        font-size: 1.2em;
+}
+
+@media (max-width: 550px) {
+    .button{
+        font-size: 1.4em;
+        width: 12em;
     }
-    
 }
