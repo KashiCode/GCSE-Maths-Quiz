@@ -44,6 +44,10 @@ const MainMenu = () => {
           onClick={() => triggerAnimation("/gcse-maths-quiz-website/probability-quiz")}
           onMouseEnter={() => { return false; }}
           onMouseLeave={() => { return false; }}>Probability Quiz</p>
+        <p className={styles.button}
+          onClick={() => triggerAnimation("/gcse-maths-quiz-website/factorisation-quiz")}
+          onMouseEnter={() => { return false; }}
+          onMouseLeave={() => { return false; }}>Factorisation Quiz</p>
         <p className={styles.button} onClick={() => triggerAnimation("/gcse-maths-quiz-website/generic-quiz")}>Empty Quiz</p>
         <p className={styles.button}
           onClick={() => triggerAnimation("/gcse-maths-quiz-website/universal-quiz")}
