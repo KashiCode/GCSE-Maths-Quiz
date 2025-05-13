@@ -19,7 +19,7 @@
     box-shadow: 0 0 0 0.8vw rgba(8, 100, 128, 0.5),
     0 0 2.8vw rgba(0, 255, 255,0.5),
     0 0 5.6vw rgba(0, 255, 255,0.5);
-    animation: animate 35s linear infinite;
+    animation: animate 40s linear infinite;
     animation-delay: calc(-1s * var(--i));
     --xDirection: 1;
     --xFactor: 1;
@@ -172,19 +172,19 @@
 
 @keyframes animate{
     0%{
-        transform: translateY(60em) translateX(0px) scale(0.3);
+        transform: translateY(84em) translateX(0px) scale(0.3);
         opacity: 0;
     }
     25%{
-        transform: translateY(75vh) translateX(calc(2px * var(--i) * var(--xDirection) * var(--xFactor))) scale(1);
+        transform: translateY(63em) translateX(calc(2px * var(--i) * var(--xDirection) * var(--xFactor))) scale(1);
         opacity: 0.7;
     }
     50%{
-        transform: translateY(50vh) translateX(0px) scale(0.5);
+        transform: translateY(42em) translateX(0px) scale(0.5);
         opacity: 0.4;
     }
     75%{
-        transform: translateY(25vh) translateX(calc(-2px * var(--i) * var(--xDirection) * var(--xFactor))) scale(0.8);
+        transform: translateY(21em) translateX(calc(-2px * var(--i) * var(--xDirection) * var(--xFactor))) scale(0.8);
         opacity: 0.7;
     }
     100%{
