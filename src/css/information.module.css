@@ -62,13 +62,15 @@
  * Creates the text visible upon loading the page
 */
 .webpageTitle{
-    position: relative;
+    position: absolute;
     color: rgb(190, 190, 190);
-    font-size: 5em;
+    display: block;
+    width: 100%;
+    font-size: 4em;
     font-weight: bold;
-    margin-top: 3em;
     text-align: center;
     left: 50%;
+    top: 5em;
     transform: translateX(-50%);
 }
 
@@ -76,11 +78,11 @@
  * Creates the button used to return to the homepage including the hover and active states
 */
 .homepageButton{
-    position: relative;
+    position: absolute;
     left: 50%;
+    top: 16em;
     transform: translateX(-50%);
     display: block;
-    margin: 1.5em 0;
     font-size: 1.8em;
     width: 24em;
     text-align: center;
@@ -167,7 +169,7 @@
  * The css is primarily for the purpose of ensuring that the button is positioned at the correct height on the page
 */
 .bottomHomepageButton{
-    top:75em;
+    top:96em;
 }
 
 
@@ -189,7 +191,7 @@
     /*Title appears better on smaller screens appropriately*/
     .webpageTitle{
         font-size: 4em;
-        margin-top: 5em;
+        top: 6em;
     }
 
     /*Heading for each section is more appropriate*/
@@ -206,11 +208,12 @@
     .homepageButton{
         width: 18em;
         font-size: 1.5em;
+        top: 22em;
     }
 
     /*Button at bottom of the page is positioned more appropriately*/
     .bottomHomepageButton{
-        top: 98em;
+        top: 122em;
     }
 }
 @media (max-width: 600px) {
@@ -222,6 +225,7 @@
     /*Title appears better on smaller screens appropriately*/
     .webpageTitle{
         font-size: 3em;
+        top: 9em;
     }
 
     /*Sizings of the sections for the info page now fit all the text better when viewed on a smaller screen*/
@@ -232,10 +236,11 @@
     /*Button are improved to be seen better when used on smaller screens*/
     .homepageButton{
         width: 70vw;
+        top: 22em;
     }
 
     /*Button at bottom of the page is positioned more appropriately*/
     .bottomHomepageButton{
-        top: 130em;
+        top: 150em;
     }
 }
