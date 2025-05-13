@@ -47,6 +47,10 @@ const MainMenu = () => {
           onMouseEnter={() => setProbabilityHover(true)}
           onMouseLeave={() => setProbabilityHover(false)}>Probability Quiz</p>
         <p className={styles.button}
+          onClick={() => triggerAnimation("/gcse-maths-quiz-website/factorisation-quiz")}
+          onMouseEnter={() => { return false; }}
+          onMouseLeave={() => { return false; }}>Factorisation Quiz</p>
+        <p className={styles.button}
           onClick={() => triggerAnimation("/gcse-maths-quiz-website/universal-quiz")}
           onMouseEnter={() => setUniversalHover(true)}
           onMouseLeave={() => setUniversalHover(false)}>Universal Quiz</p>

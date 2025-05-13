@@ -108,9 +108,6 @@ const checkAnswerStyle1 = (correctAnswers) => {
         document.getElementById("answerFeedback").innerHTML = "Incorrect. Please fill in all fields to answer the question.";
         return false;
     }
-    console.log("Answer: " + answer);
-    console.log("Correct Answer: " + correctAnswers[2, 0]);
-    console.log("Correct Answers: " + correctAnswers[2]);
     let finalAnswer = correctAnswers[2][0]
     if (answer == finalAnswer) {
         return true;
