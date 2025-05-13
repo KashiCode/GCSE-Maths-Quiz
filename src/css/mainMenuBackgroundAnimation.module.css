@@ -14,7 +14,7 @@
  * Sets root variables used for the background animation
 */
 :root{
-    --animationTime: 0.4s;
+    --animationTime: 0.6s;
     --animationOpacity: 0.40;
 }
 
@@ -231,6 +231,71 @@
 }
 
 
+
+/**Styling for the background animation of the factorisation hover
+ * Includes the two spans and their animations
+*/
+.factorisationSpan1{
+    font-size: 22vw;
+    color: rgba(72, 20, 182, var(--animationOpacity));
+    position: absolute;
+    left: -45vw;
+    top: -25vw;
+    display: none;
+}
+
+.factorisationSpan1 sup{
+    font-size: 11vw;
+}
+
+@keyframes factorisationSpanShow1 {
+    0%{
+        opacity: 0;
+        transform: translateX(0%) translateY(0%) rotate(180deg);
+        scale: 0
+    }
+    100%{
+        opacity: 1;
+        transform: translateX(42vw) translateY(100vh) rotate(-20deg);
+        scale: 1;
+    }
+}
+
+
+.animateFactorisation1{
+    display: inline-block;
+    animation: factorisationSpanShow1 var(--animationTime) ease forwards;
+}
+
+.factorisationSpan2{
+    font-size: 10vw;
+    color: rgba(210, 27, 242, var(--animationOpacity));
+    position: absolute;
+    left: -14vw;
+    display: none;
+}
+
+.factorisationSpan2 sup{
+    font-size: 5vw;
+}
+
+@keyframes factorisationSpanShow2 {
+    0%{
+        opacity: 0;
+        transform: translateX(0vw) translateY(0vh) rotate(1200deg);
+        scale: 0
+    }
+    100%{
+        opacity: 1;
+        transform: translateX(16vw) translateY(40vh) rotate(30deg);
+        scale: 1;
+    }
+}
+
+.animateFactorisation2{
+    display: inline-block;
+    animation: factorisationSpanShow2 var(--animationTime) ease forwards;
+}
 
 /**Styling for the background animation of the universal hover
  * Includes the three spans and their animations

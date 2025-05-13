@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './css/mainMenuBackgroundAnimation.module.css';
 
-const MainMenuBackgroundAnimation = ({animate, info, ratio, probability, universal}) => {
+const MainMenuBackgroundAnimation = ({animate, info, ratio, probability, factorisation, universal}) => {
     return (
     <div className={styles.backgroundAnimation + " " + (animate ? styles.fadeout : "")}>
         <span className={styles.infoSpan1 + " " + (info ? styles.animateInfo1: "")}>INFO</span>
@@ -18,6 +18,9 @@ const MainMenuBackgroundAnimation = ({animate, info, ratio, probability, univers
         <span className={styles.universalSpan1 + " " + (universal ? styles.animateUniversal1 : "")}><span class="material-symbols-outlined">calculate</span></span>
         <span className={styles.universalSpan2 + " " + (universal ? styles.animateUniversal2 : "")}><span class="material-symbols-outlined">public</span></span>
         <span className={styles.universalSpan3 + " " + (universal ? styles.animateUniversal3 : "")}><span class="material-symbols-outlined">architecture</span></span>
+    
+        <span className={styles.factorisationSpan1 + " " + (factorisation ? styles.animateFactorisation1 : "")}>x<sup>2</sup> + 5x + 6</span>
+        <span className={styles.factorisationSpan2 + " " + (factorisation ? styles.animateFactorisation2 : "")}>x<sup>2</sup> - y<sup>2</sup></span>
     </div>
     );
 }

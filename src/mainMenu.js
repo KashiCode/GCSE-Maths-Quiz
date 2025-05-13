@@ -14,6 +14,7 @@ const MainMenu = () => {
   const [infoHover, setInfoHover] = React.useState(false);
   const [ratioHover, setRatioHover] = React.useState(false);
   const [probabilityHover, setProbabilityHover] = React.useState(false);
+  const [factorisationHover, setFactorisationHover] = React.useState(false);
   const [universalHover, setUniversalHover] = React.useState(false);
 
   const navigate = useNavigate();
@@ -27,7 +28,7 @@ const MainMenu = () => {
   return (
     <div className={styles.background}>
       <BubblesBackground animate={animate}/>
-      <MainMenuBackgoundAnimation animate={animate} info={infoHover} ratio={ratioHover} probability={probabilityHover} universal={universalHover}/>
+      <MainMenuBackgoundAnimation animate={animate} info={infoHover} ratio={ratioHover} probability={probabilityHover} factorisation={factorisationHover} universal={universalHover}/>
       <div className={styles.mainMenuContainer + " " + (animate ? styles.fadeoutContainer: "")}>
         <h1>Welcome to PaceMaths</h1>
         <p className={styles.text}>
@@ -48,8 +49,8 @@ const MainMenu = () => {
           onMouseLeave={() => setProbabilityHover(false)}>Probability Quiz</p>
         <p className={styles.button}
           onClick={() => triggerAnimation("/gcse-maths-quiz-website/factorisation-quiz")}
-          onMouseEnter={() => { return false; }}
-          onMouseLeave={() => { return false; }}>Factorisation Quiz</p>
+          onMouseEnter={() => setFactorisationHover(true)}
+          onMouseLeave={() => setFactorisationHover(false)}>Factorisation Quiz</p>
         <p className={styles.button}
           onClick={() => triggerAnimation("/gcse-maths-quiz-website/universal-quiz")}
           onMouseEnter={() => setUniversalHover(true)}
