@@ -57,6 +57,7 @@ const Information = () => {
       <span className={styles.homepageButton + " " + (animate ? styles.fadeoutContainer: "")} onClick={triggerAnimation}>
         Return to Homepage
       </span>
+      <span className={styles.downArrow}><span class="material-symbols-outlined">arrow_downward</span></span>
       <div className={styles.informationContainer + " " + (animate ? styles.fadeoutContainer: "")}>
         <div className={styles.infoSectionBox}>
           <h1 className={(scrollAnimateDesc ? styles.animateSectionContents : "")}>Website Information</h1>

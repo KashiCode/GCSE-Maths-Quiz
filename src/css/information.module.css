@@ -104,6 +104,41 @@
     transition: 0.1s ease-in-out;
 }
 
+.downArrow{
+    color: rgb(190, 190, 190);
+    font-size: 10em;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 3.8em;
+    animation: animateDownArrow 2.5s ease-in-out infinite;
+}
+
+.downArrow span{
+    font-size: 0.8em;
+}
+
+@keyframes animateDownArrow{
+    0%{
+        transform: translateY(-10%) translateX(-50%);
+        opacity: 0;
+    }
+    25%{
+        opacity: 1;
+    }
+    50%{
+        transform: translateY(10%) translateX(-50%);
+    }
+    75%{
+        transform: translateY(0%) translateX(-50%);
+        opacity: 1;
+    }
+    100%{
+        transform: translateY(-10%) translateX(-50%);
+        opacity: 0;
+    } 
+}
+
 /**This is the css for the sections of the info page as well as the contents for these section on the page as well
  * It sets the two types of sections that exist on the page and also the animation for the contents when scrolling the page
 */
