@@ -299,18 +299,30 @@ const setQuestionStyle4 = () => {
 
     //This makes sure that the random numbers of the ratio work well for the question
     // The ratio has to add up to 4, 5, 8, 10 to make sure that the percentages are easy to work with
-    let num1 = 1;
-    let num2 = 3;
-    while (num1 == 1 && num2 == 3){
-        num1 = getRandomInt(1, 5);
-        num2 = getRandomInt(1, 3);
-    }
-
+    let num1 = getRandomInt(1, 5);
+    let num2 = 1;
     if (num1 == 5) {
         num1 = 4;
+        num2 = 1;
     }
-    else{
-        num1 = (num1 * 2) + 1;
+    else if (num1 == 4) {
+        num1 = 9;
+        num2 = 1;
+    }
+    else if (num1 == 3) {
+        num1 = 7;
+        num2 = getRandomInt(1, 2);
+        if (num2 == 2) {
+            num2 = 3;
+        }
+    }
+    else if (num1 == 2) {
+        num1 = 5;
+        num2 = 3;
+    }
+    else if (num1 == 1) {
+        num1 = 3;
+        num2 = getRandomInt(1, 2);
     }
 
     let totalNum = num1 + num2;
