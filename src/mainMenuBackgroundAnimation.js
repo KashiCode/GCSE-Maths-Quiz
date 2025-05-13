@@ -13,6 +13,7 @@ const MainMenuBackgroundAnimation = ({animate, info, ratio, probability}) => {
 
         <span className={styles.probabilitySpan1 + " " + (probability ? styles.animateProbability1 : "")}>P(A) = 0.2</span>
         <span className={styles.probabilitySpan2 + " " + (probability ? styles.animateProbability2 : "")}>35%</span>
+        <span class="material-symbols-outlined" className={styles.probabilitySpan3 + " " + (probability ? styles.animateProbability3 : "")}><span class="material-symbols-outlined">casino</span></span>
     </div>
     );
 }
