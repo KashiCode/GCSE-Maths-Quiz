@@ -287,3 +287,104 @@ const checkAnswerStyle3 = (correctAnswers) => {
 }
 
 export const ratioQuestionStyle3 = [setQuestionStyle3, answerSectionStyle3, checkAnswerStyle3];
+
+
+
+//Function to create the fourth question style for ratio questions
+const setQuestionStyle4 = () => {
+    // Logic to set the question and answer options
+    //Function to generate a random number
+    const getRandomInt = (min, max) => {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    };
+
+    const generateGroup = () => {
+        const groups = [["men", "women"], ["students", "teachers"], ["children", "adults"], ["employees", "managers"], ["cyclists", "drivers"], ["pilots", "passengers"]];
+        let num1 = Math.floor(Math.random() * groups.length);
+        let group = groups[num1]
+        return group;
+    }
+
+    const generateCondition = () => {
+        const conditions = ["blonde", "green-eyed", "not green-eyed", "tall", "not tall", "short", "healthy", "unhealthy", "young", "old"];
+        let num1 = Math.floor(Math.random() * conditions.length);
+        let condition = conditions[num1];
+        return condition;
+    }
+
+    //This makes sure that the random numbers of the ratio work well for the question
+    // The ratio has to add up to 4, 5, 8, 10 to make sure that the percentages are easy to work with
+    let num1 = 1;
+    let num2 = 3;
+    while (num1 == 1 && num2 == 3){
+        num1 = getRandomInt(1, 5);
+        num2 = getRandomInt(1, 3);
+    }
+
+    if (num1 == 5) {
+        num1 = 4;
+    }
+    else{
+        num1 = (num1 * 2) + 1;
+    }
+
+    let totalNum = num1 + num2;
+    let unitPercentage = 100 / totalNum;
+    let percentageNum1 = unitPercentage * num1;
+    let percentageNum2 = unitPercentage * num2;
+    let percentageQuestion1 = getRandomInt(1, 19) * 5;
+    let percentageQuestion2 = getRandomInt(1, 19) * 5;
+    let percentageProduct1 = percentageNum1 * percentageQuestion1 / 100;
+    let percentageProduct2 = percentageNum2 * percentageQuestion2 / 100;
+    let percentageTotal = percentageProduct1 + percentageProduct2;
+
+    //Creating the question string
+    let generatedGroup = generateGroup();
+    let generatedCondition = generateCondition();
+    let question = "In a group, the ratio of " + generatedGroup[0] + " to " + generatedGroup[1] + " is " + num1 + ":" + num2 + ".";
+    question += " " + percentageQuestion1 + "% of the " + generatedGroup[0] + " are " + generatedCondition + ".";
+    question += " " + percentageQuestion2 + "% of the " + generatedGroup[1] + " are " + generatedCondition + ".";
+    question += " What percentage of the group is " + generatedCondition + "?";
+
+    return [question, [generatedGroup[0], generatedGroup[1], num1, num2, percentageNum1, percentageNum2, generatedCondition, totalNum, unitPercentage, percentageQuestion1, percentageQuestion2, percentageProduct1, percentageProduct2, percentageTotal]];
+}
+
+//Creating the answer section that should allow users to input their answers
+const answerSectionStyle4 = (
+    <div>
+        <div className={styles.inputDiv}>
+            <label class={styles.ratioQuizLabel}>Matching Percentage(%): </label>
+            <input class={styles.ratioQuizInput} type='number' placeholder='Percentage' onWheel={disableScroll}/>
+        </div>
+    </div>
+);
+
+//Function to check the answer and return true or false based on the answer given
+//Also clears the input fields after checking the answer
+const checkAnswerStyle4 = (correctAnswers) => {
+    const answer = document.querySelector('input[placeholder="Percentage"]').value;
+
+    document.querySelector('input[placeholder="Percentage"]').value = "";
+        
+    if (answer === "") {
+        document.getElementById("answerFeedback").innerHTML = "Incorrect. Please fill in all fields to answer the question.";
+        return false;
+    }
+    if (answer == correctAnswers[13]) {
+        return true;
+    } else {
+        let newFeedback = "Incorrect. Your answer is " + answer + "%. The ratio of " + correctAnswers[0] + ":" + correctAnswers[1];
+        newFeedback +=  " is " + correctAnswers[2] + ":" + correctAnswers[3] + ", " + correctAnswers[9] + "% of the ";
+        newFeedback += correctAnswers[0] + " are " + correctAnswers[6] + " and " + correctAnswers[10] + "% of the " + correctAnswers[1];
+        newFeedback += " are " + correctAnswers[6] + ". The total of the ratio is " + correctAnswers[7] + " meaning that the percentage";
+        newFeedback += " per unit is " + correctAnswers[8] + "%. The percentage of " + correctAnswers[0] + " in the group is ";
+        newFeedback += correctAnswers[4] + "% and the percentage of " + correctAnswers[1] + " in the group is " + correctAnswers[5] + "%.";
+        newFeedback += " By multiplying the percentages of " + correctAnswers[9] + "% by " + correctAnswers[4] + "% we get ";
+        newFeedback += correctAnswers[11] + "% and by multiplying the percentages of " + correctAnswers[10] + "% by " + correctAnswers[5];
+        newFeedback += "% we get " + correctAnswers[12] + "%. Adding these two together gives us " + correctAnswers[13] + "%.";
+        document.getElementById("answerFeedback").innerHTML = newFeedback;
+        return false;
+    }
+}
+
+export const ratioQuestionStyle4 = [setQuestionStyle4, answerSectionStyle4, checkAnswerStyle4];
