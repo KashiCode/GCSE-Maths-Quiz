@@ -141,7 +141,7 @@
 }
 
 /**Styling for the background animation of the probability hover
- * Includes the two spans and their animations
+ * Includes the three spans and their animations
 */
 
 .probabilitySpan1{
@@ -205,7 +205,7 @@
     color: rgba(54, 7, 135, var(--animationOpacity));
     position: absolute;
     transform: translateX(-200%);
-    /* display: none; */
+    display: none;
 }
 
 .probabilitySpan3 span{
@@ -228,6 +228,105 @@
 .animateProbability3{
     display: inline-block;
     animation: probabilitySpanShow3 var(--animationTime) ease forwards;
+}
+
+
+
+/**Styling for the background animation of the universal hover
+ * Includes the three spans and their animations
+*/
+
+.universalSpan1{
+    font-size: 4vw;
+    color: rgba(100, 117, 129, var(--animationOpacity));
+    position: absolute;
+    left:0;
+    bottom: -10%;
+    display: none;
+}
+
+.universalSpan1 span{
+    font-size: 35vw;
+}
+
+@keyframes universalSpanShow1 {
+    0%{
+        opacity: 0;
+        transform: translateX(-50%) translateY(0%) rotate(-720deg);
+        scale: 0
+    }
+    100%{
+        opacity: 1;
+        transform: translateX(32.5vw) translateY(-30%) rotate(360deg);
+        scale: 1;
+    }
+}
+
+
+.animateUniversal1{
+    display: inline-block;
+    animation: universalSpanShow1 var(--animationTime) ease forwards;
+}
+
+.universalSpan2{
+    font-size: 14vw;
+    color: rgba(0, 122, 8, var(--animationOpacity));
+    position: absolute;
+    left: -14vw;
+    display: none;
+}
+
+.universalSpan2 span{
+    font-size: 24vw;
+}
+
+@keyframes universalSpanShow2 {
+    0%{
+        opacity: 0;
+        transform: translateX(0vw) translateY(0vh) rotate(1200deg);
+        scale: 0
+    }
+    100%{
+        opacity: 1;
+        transform: translateX(12vw) translateY(25vh) rotate(30deg);
+        scale: 1;
+    }
+}
+
+.animateUniversal2{
+    display: inline-block;
+    animation: universalSpanShow2 var(--animationTime) ease forwards;
+}
+
+
+
+.universalSpan3{
+    color: rgba(255, 207, 119, var(--animationOpacity));
+    position: absolute;
+    right: -30vw;
+    display: none;
+}
+
+.universalSpan3 span{
+    font-size: 28vw;
+}
+
+@keyframes universalSpanShow3 {
+    0%{
+        opacity: 0;
+        transform: translateX(0vw) translateY(0) rotate(-720deg);
+        scale: 0
+    }
+    100%{
+        opacity: 1;
+        transform: translateX(-30vw) translateY(10vh) rotate(45deg);
+        scale: 1;
+    }
+}
+
+.animateUniversal3{
+    display: inline-block;
+    animation: universalSpanShow3 var(--animationTime) ease forwards;
 }
 
 /**To make background animation dissapear
