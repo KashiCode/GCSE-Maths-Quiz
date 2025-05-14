@@ -1,4 +1,4 @@
-import styles from '../css/ratioQuiz.module.css';
+import styles from '../css/normalQuiz.module.css';
 
 //Function to disable scrolling when using the number input
 function disableScroll(event) {
@@ -91,8 +91,8 @@ const setQuestionStyle1 = () => {
 const answerSectionStyle1 = (
     <div>
         <div className={styles.inputDiv}>
-            <label class={styles.ratioQuizLabel}>Probability of A:  </label>
-            <input class={styles.ratioQuizInput} type='number' placeholder='Probability' onWheel={disableScroll}/>
+            <label class={styles.normalQuizLabel}>Probability of A:  </label>
+            <input class={styles.normalQuizInput} type='number' placeholder='Probability' onWheel={disableScroll}/>
         </div>
     </div>
 );

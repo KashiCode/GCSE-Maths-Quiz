@@ -1,5 +1,5 @@
 import { toWords } from 'number-to-words';
-import styles from '../css/ratioQuiz.module.css';
+import styles from '../css/normalQuiz.module.css';
 
 //Function to disable scrolling when using the number input
 function disableScroll(event) {
@@ -70,16 +70,16 @@ export const setQuestionStyle1 = () => {
 export const answerSectionStyle1 = (
     <div>
         <div className={styles.inputDiv}>
-            <label class={styles.ratioQuizLabel}>Red: </label>
-            <input class={styles.ratioQuizInput} type='number' placeholder='Red' onWheel={disableScroll}/>
+            <label class={styles.normalQuizLabel}>Red: </label>
+            <input class={styles.normalQuizInput} type='number' placeholder='Red' onWheel={disableScroll}/>
         </div>
         <div className={styles.inputDiv}>
-            <label class={styles.ratioQuizLabel}>Blue: </label>
-            <input class={styles.ratioQuizInput} type='number' placeholder='Blue' onWheel={disableScroll}/>
+            <label class={styles.normalQuizLabel}>Blue: </label>
+            <input class={styles.normalQuizInput} type='number' placeholder='Blue' onWheel={disableScroll}/>
         </div>
         <div className={styles.inputDiv}>
-            <label class={styles.ratioQuizLabel}>Green: </label>
-            <input class={styles.ratioQuizInput} type='number' placeholder='Green' onWheel={disableScroll}/>
+            <label class={styles.normalQuizLabel}>Green: </label>
+            <input class={styles.normalQuizInput} type='number' placeholder='Green' onWheel={disableScroll}/>
         </div>
     </div>
 );
@@ -161,8 +161,8 @@ const setQuestionStyle2 = () => {
 const answerSectionStyle2 = (
     <div>
         <div className={styles.inputDiv}>
-            <label class={styles.ratioQuizLabel}>Amount(£): </label>
-            <input class={styles.ratioQuizInput} type='number' placeholder='Amount' onWheel={disableScroll}/>
+            <label class={styles.normalQuizLabel}>Amount(£): </label>
+            <input class={styles.normalQuizInput} type='number' placeholder='Amount' onWheel={disableScroll}/>
         </div>
     </div>
 );
@@ -240,12 +240,12 @@ const setQuestionStyle3 = () => {
 const answerSectionStyle3 = (
     <div>
         <div className={styles.inputDiv}>
-            <label class={styles.ratioQuizLabel}>Ingredient 1(g): </label>
-            <input class={styles.ratioQuizInput} type='number' placeholder='Ingredient 1' onWheel={disableScroll}/>
+            <label class={styles.normalQuizLabel}>Ingredient 1(g): </label>
+            <input class={styles.normalQuizInput} type='number' placeholder='Ingredient 1' onWheel={disableScroll}/>
         </div>
         <div className={styles.inputDiv}>
-            <label class={styles.ratioQuizLabel}>Ingredient 3(g): </label>
-            <input class={styles.ratioQuizInput} type='number' placeholder='Ingredient 3' onWheel={disableScroll}/>
+            <label class={styles.normalQuizLabel}>Ingredient 3(g): </label>
+            <input class={styles.normalQuizInput} type='number' placeholder='Ingredient 3' onWheel={disableScroll}/>
         </div>
     </div>
 );
@@ -350,8 +350,8 @@ const setQuestionStyle4 = () => {
 const answerSectionStyle4 = (
     <div>
         <div className={styles.inputDiv}>
-            <label class={styles.ratioQuizLabel}>Matching Percentage(%): </label>
-            <input class={styles.ratioQuizInput} type='number' placeholder='Percentage' onWheel={disableScroll}/>
+            <label class={styles.normalQuizLabel}>Matching Percentage(%): </label>
+            <input class={styles.normalQuizInput} type='number' placeholder='Percentage' onWheel={disableScroll}/>
         </div>
     </div>
 );

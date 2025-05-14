@@ -1,4 +1,4 @@
-import styles from '../css/ratioQuiz.module.css';
+import styles from '../css/normalQuiz.module.css';
 import factorisationStyles from '../css/factorisationQuiz.module.css';
 
 //Function to disable scrolling when using the number input
