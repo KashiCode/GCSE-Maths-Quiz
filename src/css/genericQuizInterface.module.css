@@ -16,7 +16,7 @@
 }
 
 /**This is the css to create the main appearance for the quiz
- * Creates the quiz container where most of the game will be taking place
+ * Creates the quiz container where most of the quiz will be taking place
 */
 .quizContainer{
     position:absolute;
@@ -64,6 +64,9 @@
     
 }
 
+/**Styling for header of the quiz including return button and title
+ * 
+*/
 .quizHeader{
     display:flex;
 }
@@ -105,7 +108,6 @@
 /**Styling of the title of the quiz
  * Creates general appearance of the title of the quiz
 */
-
 .quizContainer h1{
     font-size: 2.5em;
     font-weight: bold;
@@ -116,10 +118,9 @@
     width: 100%;
 }
 
-/**Styling of the line that separates the title from the rest of the quiz
- * Creates general appearance of the line that separates the title from the rest of the quiz
+/**Styling of the line used for seperation of sections of the quiz
+ * Creates a clear line for better representation of the different quiz sections to identify the different areas
 */
-
 .line{
     border: 0;
     border-bottom: solid white 2px;
@@ -128,11 +129,14 @@
 /**Styling of the quiz content area
  * Creates general appearance of the quiz content area including question, info and answer sections
 */
-
 .quizContent{
     height:37em;
 }
 
+/**Styling for the info section of the quiz
+ * Provides info such as timers and counts for questions
+ * Allows the user to better understand their progress in the quiz
+*/
 .quizInfo{
     display: flex;
     width: 100%;
@@ -150,7 +154,9 @@
     line-height: 1.8em;
 }
 
-/*Maintain the text size for text that isn't relevant on smaller screens*/
+/**Maintain the text size for text on smaller screens when text may not be relevant
+ * Only used on the smaller screen sizes to approrpiately fite the text
+*/
 .smallerScreenText{
     font-size: 1em;
 }
@@ -159,6 +165,9 @@
     border-right: none;
 }
 
+/**Styling for the question of the quiz
+ * Makes it appear appropriately for the quiz
+*/
 .quizQuestion{
     height: 27%;
     padding: 0.5em;
@@ -166,6 +175,9 @@
     font-size: 1.5em;
 }
 
+/**Styling for the answer section of the quiz
+ * This is where the user will input their answer to the quiz question 
+*/
 .quizAnswerSection{
     height: 52%;
     width: 100%;
@@ -173,27 +185,25 @@
 }
 
 /**Styling for the bottom of the quiz container
- * Includes the submit button and the previous answer feedback area
+ * Includes the submit button (used to include the previous answer feedback area)
 */
-
 .quizFooter{
     display: grid;
     grid-template-columns: 85% 15%;
     margin-top: 0.5em;
 }
 
-.answerFeedback{
+/* .answerFeedback{
     font-size: 1.3em;
     color: white;
     padding: 0.2em;
     text-align: left;
     height: 3.5em;
-}
+} */
 
 /**Styling for submit button of the quiz
  * Creates general appearance of the submit button including hover and active states
 */
-
 .submitButton{
     position: absolute;
     bottom: 0.5em;
@@ -266,7 +276,7 @@
     color: white;
 }
 
-/***Styling for the incorrect alert that appears when the answer is incorrect
+/**Styling for the incorrect alert that appears when the answer is incorrect
  * Creates general appearance of the incorrect alert as well as the animations appropriate for it
  * Also includes container for the alert to prevent the rest of the page from being accessed when the alert is open
 */
@@ -403,6 +413,7 @@
         display: none;
     }
 
+    /*Appropriate changes for improved formatting of the quiz info section ensuring borders look appropriate*/
     .correctCount{
         border-right: none;
     }

@@ -32,6 +32,7 @@
     0 0 5.6vw rgba(0, 42, 255, 0.5);
 }
 
+/*Hidden bubbles only visible for the longer information page*/
 .hiddenBubbles{
     display: none;
 }
@@ -74,12 +75,15 @@
     0 0 5.6vw rgb(161, 221, 11);
 }
 
+/*Styling for the info page to include extra bubbles for the greater page length*/
 .extraGreenBubbles{
     display: flex;
     width: 100%;
-    /* margin-top: 5em; */
 }
 
+/**Styling animation specific to the animation for the info page due to its greater length
+ * Includes specific animation for the bubbles on smaller screens, due to the significant impact of the screen size on the animation
+*/
 @keyframes greenAnimate{
     0%{
         transform: translateY(190em) translateX(0px) scale(0.3);
@@ -149,6 +153,30 @@
     }
 }
 
+/**Media queries for smaller screen sizes
+ * Webpage rearranges to appear better on smaller screens
+ * Specific exclusively to the green bubbles of the information page
+*/
+@media (max-width: 900px) {
+    .green span{
+        animation: greenAnimate900 80s linear infinite;
+        animation-delay: calc(-4s * var(--i));
+        --xDirection: 1;
+        --xFactor: 1;
+    }
+}
+@media (max-width: 600px) {
+    .green span{
+        animation: greenAnimate600 90s linear infinite;
+        animation-delay: calc(-2s * var(--i));
+        --xDirection: 1;
+        --xFactor: 1;
+    }
+}
+
+/**Setting randomised float direction for the bubbles in the x direction
+ * Done to make their direction appear more random using certain factors
+*/
 .bubbles span:nth-child(4n){
     --xDirection: -1;
 }.bubbles span:nth-child(4n+1){
@@ -170,6 +198,9 @@
     --xFactor: 2.5;
 }
 
+/**Animation for the bubbles on the main menu and error page
+ * The main animation used for the bubbles across pages
+*/
 @keyframes animate{
     0%{
         transform: translateY(84em) translateX(0px) scale(0.3);
@@ -221,25 +252,5 @@
     100%{
         opacity: 0;
         transform: translateY(-500%);
-    }
-}
-
-/**Media queries for smaller screen sizes
- * Webpage rearranges to appear better on smaller screens
-*/
-@media (max-width: 900px) {
-    .green span{
-        animation: greenAnimate900 80s linear infinite;
-        animation-delay: calc(-4s * var(--i));
-        --xDirection: 1;
-        --xFactor: 1;
-    }
-}
-@media (max-width: 600px) {
-    .green span{
-        animation: greenAnimate600 90s linear infinite;
-        animation-delay: calc(-2s * var(--i));
-        --xDirection: 1;
-        --xFactor: 1;
     }
 }

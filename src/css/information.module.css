@@ -104,6 +104,10 @@
     transition: 0.1s ease-in-out;
 }
 
+/**This is the css to create the design for the down arrow of the main menu
+ * To better represent the fact that the user should scroll down the page an animation is used
+ * This animation aids the user in pointing down the page for obvious use
+*/
 .downArrow{
     color: rgb(190, 190, 190);
     font-size: 10em;
@@ -139,7 +143,7 @@
     } 
 }
 
-/**This is the css for the sections of the info page as well as the contents for these section on the page as well
+/**This is the css for the sections of the info page as well as the contents for these sections
  * It sets the two types of sections that exist on the page and also the animation for the contents when scrolling the page
 */
 .informationContainer > div{
@@ -207,8 +211,6 @@
 .bottomHomepageButton{
     top:96em;
 }
-
-
 
 /**Media queries for smaller screen sizes
  * Webpage rearranges to appear better on smaller screens

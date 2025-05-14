@@ -18,6 +18,9 @@
     --animationOpacity: 0.40;
 }
 
+
+
+
 /**Styling for the background animation of the info hover
  * Includes the two spans and their animations
 */
@@ -79,6 +82,10 @@
     animation: infoSpanShow2 var(--animationTime) ease forwards;
 }
 
+
+
+
+
 /**Styling for the background animation of the ratio hover
  * Includes the two spans and their animations
 */
@@ -139,6 +146,10 @@
     display: inline-block;
     animation: ratioSpanShow2 var(--animationTime) ease forwards;
 }
+
+
+
+
 
 /**Styling for the background animation of the probability hover
  * Includes the three spans and their animations
@@ -232,6 +243,8 @@
 
 
 
+
+
 /**Styling for the background animation of the factorisation hover
  * Includes the two spans and their animations
 */
@@ -296,6 +309,9 @@
     display: inline-block;
     animation: factorisationSpanShow2 var(--animationTime) ease forwards;
 }
+
+
+
 
 /**Styling for the background animation of the universal hover
  * Includes the three spans and their animations
@@ -393,6 +409,8 @@
     display: inline-block;
     animation: universalSpanShow3 var(--animationTime) ease forwards;
 }
+
+
 
 /**To make background animation dissapear
  * Animation used when the user clicks on a link to go to another page causing the background animation to disappear

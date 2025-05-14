@@ -1,5 +1,6 @@
 /**Sets the styling specific for the input divs in the ratio quiz interface
- * 
+ * Creates an appropriate size and spacing for the input boxes
+ * The factorisation quiz interface uses a different layout due to the representation of the input boxes as part of an equation
 */
 .inputDiv{
     display: flexbox;

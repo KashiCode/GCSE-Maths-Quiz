@@ -62,6 +62,9 @@
     }
 }
 
+/**This is the css creating the title text at the top of the main menu
+ * Gives correct dimesnions and design to the title
+*/
 .mainMenuContainer h1{
     color: rgb(190, 190, 190);
     font-size: 2.5rem;
@@ -70,6 +73,9 @@
     text-decoration: underline;
 }
 
+/**This is the css for the text under the title of the page
+ * Makes it a little less noticeable than the title while still being readable
+*/
 .text{
     color: rgb(99, 99, 99);
     font-size: 1.5em;
@@ -77,6 +83,9 @@
     margin: 0 auto;
 }
 
+/**This is the css for the buttons of the main menu
+ * Creates the buttons that are used to start the quiz and access the different website features 
+*/
 .button{
     font-size: 1.8em;
     display: inline-block;
