@@ -227,7 +227,7 @@
     /*Title appears better on smaller screens appropriately*/
     .webpageTitle{
         font-size: 4em;
-        top: 6em;
+        top: 4em;
     }
 
     /*Heading for each section is more appropriate*/
@@ -244,7 +244,7 @@
     .homepageButton{
         width: 18em;
         font-size: 1.5em;
-        top: 22em;
+        top: 19em;
     }
 
     /*Button at bottom of the page is positioned more appropriately*/
@@ -261,7 +261,7 @@
     /*Title appears better on smaller screens appropriately*/
     .webpageTitle{
         font-size: 3em;
-        top: 7.5em;
+        top: 4.5em;
     }
 
     /*Sizings of the sections for the info page now fit all the text better when viewed on a smaller screen*/
@@ -272,7 +272,7 @@
     /*Button are improved to be seen better when used on smaller screens*/
     .homepageButton{
         width: 70vw;
-        top: 22em;
+        top: 16em;
     }
 
     /*Button at bottom of the page is positioned more appropriately*/
