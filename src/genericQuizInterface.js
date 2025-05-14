@@ -151,7 +151,7 @@ const GenericQuiz = (props) => {
         <div className={styles.correctAlert + " " + (correctAnimation ? styles.animateCorrectAlert : "")}>
           <h1>CORRECT ANSWER</h1>
         </div>
-        <div className={styles.alertContainer + " " + (incorrectAnimation ? styles.animateAlertContainer : "")}>
+        <div className={styles.alertContainer + " " + (incorrectAnimation ? styles.animateAlertContainer : "")} onClick={() => closeIncorrectAnimation()}>
           <div className={styles.incorrectAlert + " " + (incorrectAnimation ? styles.animateIncorrectAlertIn : "")}>
             <span class="material-symbols-outlined" onClick={() => closeIncorrectAnimation()}>close</span>
             <h1>INCORRECT ANSWER</h1>
@@ -164,4 +164,4 @@ const GenericQuiz = (props) => {
   );
 }
   
-  export default GenericQuiz;
+export default GenericQuiz;
