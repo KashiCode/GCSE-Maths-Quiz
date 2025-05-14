@@ -1,25 +1,37 @@
 import styles from '../css/normalQuiz.module.css';
 
-//Function to disable scrolling when using the number input
+// Function to disable scrolling when using the number input
 function disableScroll(event) {
     event.preventDefault();
     event.target.blur();
 }
 
-//Function to generate a random number
+// Function to generate a random number
 const getRandomInt = (min, max) => {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
-//Function to create the first question style for probability questions
+// Function to create the first question style for probability questions
 const setQuestionStyle1 = () => {
     // Logic to set the question and answer options
+    
+    // Generate a random number for the number of sections in the spinner
     let spinnerNum = getRandomInt(3, 5);
+    // Generate a number to decide if some spinner sections will share the same probability
     let shared = getRandomInt(1, 2);
+
+    // Starting the question text for the spinner question
     let question = "A spinner has " + spinnerNum + " sections. The sections are A, B, C";
     question += ((spinnerNum > 3) ? ((spinnerNum == 4)? ", D." : ", D, E.") : ".");
+    
+    // Declaring the array that will hold the probabilities
+    // This is done as an array for this question due to the number of probabilities in the question not being fixed
     let probsArray = [];
+
+    // Different algorithms for different numbers of sections in the spinner or shared probabilities
+    // The algorithms are each randomly generated to ensure the probabilities are not fixed but have limitations to prevent errors
     if (spinnerNum === 3) {
+        // Three sections in the spinner with no shared probabilities
         let totalProb = 1; 
         let num1 = getRandomInt(1, 8);
         let prob1 =  Number((num1 * 0.1).toFixed(1));
@@ -31,6 +43,7 @@ const setQuestionStyle1 = () => {
     }
     else{
         if (shared === 1) {
+            // Algorithm for no shared probabilities
             let num1 = getRandomInt(1, 6);
             let prob1 =  Number((num1 * 0.1).toFixed(1));
             let totalProb =  Number((1 - prob1).toFixed(1));
@@ -41,11 +54,13 @@ const setQuestionStyle1 = () => {
             let prob3 =  Number((num3 * 0.1).toFixed(1));
             totalProb =  Number((totalProb - prob3).toFixed(1));
             if (spinnerNum === 4) {
+                // No shared probabilities with 4 sections
                 let prob4 = totalProb;
                 probsArray = [prob1, prob2, prob3, prob4];
                 question += " The probability of landing on B is " + prob2 + ", the probability of landing on C is " + prob3 + " and the probability of landing on D is " + prob4 + ".";
             }
             else {
+                // No shared probabilities with 5 sections
                 let prob4 =  Number((getRandomInt(1, 10-num1-num2-num3-1) * 0.1).toFixed(1));
                 let prob5 =  Number((totalProb - prob4).toFixed(1));
                 probsArray = [prob1, prob2, prob3, prob4, prob5];
@@ -53,7 +68,9 @@ const setQuestionStyle1 = () => {
             }
         }
         else{
+            // Algorithm for shared probabilities
             if (spinnerNum === 4) {
+                // Shared probabilities with 4 sections
                 let sharedNum = getRandomInt(1, 4);
                 let totalProb =  Number((1 - sharedNum * 0.2).toFixed(1));
                 let num3 = getRandomInt(1, 9-(sharedNum*2));
@@ -66,6 +83,7 @@ const setQuestionStyle1 = () => {
                 question += " The probability of landing on C is " + prob3 + " and the probability of landing on D is " + prob4 + ". The probability of landing on A is the same as the probability of landing on B.";
             }
             else {
+                // Shared probabilities with 5 sections
                 let sharedNum = getRandomInt(1, 3);
                 let totalProb =  Number((1 - sharedNum * 0.2).toFixed(1));
                 let num3 =  Number((getRandomInt(1, 8-(sharedNum*2)).toFixed(1)));
@@ -87,7 +105,7 @@ const setQuestionStyle1 = () => {
     return [question, [spinnerNum, shared, probsArray]];
 }
 
-//Creating the answer section that should allow users to input their answers
+// Creating the answer section that should allow users to input their answers
 const answerSectionStyle1 = (
     <div>
         <div className={styles.inputDiv}>
@@ -97,24 +115,33 @@ const answerSectionStyle1 = (
     </div>
 );
 
-//Function to check the answer and return true or false based on the answer given
-//Also clears the input fields after checking the answer
+// Function to check the answer and return true or false based on the answer given
+// Also clears the input fields after checking the answer
 const checkAnswerStyle1 = (correctAnswers) => {
+    // Get the answer from the input field
     const answer = document.querySelector('input[placeholder="Probability"]').value;
 
+    // Clear the input field
     document.querySelector('input[placeholder="Probability"]').value = "";
-        
+    
+    // Check if the answer is empty
     if (answer === "") {
         document.getElementById("answerFeedback").innerHTML = "Incorrect. Please fill in all fields to answer the question.";
         return false;
     }
+    // Check if the answer is correct
     let finalAnswer = correctAnswers[2][0]
     if (answer == finalAnswer) {
         return true;
     } else {
+        // Due to the variety of answers, the feedback is different depending on the question
+        // Starting the feedback with the answer given
         let newFeedback = "Incorrect. Your answer is " + answer + ". ";
+        // Checking if there are shared probabilities
         if (correctAnswers[1] == 1) {
+            // There are no shared probabilities
             newFeedback += "The other probabilities are ";
+            // Looping through the probabilities to add them to the feedback with an appropraite message missing the first one
             for (let i = 1; i < correctAnswers[2].length; i++) {
                 if (i == correctAnswers[2].length - 1) {
                     newFeedback += "and " + correctAnswers[2][i] + ".";
@@ -122,10 +149,13 @@ const checkAnswerStyle1 = (correctAnswers) => {
                     newFeedback += correctAnswers[2][i] + ", ";
                 }
             }
+            // Adding the final answer to the feedback
             newFeedback += " which by adding together and taking away from 1 gives you the answer " + finalAnswer + ".";
         }
         else{
+            // There are shared probabilities
             newFeedback += "The other probabilities are ";
+            // Looping through the probabilities to add them to the feedback with an appropraite message missing the first and second one
             for (let i = 2; i < correctAnswers[2].length; i++) {
                 if (i == correctAnswers[2].length - 1) {
                     newFeedback += "and " + correctAnswers[2][i] + ".";
@@ -133,10 +163,12 @@ const checkAnswerStyle1 = (correctAnswers) => {
                     newFeedback += correctAnswers[2][i] + ", ";
                 }
             }
+            // Adding the final answer to the feedback
             newFeedback += " The probability of landing on A is the same as the probability of landing on B. So by ";
             newFeedback += "adding together the other probabilties and taking away from 1, we can divide the result by two";
             newFeedback += " to get the answer " + finalAnswer + ".";
         }
+        // Setting the feedback to the answer feedback section
         document.getElementById("answerFeedback").innerHTML = newFeedback;
         return false;
     }

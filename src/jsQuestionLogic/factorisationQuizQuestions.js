@@ -1,18 +1,18 @@
 import styles from '../css/normalQuiz.module.css';
 import factorisationStyles from '../css/factorisationQuiz.module.css';
 
-//Function to disable scrolling when using the number input
+// Function to disable scrolling when using the number input
 function disableScroll(event) {
     event.preventDefault();
     event.target.blur();
 }
 
-//Function to generate a random number
+// Function to generate a random number
 const getRandomInt = (min, max) => {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
-//Function to check if two numbers have a common factor
+// Function to check if two numbers have a common factor
 const hasCommonFactor = (num1, num2) => {
     for (let i = 2; i <= Math.min(num1, num2); i++) {
         if (num1 % i === 0 && num2 % i === 0) {
@@ -22,7 +22,7 @@ const hasCommonFactor = (num1, num2) => {
     return false;
 }
 
-//Function to create the first question style for factorisation questions
+// Function to create the first question style for factorisation questions
 const setQuestionStyle1 = () => {
     // Logic to set the question and answer options
 
@@ -53,13 +53,12 @@ const setQuestionStyle1 = () => {
         <span className={styles.quizQuestion} style={{ fontSize: "1.5em" }}>
             Factorise the expression {numA}x<sup style={{ fontSize: "0.75em"}}>2</sup> + {numB}x + {numC}.
         </span>
-        // "question"
     );
 
     return [question, [num1, num2, num3, num4, numA, numB, numC]];
 }
 
-//Creating the answer section that should allow users to input their answers
+// Creating the answer section that should allow users to input their answers
 const answerSectionStyle1 = (
     <div>
         <div className={factorisationStyles.inputDiv}>
@@ -76,23 +75,26 @@ const answerSectionStyle1 = (
     </div>
 );
 
-//Function to check the answer and return true or false based on the answer given
-//Also clears the input fields after checking the answer
+// Function to check the answer and return true or false based on the answer given
 const checkAnswerStyle1 = (correctAnswers) => {
+    // Get the values from the input fields
     const value1 = document.querySelector('input[id="value1"]').value;
     const value2 = document.querySelector('input[id="value2"]').value;
     const value3 = document.querySelector('input[id="value3"]').value;
     const value4 = document.querySelector('input[id="value4"]').value;
 
+    // Clear the input fields
     document.querySelector('input[id="value1"]').value = "";
     document.querySelector('input[id="value2"]').value = "";
     document.querySelector('input[id="value3"]').value = "";
     document.querySelector('input[id="value4"]').value = "";
-        
+    
+    // Check if the values are empty
     if (value1 === "" || value2 === "" || value3 === "" || value4 === "") {
         document.getElementById("answerFeedback").innerHTML = "Incorrect. Please fill in all fields to answer the question.";
         return false;
     }
+    // Check if the values are correct
     if ((value1 == correctAnswers[0] && value2 == correctAnswers[1] && value3 == correctAnswers[2] && value4 == correctAnswers[3]) || (value1 == correctAnswers[2] && value2 == correctAnswers[3] && value3 == correctAnswers[0] && value4 == correctAnswers[1])) {
         return true;
     } else {
