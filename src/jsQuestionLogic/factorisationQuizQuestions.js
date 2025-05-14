@@ -25,24 +25,35 @@ const hasCommonFactor = (num1, num2) => {
 //Function to create the first question style for factorisation questions
 const setQuestionStyle1 = () => {
     // Logic to set the question and answer options
+
+    // Generate two random numbers between 1 and 4 for the first bracket
+    // Generate two random numbers between 1 and 7 for the first bracket
+    // This represent the the numbers making up the first brackets for the solved equation
+    // The while loop ensures the two have no common factors to prevent multiple solutions
     let num1 = getRandomInt(1, 4);
     let num2 = getRandomInt(1, 7);
-    while ((num1 === num2 || hasCommonFactor(num1, num2))&& !(num1 === 1 && num2 === 1)) {
+    while (hasCommonFactor(num1, num2) && !(num1 === 1 && num2 === 1)) {
         num2 = getRandomInt(1, 7);
     }
+    // Generates second pair of random numbers for the second bracket in the same way
+    // This represent the the numbers making up the second brackets for the solved equation
     let num3 = getRandomInt(1, 4);
     let num4 = getRandomInt(1, 7);
     while ((num3 === num4 || hasCommonFactor(num3, num4))&& !(num3 === 1 && num4 === 1)) {
         num4 = getRandomInt(1, 7);
     }
+
+    // This is calculating the values of the numbers in the quadratic equation used as the question
     let numA = num1 * num3;
     let numB = (num1 * num4) + (num2 * num3);
     let numC = num2 * num4;
     
+    // Writing of the question while making sure to use appropriate signs for squared
     let question = (
-        <span>
-            Factorise the expression {numA}x<sup>2</sup> + {numB}x + {numC}.
+        <span className={styles.quizQuestion} style={{ fontSize: "1.5em" }}>
+            Factorise the expression {numA}x<sup style={{ fontSize: "0.75em"}}>2</sup> + {numB}x + {numC}.
         </span>
+        // "question"
     );
 
     return [question, [num1, num2, num3, num4, numA, numB, numC]];
