@@ -8,8 +8,10 @@ import Footer from './footer.js';
 
 const Information = () => {
 
+  // Setting variable for animating the page in/out
   const [animate,setAnimate] = React.useState(false);
 
+  // Setting the scroll animation variables for each section
   const [scrollAnimateDesc,setScrollAnimateDesc] = React.useState(false);
   const [scrollAnimateAuthor,setScrollAnimateAuthor] = React.useState(false);
   const [scrollAnimateFeatures,setScrollAnimateFeatures] = React.useState(false);
@@ -17,12 +19,14 @@ const Information = () => {
 
   const navigate = useNavigate();
 
+  // Function to trigger the animation of fading out and navigate to the homepage
   const triggerAnimation = () => {
     setAnimate(true);
 
     setTimeout(() => navigate("/gcse-maths-quiz-website"), 750);
   }
 
+  // Trigger the animation for sections to fade in as the user scrolls
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 0) {

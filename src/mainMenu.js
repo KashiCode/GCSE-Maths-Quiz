@@ -7,10 +7,10 @@ import MainMenuBackgoundAnimation from './mainMenuBackgroundAnimation.js';
 import Footer from './footer.js';
 
 const MainMenu = () => {
-  //Use state to trigger the animation for fading out
+  // Use state to trigger the animation for fading out
   const [animate,setAnimate] = React.useState(false);
 
-  //Use state to trigger the background animation for the button hovers
+  // Use state to trigger the background animation for the button hovers
   const [infoHover, setInfoHover] = React.useState(false);
   const [ratioHover, setRatioHover] = React.useState(false);
   const [probabilityHover, setProbabilityHover] = React.useState(false);
@@ -19,6 +19,7 @@ const MainMenu = () => {
 
   const navigate = useNavigate();
 
+  // Trigger the animation of fading out and navigate to the selected page
   const triggerAnimation = (navigationLink) => {
     setAnimate(true);
 

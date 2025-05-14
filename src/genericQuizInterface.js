@@ -11,7 +11,6 @@ const formatTime = (totalSeconds) => {
   const minutes = Math.floor((totalSeconds % 3600) / 60);
   const seconds = totalSeconds % 60;
 
-  // Pad with leading zeros if needed
   const pad = (num) => String(num).padStart(2, '0');
 
   return `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
@@ -19,21 +18,24 @@ const formatTime = (totalSeconds) => {
 
 
 const GenericQuiz = (props) => {
-  //Setting general quiz variables
+  // Setting general quiz variables
   const quizTitle = props.quizTitle ? props.quizTitle : "Quiz Unknown";
   const [animate,setAnimate] = React.useState(false);
 
-  //Setting the quiz states for the different quiz questions
+  // Setting the quiz states for the different quiz questions, answers sections and current answer
   const [question,setQuestion] = React.useState();
   const [answerSection,setAnswerSection] = React.useState();
   const [currentAnswer, setCurrentAnswer] = React.useState();
 
+  // Setting the quiz question styles and the other appropriate variables to allow variable question types
   const [questionStyle, setQuestionStyle] = React.useState(0);
   const [questionTypes, setQuestionTypes] = React.useState(() => [() => {}]);
   const [answerTypes, setAnswerTypes] = React.useState(() => [null]);
   const [checkAnswerTypes, setCheckAnswerTypes] = React.useState(() => [() => true]);
 
-  //Getting the props for the quiz
+  // Getting the props for the quiz
+  // If each props exists, set the question types, answer types and check answer types to the props
+  // If not set them to a default value for an empty quiz
   useEffect(() => {
     setQuestionTypes(props.questionFunction ? props.questionFunction : [() => {
       return ["Question function is missing. Quiz is not functional.",null]}]);
@@ -41,6 +43,8 @@ const GenericQuiz = (props) => {
     setCheckAnswerTypes(props.checkAnswerFunction ? props.checkAnswerFunction : [() => {
     return true}]);
 
+    // Sets initial question and answer section
+    // These are always the first question style
     let currentAnswer;
     let currentFunction;
     if (props.questionFunction) {
@@ -57,8 +61,11 @@ const GenericQuiz = (props) => {
     setAnswerSection(currentAnswer);
   }, []);
 
+  // Setting the timer variables for the quiz
   const [totalTimer,setTotalTimer] = React.useState(0);
   const [questionTimer,setQuestionTimer] = React.useState(0);
+
+  // Setting the correct and incorrect answer counts
   const [correctCount,setCorrectCount] = React.useState(0);
   const [incorrectCount,setIncorrectCount] = React.useState(0);
 
@@ -66,8 +73,8 @@ const GenericQuiz = (props) => {
   const [correctAnimation,setCorrectAnimation] = React.useState(false);
   const [incorrectAnimation,setIncorrectAnimation] = React.useState(false);
 
-  //Setting the timer for the quiz
-  //This timer will run every second and update the total time and question time
+  // Setting the timer for the quiz
+  // This timer will run every second and update the total time and question time
   useEffect(() => {
 
     const timer = setInterval(() => {
@@ -80,14 +87,14 @@ const GenericQuiz = (props) => {
 
   const navigate = useNavigate();
 
-  //Animation function for returning to the main page
+  // Animation function for returning to the main page
   const triggerAnimation = () => {
     setAnimate(true);
 
     setTimeout(() => navigate("/gcse-maths-quiz-website"), 650);
   }
 
-  //Animation function for the correct answer
+  // Animation function for the correct answer
   const triggerCorrectAnimation = () => {
     setCorrectAnimation(true);
     setTimeout(() => {
@@ -95,17 +102,19 @@ const GenericQuiz = (props) => {
     }, 1500);
   }
 
-  //Animation function for the incorrect answer
+  // Animation function for the incorrect answer
   const triggerIncorrectAnimation = () => {
     setIncorrectAnimation(true);
   }
 
-  //This function closes the incorrect answer animation and clears the feedback message
+  // This function closes the incorrect answer animation and clears the feedback message
   const closeIncorrectAnimation = () => {
     setIncorrectAnimation(false);
     document.getElementById("answerFeedback").innerHTML = "";
   }
 
+  // This function checks the answer and updates the correct and incorrect counts
+  // It also sets the question timer to 0 and generates a new question
   const submitAnswer = () => {
     if (checkAnswerTypes[questionStyle](currentAnswer)) {
       setCorrectCount((prev) => prev + 1);
