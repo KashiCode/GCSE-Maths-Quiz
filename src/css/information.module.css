@@ -7,7 +7,7 @@
     background: #0b2633;
     background: linear-gradient(180deg, rgba(11, 38, 51, 1) 0%, rgba(19, 39, 56, 1) 12%, rgba(26, 53, 82, 1) 71%, rgba(52, 87, 117, 1) 100%);
     width: 100%;
-    min-height: 195em;
+    min-height: 200em;
     height: 100vh;
     overflow-x: hidden;
     overflow-y: hidden;
@@ -216,7 +216,7 @@
 @media (max-width: 900px) {
     /*Size of background overall works better now*/
     .background{
-        min-height: 205em;
+        min-height: 215em;
     }
 
     /*Container for main menu is positioned mored appropriately now*/
@@ -227,7 +227,7 @@
     /*Title appears better on smaller screens appropriately*/
     .webpageTitle{
         font-size: 4em;
-        top: 6em;
+        top: 4em;
     }
 
     /*Heading for each section is more appropriate*/
@@ -244,7 +244,7 @@
     .homepageButton{
         width: 18em;
         font-size: 1.5em;
-        top: 22em;
+        top: 19em;
     }
 
     /*Button at bottom of the page is positioned more appropriately*/
@@ -255,13 +255,13 @@
 @media (max-width: 600px) {
     /*Size of background overall works better now*/
     .background{
-        min-height: 255em;
+        min-height: 265em;
     }
     
     /*Title appears better on smaller screens appropriately*/
     .webpageTitle{
         font-size: 3em;
-        top: 7.5em;
+        top: 4.5em;
     }
 
     /*Sizings of the sections for the info page now fit all the text better when viewed on a smaller screen*/
@@ -272,7 +272,7 @@
     /*Button are improved to be seen better when used on smaller screens*/
     .homepageButton{
         width: 70vw;
-        top: 22em;
+        top: 16em;
     }
 
     /*Button at bottom of the page is positioned more appropriately*/
