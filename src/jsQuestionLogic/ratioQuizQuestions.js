@@ -199,14 +199,19 @@ const setQuestionStyle3 = () => {
         let num1 = Math.floor(Math.random() * ingredients.length);
         let ingredient1 = ingredients[num1];
         let num2 = Math.floor(Math.random() * ingredients.length);
+        console.log("First while loop start " + num1 + " " + num2);
         while (num1 == num2) {
-            let num2 = Math.floor(Math.random() * ingredients.length);
+            num2 = Math.floor(Math.random() * ingredients.length);
+            console.log("while loop " + num2);
         }
         let ingredient2 = ingredients[num2];
         let num3 = Math.floor(Math.random() * ingredients.length);
+        console.log("Second while loop start " + num1 + " " + num2 + " " + num3);
         while (num1 == num3 || num2 == num3) {
-            let num3 = Math.floor(Math.random() * ingredients.length);
+            num3 = Math.floor(Math.random() * ingredients.length);
+            console.log("while loop " + num3);
         }
+        console.log("Second while loop end " + num1 + " " + num2 + " " + num3);
         let ingredient3 = ingredients[num3];
         return [ingredient1, ingredient2, ingredient3];
     }
@@ -228,6 +233,7 @@ const setQuestionStyle3 = () => {
 
     //Creating the question string
     let generatedIngredients = generateIngredient();
+    console.log("Ingredients generated.");
     let question = "A recipe uses " + toWords(num1) + " parts " + generatedIngredients[0] + " for " + toWords(num2) + " parts ";
     question += generatedIngredients[1] + " and " + toWords(num3) + " parts " + generatedIngredients[2] + ".";
     question += " When preparing for a party, the chef uses " + amount2 + "g of " + generatedIngredients[1] + ", ";
