@@ -190,3 +190,65 @@ export const checkAnswerStyleFactor2 = (correctAnswers) => {
 };
 
 export const factorisationQuestionStyle2 = [setQuestionStyleFactor2, answerSectionStyleFactor2, checkAnswerStyleFactor2];
+
+
+
+// Function to create the third question style for factorisation questions
+export const setQuestionStyleFactor3 = () => {
+
+    const m = getRandomInt(1, 13);
+    const n = getRandomInt(1, 13);
+    const p = m * m;
+    const q = n * n;
+
+    const question = (
+        <span className={styles.quizQuestion} style={{ fontSize: "1.5em" }}>
+            Factorise {p}x<sup style={{ fontSize: "0.75em"}}>2</sup> - {q}.
+        </span>
+    );
+
+    return [question, [m, n]];
+};
+
+export const answerSectionStyleFactor3 = (
+  <div>
+    <label className={factorisationStyles.textLabel}>(</label>
+    <input className={factorisationStyles.boxInput} type="number" id="m1" onWheel={disableScroll}/>
+    <label className={factorisationStyles.textLabel}>x + </label>
+    <input className={factorisationStyles.boxInput} type="number" id="n1" onWheel={disableScroll}/>
+    <label className={factorisationStyles.textLabel}>) (</label>
+    <input className={factorisationStyles.boxInput} type="number" id="m2" onWheel={disableScroll}/>
+    <label className={factorisationStyles.textLabel}>x - </label>
+    <input className={factorisationStyles.boxInput} type="number" id="n2" onWheel={disableScroll}/>
+    <label className={factorisationStyles.textLabel}>)</label>
+  </div>
+);
+
+export const checkAnswerStyleFactor3 = (correctAnswers) => {
+    const [m, n] = correctAnswers;
+
+    const m1 = document.querySelector('input[id="m1"]').value;
+    const n1 = document.querySelector('input[id="n1"]').value;
+    const m2 = document.querySelector('input[id="m2"]').value;
+    const n2 = document.querySelector('input[id="n2"]').value;
+
+    // Clear inputs
+    const inputs = document.querySelectorAll('input[type="number"]');
+    inputs.forEach(inp => inp.value = "");
+
+    if (!m1 || !n1 || !m2 || !n2) {
+        document.getElementById("answerFeedback").innerHTML =
+            "Incorrect. Please fill in all fields to answer the question.";
+        return false;
+    }
+
+    if (Number(m1) === m && Number(m2) === m && Number(n1) === n && Number(n2) === n) {
+        return true;
+    } else {
+        const incorrectFeedback = `Incorrect, your answer is (${m1}x + ${n1})(${m2}x - ${n2}). The correct factorisation is (${m}x + ${n})(${m}x - ${n}).`;
+        document.getElementById("answerFeedback").innerHTML = incorrectFeedback;
+        return false;
+    }
+};
+
+export const factorisationQuestionStyle3 = [setQuestionStyleFactor3, answerSectionStyleFactor3, checkAnswerStyleFactor3];
