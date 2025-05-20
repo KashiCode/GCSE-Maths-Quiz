@@ -252,3 +252,112 @@ export const checkAnswerStyleFactor3 = (correctAnswers) => {
 };
 
 export const factorisationQuestionStyle3 = [setQuestionStyleFactor3, answerSectionStyleFactor3, checkAnswerStyleFactor3];
+
+
+
+// Function to create the fourth question style for factorisation questions
+export const setQuestionStyleFactor4 = () => {
+    // Checks if two numbers have a common factor
+    const commonFactor = (a, b) => {
+        for (let i = 2; i <= Math.min(a, b); i++) {
+            if (a % i === 0 && b % i === 0) {
+                return true
+            }
+        }
+        return false
+    }
+
+    const n = getRandomInt(1, 5);
+
+    // Generate random coefficients
+    const p = getRandomInt(1, 4);
+    let q = getRandomInt(1, 8);
+    // Ensure p and q have no common factors
+    while (commonFactor(p, q)) {
+        q = getRandomInt(1, 8);
+    }
+    const r = getRandomInt(1, 4);
+    let s = getRandomInt(1, 8);
+    // Ensure r and s have no common factors
+    while (commonFactor(r, s)) {
+        s = getRandomInt(1, 8);
+    }
+
+    const A = p * r;
+    const B = p * s + q * r;
+    const C = q * s;
+
+    const question =(
+        <span className={styles.quizQuestion} style={{ fontSize: "1.5em" }}>
+            Factorise {A}(x + {n})<sup style={{ fontSize: "0.75em"}}>2</sup> + {B}(x + {n}) + {C}.
+        </span>
+    );
+
+    const u = p * n + q;
+    const v = r * n + s;
+
+    // Prepare feedback showing both factorisations
+    const factorY = `(${p}(x + ${n}) + ${q})(${r}(x + ${n}) + ${s})`;
+    const factorX = `(${p}x + ${u})(${r}x + ${v})`;
+    const incorrectFeedback =
+      `The correct factorisation in terms of (x + ${n}) is ${factorY}, ` +
+      `which simplifies to ${factorX}.`;
+
+    return [question, [p, u, r, v, incorrectFeedback]];
+};
+
+export const answerSectionStyleFactor4 = (
+  <div>
+    <label className={factorisationStyles.textLabel}>(</label>
+    <input className={factorisationStyles.boxInput} type="number" id="p" onWheel={disableScroll}/>
+    <label className={factorisationStyles.textLabel}>x + </label>
+    <input className={factorisationStyles.boxInput} type="number" id="u" onWheel={disableScroll}/>
+    <label className={factorisationStyles.textLabel}>)(</label>
+    <input className={factorisationStyles.boxInput} type="number" id="r" onWheel={disableScroll}/>
+    <label className={factorisationStyles.textLabel}>x + </label>
+    <input className={factorisationStyles.boxInput} type="number" id="v" onWheel={disableScroll}/>
+    <label className={factorisationStyles.textLabel}>)</label>
+  </div>
+);
+
+export const checkAnswerStyleFactor4 = (correctAnswers) => {
+    const [p, u, r, v, incorrectFeedback] = correctAnswers;
+
+    const inP = document.querySelector('input[id="p"]').value;
+    const inU = document.querySelector('input[id="u"]').value;
+    const inR = document.querySelector('input[id="r"]').value;
+    const inV = document.querySelector('input[id="v"]').value;
+
+    document.querySelector('input[id="p"]').value = "";
+    document.querySelector('input[id="u"]').value = "";
+    document.querySelector('input[id="r"]').value = "";
+    document.querySelector('input[id="v"]').value = "";
+
+    if (!inP || !inU || !inR || !inV) {
+        document.getElementById("answerFeedback").innerHTML =
+          "Incorrect. Please fill in all fields to answer the question.";
+        return false;
+    }
+    if (
+        (
+          Number(inP) === p &&
+          Number(inU) === u &&
+          Number(inR) === r &&
+          Number(inV) === v
+        ) ||
+        (
+          Number(inP) === r &&
+          Number(inU) === v &&
+          Number(inR) === p &&
+          Number(inV) === u
+        )
+    ) {
+        return true;
+    } else {
+        incorrectFeedback = 'Incorrect, your answer is (${inP}x + ${inU})(${inR}x + ${inV}).' + incorrectFeedback;
+        document.getElementById("answerFeedback").innerHTML = incorrectFeedback;
+        return false;
+    }
+};
+
+export const factorisationQuestionStyle4 = [setQuestionStyleFactor4, answerSectionStyleFactor4, checkAnswerStyleFactor4];
