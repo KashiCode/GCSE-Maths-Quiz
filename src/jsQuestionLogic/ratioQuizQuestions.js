@@ -595,3 +595,91 @@ export const checkAnswerStyle6 = (correctAnswers) => {
 };
 
 export const ratioQuestionStyle6 = [setQuestionStyle6, answerSectionStyle6, checkAnswerStyle6];
+
+
+
+// Function to create the seventh question style for ratio questions
+export const setQuestionStyle7 = () => {
+    // Random names
+    const names = ["Jenny", "Emma", "Sophie", "Chloe", "Alice"];
+    const name = names[getRandomInt(0, names.length - 1)];
+
+    // Highest common factor functions
+    const hcf2 = (a, b) => { while (b) { [a, b] = [b, a % b]; } return a; };
+    const hcf3 = (a, b, c) => hcf2(hcf2(a, b), c);
+
+    // Random ratio numbers
+    let r1, r2, r3;
+    do {
+        r1 = getRandomInt(1, 10);
+        r2 = getRandomInt(1, 10);
+        r3 = getRandomInt(1, 10);
+    } while (hcf3(r1, r2, r3) !== 1);
+
+    // Random available amounts of each ingredient
+    const availFlour = getRandomInt(500, 5000);
+    const availButter = getRandomInt(200, 2000);
+    const availCheese = getRandomInt(100, 1000);
+
+    // Random amount of mixture needed for each scone
+    const usage = getRandomInt(20, 80);
+
+    // Find answer of the question
+    const sumRatio = r1 + r2 + r3;
+    const sByFlour  = Math.floor(availFlour  * sumRatio / (usage * r1));
+    const sByButter = Math.floor(availButter * sumRatio / (usage * r2));
+    const sByCheese = Math.floor(availCheese * sumRatio / (usage * r3));
+
+    // Determine maximum number of scones and limiting ingredient
+    const counts  = [sByFlour, sByButter, sByCheese];
+    const namesIng = ['self-raising flour', 'butter', 'cheese'];
+    const maxScones = Math.min(...counts);
+    const idxLimit = counts.indexOf(maxScones);
+    const limiting = namesIng[idxLimit];
+
+    // Pregenerated incorrect answer feedback
+    const incorrectFeedback =
+      `Incorrect. The correct answer is ${maxScones} scones, because your ${limiting} only allows ${counts[idxLimit]} scones before it runs out.`;
+
+    const question =
+      `${name} uses her mother’s recipe to make cheese scones. ` +
+      `Her recipe uses a mixture of self-raising flour, butter and cheese in the ratio ${r1}:${r2}:${r3} by weight. ` +
+      `In her kitchen, ${name} has ${availFlour}g of self-raising flour, ${availButter}g of butter and ${availCheese}g of cheese. ` +
+      `When ${name} makes cheese scones each scone needs about ${usage} grams of mixture. ` +
+      `Work out the largest number of cheese scones that ${name} can make.`;
+
+    return [question, [maxScones, incorrectFeedback]];
+};
+
+export const answerSectionStyle7 = (
+  <div>
+    <div className={styles.inputDiv}>
+      <label className={styles.normalQuizLabel}>Number of cheese scones: </label>
+      <input className={styles.normalQuizInput} type="number" placeholder="Scones" onWheel={disableScroll}/>
+    </div>
+  </div>
+);
+
+export const checkAnswerStyle7 = (correctAnswers) => {
+    const ans = document.querySelector('input[placeholder="Scones"]').value;
+
+    document.querySelector('input[placeholder="Scones"]').value = "";
+
+    if (ans === "") {
+        document.getElementById("answerFeedback").innerHTML =
+            "Incorrect. Please fill in the field to answer the question.";
+        return false;
+    }
+
+    const correct = correctAnswers[0];
+    const feedback = correctAnswers[1];
+
+    if (Number(ans) === correct) {
+        return true;
+    } else {
+        document.getElementById("answerFeedback").innerHTML = feedback;
+        return false;
+    }
+};
+
+export const ratioQuestionStyle7 = [setQuestionStyle7, answerSectionStyle7, checkAnswerStyle7];
