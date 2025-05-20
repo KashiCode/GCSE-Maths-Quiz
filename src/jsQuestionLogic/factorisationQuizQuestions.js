@@ -107,3 +107,86 @@ const checkAnswerStyle1 = (correctAnswers) => {
 }
 
 export const factorisationQuestionStyle1 = [setQuestionStyle1, answerSectionStyle1, checkAnswerStyle1];
+
+
+
+// Function to create the second question style for factorisation questions
+export const setQuestionStyleFactor2 = () => {
+    const letter = 'a';
+
+    // Random numbers between 1 and 9
+    const o1 = getRandomInt(1, 9);
+    const i1 = getRandomInt(1, 9);
+    const c1 = getRandomInt(1, 9);
+    const o2 = getRandomInt(1, 9);
+    const i2 = getRandomInt(1, 9);
+    const c2 = getRandomInt(1, 9);
+
+    // Random signs for each bracket: true for '+', false for '-'
+    const sign1 = Math.random() < 0.5;
+    const sign2 = Math.random() < 0.5;
+
+    const part1 = `${o1}(${i1}${letter} ${sign1 ? '+' : '-'} ${c1})`;
+    const part2 = `${o2}(${i2}${letter} ${sign2 ? '+' : '-'} ${c2})`;
+    const expr = `${part1} + ${part2}`;
+
+    // Expand and simplify
+    const coef1 = o1 * i1;
+    const const1 = sign1 ? o1 * c1 : -o1 * c1;
+    const coef2 = o2 * i2;
+    const const2 = sign2 ? o2 * c2 : -o2 * c2;
+    const totalCoef = coef1 + coef2;
+    const totalConst = const1 + const2;
+
+    const simplified = `${totalCoef}${letter}${totalConst >= 0 ? ' + ' : ' - '}${Math.abs(totalConst)}`;
+    const question = 'Expand and simplify ' + expr;
+
+    return [question, [totalCoef, totalConst, simplified]
+    ];
+};
+
+export const answerSectionStyleFactor2 = (
+    <div>
+        <div className={factorisationStyles.inputDiv}>
+            <input className={factorisationStyles.boxInput} type="number" id="Coeff" onWheel={disableScroll}/>
+            <label className={factorisationStyles.textLabel}>a</label>
+            <select name="sign" className={factorisationStyles.boxInput}>
+                <option value="+">+</option>
+                <option value="-">-</option>
+            </select>
+            <input className={factorisationStyles.boxInput} type="number" id="Const" onWheel={disableScroll}/>
+        </div>
+    </div>
+);
+
+export const checkAnswerStyleFactor2 = (correctAnswers) => {
+    const [totalCoef, totalConst, simplified] = correctAnswers;
+
+    const inputCoef = document.querySelector('input[id="Coeff"]').value;
+    const selectSign = document.querySelector('select[name="sign"]').value;
+    const inputConst = document.querySelector('input[id="Const"]').value;
+
+    document.querySelector('input[id="Coeff"]').value = "";
+    document.querySelector('select[name="sign"]').value = "+";
+    document.querySelector('input[id="Const"]').value = "";
+
+    // Validate filled
+    if (!inputCoef || !inputConst) {
+        document.getElementById("answerFeedback").innerHTML = 
+            "Incorrect. Please fill in all fields to answer the question.";
+        return false;
+    }
+
+    const userCoef = Number(inputCoef);
+    const userConst = selectSign === '+' ? Number(inputConst) : -Number(inputConst);
+
+    if (userCoef === totalCoef && userConst === totalConst) {
+        return true;
+    } else {
+        const incorrectFeedback = `Incorrect Your answer is ${inputCoef}a ${selectSign} ${inputConst}. The correct expanded form is ${simplified}.`;
+        document.getElementById("answerFeedback").innerHTML = incorrectFeedback;
+        return false;
+    }
+};
+
+export const factorisationQuestionStyle2 = [setQuestionStyleFactor2, answerSectionStyleFactor2, checkAnswerStyleFactor2];
