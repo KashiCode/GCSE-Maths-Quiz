@@ -431,3 +431,81 @@ const checkAnswerStyle4 = (correctAnswers) => {
 }
 
 export const ratioQuestionStyle4 = [setQuestionStyle4, answerSectionStyle4, checkAnswerStyle4];
+
+// Function to create the fifth question style for ratio questions
+export const setQuestionStyle5 = () => {
+    const items = ["freezers", "cookers", "tables", "chairs", "desks", "lamps", "sofas", "beds", "wardrobes", "shelves"];
+    // Function for generating a random pair of items that don't repeat
+    let i1 = getRandomInt(0, items.length - 1);
+    let i2 = getRandomInt(0, items.length - 1);
+    while (i2 === i1) {
+        i2 = getRandomInt(0, items.length - 1);
+    }
+    const item1 = items[i1];
+    const item2 = items[i2];
+
+    // Generate ratio numbers
+    const generateRatio = (a, b) => {
+        while (b) { [a, b] = [b, a % b]; }
+        return a;
+    };
+    let num1 = getRandomInt(1, 10);
+    let num2 = getRandomInt(1, 10);
+    while (generateRatio(num1, num2) !== 1) {
+        num1 = getRandomInt(1, 10);
+        num2 = getRandomInt(1, 10);
+    }
+
+    // Finding the total sold
+    const sum = num1 + num2;
+    const minK = Math.ceil(51 / sum);
+    const k = getRandomInt(minK, minK + 10);
+    const totalSold = sum * k;
+
+    // Find the correct amounts of each item
+    const unit = totalSold / sum;
+    const correct1 = num1 * unit;
+    const correct2 = num2 * unit;
+
+    // Generate question string
+    let question = `A shop sells ${item1} and ${item2}. The ratio of the number of ${item1} sold to the number of ${item2} sold is ${num1}:${num2}. `;
+    question += `The shop sells a total of ${totalSold} ${item1} and ${item2} in one week. Work out the number of ${item1} and the number of ${item2} sold that week.`;
+
+    return [question, [correct1, correct2, num1, num2, totalSold, item1, item2]];
+};
+
+export const answerSectionStyle5 = (
+    <div>
+        <div className={styles.inputDiv}>
+            <label className={styles.normalQuizLabel}>First Item: </label>
+            <input className={styles.normalQuizInput} type="number" placeholder="First" onWheel={disableScroll}/>
+        </div>
+        <div className={styles.inputDiv}>
+            <label className={styles.normalQuizLabel}>Second Item: </label>
+            <input className={styles.normalQuizInput} type="number" placeholder="Second" onWheel={disableScroll}/>
+        </div>
+    </div>
+);
+
+export const checkAnswerStyle5 = (correctAnswers) => {
+    const ans1 = document.querySelector('input[placeholder="First"]').value;
+    const ans2 = document.querySelector('input[placeholder="Second"]').value;
+    
+    // Clear inputs
+    document.querySelector('input[placeholder="First"]').value = "";
+    document.querySelector('input[placeholder="Second"]').value = "";
+    if (ans1 === "" || ans2 === "") {
+        document.getElementById("answerFeedback").innerHTML = "Incorrect. Please fill in all fields to answer the question.";
+        return false;
+    }
+    if (Number(ans1) === correctAnswers[0] && Number(ans2) === correctAnswers[1]) {
+        return true;
+    } else {
+        document.getElementById("answerFeedback").innerHTML =
+            `Incorrect. Your answer is ${ans1} ${ans2}. When the ratio of ${correctAnswers[5]}:${correctAnswers[6]} is ${correctAnswers[2]}:${correctAnswers[3]} ` +
+            `and the total sold is ${correctAnswers[4]}, the correct answer is ${correctAnswers[0]} ${correctAnswers[5]} and ${correctAnswers[1]} ${correctAnswers[6]}.`;
+        return false;
+    }
+};
+
+export const ratioQuestionStyle5 = [setQuestionStyle5, answerSectionStyle5, checkAnswerStyle5];
