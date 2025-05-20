@@ -490,7 +490,7 @@ export const answerSectionStyle5 = (
 export const checkAnswerStyle5 = (correctAnswers) => {
     const ans1 = document.querySelector('input[placeholder="First"]').value;
     const ans2 = document.querySelector('input[placeholder="Second"]').value;
-    
+
     // Clear inputs
     document.querySelector('input[placeholder="First"]').value = "";
     document.querySelector('input[placeholder="Second"]').value = "";
@@ -509,3 +509,89 @@ export const checkAnswerStyle5 = (correctAnswers) => {
 };
 
 export const ratioQuestionStyle5 = [setQuestionStyle5, answerSectionStyle5, checkAnswerStyle5];
+
+
+
+// Function to create the sixth question style for ratio questions
+export const setQuestionStyle6 = () => {
+    // Name options per initial
+    const namesA = ["Alice", "Amy", "Andrew, Adam", "Alex"];
+    const namesB = ["Ben", "Bella", "Bob", "Bill", "Becky"];
+    const namesC = ["Candice", "Carl", "Chloe", "Chris", "Charlie"];
+    const nameA = namesA[getRandomInt(0, namesA.length - 1)];
+    const nameB = namesB[getRandomInt(0, namesB.length - 1)];
+    const nameC = namesC[getRandomInt(0, namesC.length - 1)];
+
+    // Functions for highest common factor
+    const hcf2 = (a, b) => {
+        while (b) {
+            [a, b] = [b, a % b];
+        }
+        return a;
+    };
+    const hcf3 = (a, b, c) => hcf2(hcf2(a, b), c);
+
+    // Generate ratio numbers
+    let rA, rB, rC;
+    do {
+        rA = getRandomInt(1, 12);
+        rB = getRandomInt(1, 12);
+        rC = getRandomInt(1, 12);
+    } while (hcf3(rA, rB, rC) !== 1);
+
+    // Total shared by the three people
+    const sum = rA + rB + rC;
+    const k = getRandomInt(5, 20);
+    const total = sum * k;
+
+    const unit = total / sum;
+    const correctA = rA * unit;
+    const correctB = rB * unit;
+    const correctC = rC * unit;
+
+    const question = `${nameA}, ${nameB} and ${nameC} share £${total} in the ratio ${rA}:${rB}:${rC}. How much money does each person get?`;
+
+    return [question, [correctA, correctB, correctC, rA, rB, rC, total, nameA, nameB, nameC]];
+};
+
+export const answerSectionStyle6 = (
+  <div>
+    <div className={styles.inputDiv}>
+      <label className={styles.normalQuizLabel}>A name: </label>
+      <input className={styles.normalQuizInput} type="number" placeholder="A name" onWheel={disableScroll}/>
+    </div>
+    <div className={styles.inputDiv}>
+      <label className={styles.normalQuizLabel}>B name: </label>
+      <input className={styles.normalQuizInput} type="number" placeholder="B name" onWheel={disableScroll}/>
+    </div>
+    <div className={styles.inputDiv}>
+      <label className={styles.normalQuizLabel}>C name: </label>
+      <input className={styles.normalQuizInput} type="number" placeholder="C name" onWheel={disableScroll}/>
+    </div>
+  </div>
+);
+
+export const checkAnswerStyle6 = (correctAnswers) => {
+    const ansA = document.querySelector('input[placeholder="A name"]').value;
+    const ansB = document.querySelector('input[placeholder="B name"]').value;
+    const ansC = document.querySelector('input[placeholder="C name"]').value;
+
+    document.querySelector('input[placeholder="A name"]').value = "";
+    document.querySelector('input[placeholder="B name"]').value = "";
+    document.querySelector('input[placeholder="C name"]').value = "";
+
+    if (ansA === "" || ansB === "" || ansC === "") {
+        document.getElementById("answerFeedback").innerHTML = "Incorrect. Please fill in all fields to answer the question.";
+        return false;
+    }
+    if (Number(ansA) === correctAnswers[0] && Number(ansB) === correctAnswers[1] && Number(ansC) === correctAnswers[2]) {
+        return true;
+    } else {
+        document.getElementById("answerFeedback").innerHTML =
+          `Incorrect. Your answers are £${ansA}, £${ansB}, £${ansC}. When ${correctAnswers[7]}, ${correctAnswers[8]} and ${correctAnswers[9]} share £${correctAnswers[6]} in the ratio ${correctAnswers[3]}:${correctAnswers[4]}:${correctAnswers[5]}, ` +
+          `the correct amounts are £${correctAnswers[0]} for ${correctAnswers[7]}, £${correctAnswers[1]} for ${correctAnswers[8]} and £${correctAnswers[2]} for ${correctAnswers[9]}.`;
+        return false;
+    }
+};
+
+export const ratioQuestionStyle6 = [setQuestionStyle6, answerSectionStyle6, checkAnswerStyle6];
