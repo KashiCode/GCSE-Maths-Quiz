@@ -175,3 +175,68 @@ const checkAnswerStyle1 = (correctAnswers) => {
 }
 
 export const probabilityQuestionStyle1 = [setQuestionStyle1, answerSectionStyle1, checkAnswerStyle1];
+
+
+
+
+// Function to create the second question style for probability questions
+export const setQuestionStyleProbability2 = () => {
+    const n = getRandomInt(1, 10);
+    const total = 3 * n;
+
+    // Finding the numbers for the solved fraction answer
+    const numer = n * (n - 1) * (n - 2);
+    const denom = total * (total - 1) * (total - 2);
+
+    // Simplify fraction
+    const gcd = (a, b) => b ? gcd(b, a % b) : a;
+    const g = gcd(numer, denom);
+    const simpNum = numer / g;
+    const simpDen = denom / g;
+
+    const feedback = "Number of red counters is " + n + ". P(1st red) = " + n + "/" + total + ". P(2nd red) = " + (n - 1) + "/" +
+        (total - 1) + ". P(3rd red) = " + (n - 2) + "/" + (total - 2) + ". Multiply the probabilities: " + numer + "/" + denom +
+        ". Simplified: " + simpNum + "/" + simpDen;
+
+    const question =
+      `There are red counters, blue counters and yellow counters in a bag with a total of ${total} counters. ` +
+      `Three counters are taken at random without replacement. Work out the probability of drawing three red counters.`;
+
+    return [question, [simpNum, simpDen, feedback]];
+};
+
+export const answerSectionStyleProbability2 = (
+    <div className={styles.inputDiv} style={{display: "flex", lineHeight: "3.5em", marginTop: "1em"}}>
+        <label className={styles.normalQuizLabel}>Probability: </label>
+        <div className={styles.fractionDiv}>
+            <input className={styles.fractionInput} type="number" id="Numerator" onWheel={disableScroll}/>
+            <hr className={styles.fractionBar} />
+            <input className={styles.fractionInput} type="number" id="Denominator" onWheel={disableScroll}/>
+        </div>
+    </div>
+);
+
+export const checkAnswerStyleProbability2 = (correctAnswers) => {
+    const [simpNum, simpDen, feedback] = correctAnswers;
+    const numInput = document.querySelector('input[id="Numerator"]').value;
+    const denInput = document.querySelector('input[id="Denominator"]').value;
+
+    document.querySelector('input[id="Numerator"]').value = "";
+    document.querySelector('input[id="Denominator"]').value = "";
+
+    if (numInput === "" || denInput === "") {
+        document.getElementById("answerFeedback").innerHTML =
+          "Incorrect. Please fill in both numerator and denominator.";
+        return false;
+    }
+
+    if (Number(numInput) === simpNum && Number(denInput) === simpDen) {
+        return true;
+    } else {
+        document.getElementById("answerFeedback").innerHTML =
+          "Incorrect your answer is " + numInput + "/" + denInput + ". " + feedback;
+        return false;
+    }
+};
+
+export const probabilityQuestionStyle2 = [setQuestionStyleProbability2, answerSectionStyleProbability2, checkAnswerStyleProbability2];
