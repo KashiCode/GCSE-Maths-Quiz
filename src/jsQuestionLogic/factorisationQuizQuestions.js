@@ -354,7 +354,7 @@ export const checkAnswerStyleFactor4 = (correctAnswers) => {
     ) {
         return true;
     } else {
-        incorrectFeedback = 'Incorrect, your answer is (${inP}x + ${inU})(${inR}x + ${inV}).' + incorrectFeedback;
+        incorrectFeedback = "Incorrect, your answer is (" + inP + "x + " + inU + ")(" + inR + "x + " + inV + ")." + incorrectFeedback;
         document.getElementById("answerFeedback").innerHTML = incorrectFeedback;
         return false;
     }
