@@ -240,3 +240,87 @@ export const checkAnswerStyleProbability2 = (correctAnswers) => {
 };
 
 export const probabilityQuestionStyle2 = [setQuestionStyleProbability2, answerSectionStyleProbability2, checkAnswerStyleProbability2];
+
+
+
+
+
+// Function to create the third question style for probability questions
+export const setQuestionStyleProbability3 = () => {
+    // Random probabilities with two decimals
+    const pSat = Number((Math.random() * 0.8 + 0.1).toFixed(2));
+    const pSunWin = Number((Math.random() * 0.8 + 0.1).toFixed(2));
+    const pSunLose = Number((Math.random() * 0.8 + 0.1).toFixed(2));
+
+    // Define event types and find probabilities
+    const events = [
+      {
+        desc: 'win both matches',
+        calc: () => pSat * pSunWin
+      },
+      {
+        desc: 'win exactly one match',
+        calc: () => pSat * (1 - pSunWin) + (1 - pSat) * pSunLose
+      },
+      {
+        desc: 'lose exactly one match',
+        calc: () => pSat * (1 - pSunWin) + (1 - pSat) * pSunLose
+      },
+      {
+        desc: 'lose both matches',
+        calc: () => (1 - pSat) * (1 - pSunLose)
+      }
+    ];
+    const choice = events[getRandomInt(0, events.length - 1)];
+
+    // Probabilities rounded to 4 decimals
+    const raw = choice.calc();
+    const correctProb = Number(raw.toFixed(4));
+
+    const question =
+      `A darts team plays on Saturday and Sunday. P(win Saturday) = ${pSat}. If they win Saturday, P(win Sunday) = ${pSunWin}. ` +
+      `If they do not win Saturday, P(win Sunday) = ${pSunLose}. Find the probability that the team will ${choice.desc}. Round ` + 
+      `your answer to 4 decimal places.`;
+
+    return [question, [pSat, pSunWin, pSunLose, choice.desc, correctProb]];
+};
+
+export const answerSectionStyleProbability3 = (
+  <div className={styles.inputDiv}>
+    <label className={styles.normalQuizLabel}>Probability: </label>
+    <input className={styles.normalQuizInput} type="number" placeholder="Enter Probability" onWheel={disableScroll} />
+  </div>
+);
+
+export const checkAnswerStyleProbability3 = (correctAnswers) => {
+    const [pSat, pSunWin, pSunLose, desc, correctProb] = correctAnswers;
+    const input = document.querySelector('input[placeholder="Enter Probability"]').value;
+
+    // Clear input
+    document.querySelector('input[placeholder="Enter Probability"]').value = '';
+
+    if (input === '') {
+        document.getElementById('answerFeedback').innerHTML =
+          'Incorrect. Please enter a probability.';
+        return false;
+    }
+    const userProb = Number(input);
+    if (userProb === correctProb) {
+        return true;
+    } else {
+        const lines = [];
+        lines.push(`You entered: ${userProb}`);
+        lines.push(`P(win Sat) = ${pSat}`);
+        lines.push(`P(win Sun | win Sat) = ${pSunWin}`);
+        lines.push(`P(win Sun | lose Sat) = ${pSunLose}`);
+        lines.push(`Event: ${desc}`);
+        lines.push(
+          `Correct probability = ${correctProb}`
+        );
+        document.getElementById('answerFeedback').innerHTML =
+          'Incorrect. Solution:<br/>' + lines.join('<br/>');
+        return false;
+    }
+};
+
+export const probabilityQuestionStyle3 = [setQuestionStyleProbability3, answerSectionStyleProbability3, checkAnswerStyleProbability3];
