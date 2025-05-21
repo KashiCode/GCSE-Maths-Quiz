@@ -324,3 +324,115 @@ export const checkAnswerStyleProbability3 = (correctAnswers) => {
 };
 
 export const probabilityQuestionStyle3 = [setQuestionStyleProbability3, answerSectionStyleProbability3, checkAnswerStyleProbability3];
+
+
+
+
+// Function to create the fourth question style for probability questions
+export const setQuestionStyleProbability4 = () => {
+    // Random name
+    const names = ["Alice", "Ben", "Cara", "Daniel", "Edward"];
+    const name = names[getRandomInt(0, names.length - 1)];
+
+    // Random total cards 
+    const N = getRandomInt(7, 15);
+    const k = getRandomInt(2, 4);
+
+    // Random event type
+    const eventType = Math.random() < 0.5 ? "even" : "odd";
+
+    // Count of odd-numbered cards
+    const oddCount = Math.ceil(N / 2);
+
+    // Combination helper
+    const comb = (n, r) => {
+        let res = 1;
+        for (let i = 1; i <= r; i++) {
+            res = res * (n - r + i) / i;
+        }
+        return res;
+    };
+
+    const totalComb = comb(N, k);
+    const oddComb = comb(oddCount, k);
+
+    // Raw probability fraction
+    let rawNum, rawDen;
+    if (eventType === "odd") {
+        rawNum = oddComb;
+        rawDen = totalComb;
+    } else {
+        rawNum = totalComb - oddComb;
+        rawDen = totalComb;
+    }
+
+    const gcd = (a, b) => b ? gcd(b, a % b) : a;
+    const g = gcd(rawNum, rawDen);
+    const simpNum = rawNum / g;
+    const simpDen = rawDen / g;
+
+    let steps = 
+      `Total ways = ${totalComb}; ` +
+      `Odd cards=${oddCount}, ways all odd = ${oddComb}; `;
+    if (eventType === "odd") {
+        steps += `P(odd product)=${oddComb}/${totalComb}=${simpNum}/${simpDen}`;
+    } else {
+        steps += `P(even product)=1-${oddComb}/${totalComb}=${rawNum}/${rawDen}=${simpNum}/${simpDen}`;
+    }
+
+    const question =
+      `${name} has ${N} cards numbered 1 to ${N}. ` +
+      `They draw ${k} cards at random. ` +
+      `Work out the probability that the product of the numbers is ${eventType}.`;
+
+    return [question, [simpNum, simpDen, steps]];
+};
+
+export const answerSectionStyleProbability4 = (
+  <div className={styles.inputDiv} style={{display: "flex", lineHeight: "3.5em", marginTop: "1em"}}>
+    <label className={styles.normalQuizLabel}>Probability: </label>
+    <div className={styles.fractionDiv}>
+        <input
+          className={styles.fractionInput}
+          type="number"
+          id="Numerator"
+          onWheel={disableScroll}
+        />
+        <hr className={styles.fractionBar} />
+        <input
+          className={styles.fractionInput}
+          type="number"
+          id="Denominator"
+          onWheel={disableScroll}
+        />
+    </div>
+  </div>
+);
+
+export const checkAnswerStyleProbability4 = (correctAnswers) => {
+    const [simpNum, simpDen, steps] = correctAnswers;
+    const numInput = document.querySelector('input[id="Numerator"]').value;
+    const denInput = document.querySelector('input[id="Denominator"]').value;
+
+    // Clear inputs
+    document.querySelector('input[id="Numerator"]').value = "";
+    document.querySelector('input[id="Denominator"]').value = "";
+
+    if (numInput === "" || denInput === "") {
+        document.getElementById("answerFeedback").innerHTML =
+          "Incorrect. Please fill in both numerator and denominator.";
+        return false;
+    }
+
+    const userNum = Number(numInput);
+    const userDen = Number(denInput);
+    if (userNum === simpNum && userDen === simpDen) {
+        return true;
+    } else {
+        document.getElementById("answerFeedback").innerHTML =
+          `You entered: ${userNum}/${userDen}. Solution steps: ${steps}`;
+        return false;
+    }
+};
+
+export const probabilityQuestionStyle4 = [setQuestionStyleProbability4, answerSectionStyleProbability4, checkAnswerStyleProbability4];
