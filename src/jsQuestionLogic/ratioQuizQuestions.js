@@ -782,3 +782,72 @@ export const ratioQuestionStyle8 = [
   checkAnswerStyle8,
 ];
 
+
+// Function to create the ninth question style for ratio questions
+export const setQuestionStyle9 = () => {
+  const gcd = (a, b) => (b ? gcd(b, a % b) : a);
+
+
+  const k = getRandomInt(2, 5);   // cylinder radius = k·x
+  const h = getRandomInt(1, 5);   // cylinder height = h·x
+
+  const hemi      = 3;
+  const cylRaw    = 2 * (k * k + k * h);
+  const g         = gcd(hemi, cylRaw);
+  const hemiSim   = hemi / g;
+  const cylSim    = cylRaw / g;
+
+  const question = (
+    `A solid hemisphere has radius x.\n` +
+    `A solid cylinder has radius ${k}x and height ${h}x.\n\n` +
+    `Surface area of a sphere = 4πr²  (where r is the radius)\n\n` +
+    `Work out the ratio\n\n` +
+    ` total surface area of the hemisphere : total surface area of the cylinder\n\n` +
+    `Give your answer in its simplest form.`
+  );
+
+  return [question, [hemiSim, cylSim, hemi, cylRaw, k, h]];
+};
+
+export const answerSectionStyle9 = (
+  <div>
+    <div className={styles.inputDiv}>
+      <label className={styles.normalQuizLabel}>Hemisphere : </label>
+      <input className={styles.normalQuizInput} type="number" placeholder="Hemisphere" onWheel={disableScroll}/>
+    </div>
+    <div className={styles.inputDiv}>
+      <label className={styles.normalQuizLabel}>Cylinder : </label>
+      <input className={styles.normalQuizInput} type="number" placeholder="Cylinder" onWheel={disableScroll}/>
+    </div>
+  </div>
+);
+
+export const checkAnswerStyle9 = correct => {
+  const [hSim, cSim, hemi, cylRaw, k, h] = correct;
+  const hIn = document.querySelector('input[placeholder="Hemisphere"]').value;
+  const cIn = document.querySelector('input[placeholder="Cylinder"]').value;
+
+  document.querySelector('input[placeholder="Hemisphere"]').value = "";
+  document.querySelector('input[placeholder="Cylinder"]').value   = "";
+
+  if (hIn === "" || cIn === "") {
+    document.getElementById("answerFeedback").innerHTML =
+      "Incorrect. Please fill in both boxes.";
+    return false;
+  }
+
+  if (+hIn === hSim && +cIn === cSim) return true;
+
+  document.getElementById("answerFeedback").innerHTML =
+    `Incorrect. Your answer is ${hIn}:${cIn}.<br/>` +
+    `Hemisphere area = 3πx².<br/>` +
+    `Cylinder area   = 2πx²( ${k}² + ${k}·${h} ) = ${cylRaw}πx².<br/>` +
+    `Ratio = 3 : ${cylRaw} = ${hSim}:${cSim} in simplest form.`;
+  return false;
+};
+
+export const ratioQuestionStyle9 = [
+  setQuestionStyle9,
+  answerSectionStyle9,
+  checkAnswerStyle9,
+];
