@@ -436,3 +436,590 @@ export const checkAnswerStyleProbability4 = (correctAnswers) => {
 };
 
 export const probabilityQuestionStyle4 = [setQuestionStyleProbability4, answerSectionStyleProbability4, checkAnswerStyleProbability4];
+
+
+// Function to create the sixth question style for probability questions
+const setQuestionStyleProbability6 = () => {
+  const probs = [
+    [1, 2], [1, 3], [2, 3],
+    [2, 5], [3, 5], [3, 4],
+  ];
+
+  let F0, C0, A, p, q, x; // variables
+
+  while (true) {
+    F0 = getRandomInt(40, 90);            // initial total fish
+    C0 = getRandomInt(15, F0 - 15);       // initial carp
+    A  = getRandomInt(8, 15);             // fish added
+
+    [p, q] = probs[getRandomInt(0, probs.length - 1)];
+    const P = p / q;                      
+
+    // Solve for x = tench added
+    x = C0 + A - P * (F0 + A);
+
+    if (Number.isInteger(x) && x >= 0 && x <= A) break; // good set
+  }
+
+  const question =
+    `A pond had ${F0} fish.\n` +
+    `${C0} were carp and the rest were tench.\n` +
+    `${A} fish were added.\n\n` +
+    `The probability that a fish picked at random is a carp is now ` +
+    `${p}/${q}.\n\n` +
+    `How many tench were added?`;
+                                      
+  return [question, x];
+};
+
+const answerSectionStyleProbability6 = (
+  <div className={styles.inputDiv}>
+    <label className={styles.normalQuizLabel}>Tench added: </label>
+    <input
+      className={styles.normalQuizInput}
+      type="number"
+      id="TenchInput"
+      placeholder="Enter number"
+      onWheel={disableScroll}
+    />
+  </div>
+);
+
+const checkAnswerStyleProbability6 = correctX => {
+  const inp = document.getElementById("TenchInput").value;
+
+  document.getElementById("TenchInput").value = "";
+
+  if (inp === "") {
+    document.getElementById("answerFeedback").innerHTML =
+      "Incorrect. Please enter a number.";
+    return false;
+  }
+
+  if (+inp === correctX) {
+    return true;
+  } else {
+    document.getElementById("answerFeedback").innerHTML =
+      `Incorrect. Your answer is ${inp}.  The correct number of tench added is ${correctX}.`;
+    return false;
+  }
+};
+
+export const probabilityQuestionStyle6 = [
+  setQuestionStyleProbability6,
+  answerSectionStyleProbability6,
+  checkAnswerStyleProbability6,
+];
+
+
+// Function to create the eighth question style for probability questions
+const setQuestionStyleProbability8 = () => {
+
+  const fracText = f => {
+    const map = {0.25:"a quarter", 0.2:"a fifth", 0.3:"3 tenths", 0.33:"a third"};
+    return map[f.toFixed(2)] || `${f*100}%`;
+  };
+
+  const ratioOptions = [
+    [5, 2],
+    [4, 3],
+    [3, 2],
+  ];
+
+  const factorOptions = [
+    [2, "double"],
+    [3, "triple"],
+    [0.5, "half"],
+  ];
+
+  let N, menFrac, a, b, k, kWord;
+  let M, Mp, Mf, W, Wp, Wf;
+
+  while (true) {
+    // total candidates
+    N = getRandomInt(60, 120);
+
+    // men fraction
+    menFrac = Math.random() < 0.5 ? 0.25 : 1 / 3;
+    M = N * menFrac;
+    if (!Number.isInteger(M)) continue;
+
+    // men pass : fail
+    [a, b] = ratioOptions[getRandomInt(0, ratioOptions.length - 1)];
+    Mp = (a / (a + b)) * M;
+    Mf = M - Mp;
+    if (!Number.isInteger(Mp)) continue;
+
+    // women numbers
+    W = N - M;
+
+    [k, kWord] = factorOptions[getRandomInt(0, factorOptions.length - 1)];
+    Wf = W / (k + 1);
+    Wp = W - Wf;
+
+    if (
+      Number.isInteger(Wf) &&
+      Number.isInteger(Wp)
+    ) break;
+  }
+
+  /*Build the JSX stem – paragraph + inline SVG tree with inputs    */
+
+  const question = (
+    <>
+      <p>
+        {N} people take a driving test.<br />
+        {fracText(menFrac)} are men.<br />
+        For the men, the ratio <strong>pass : fail = {a} : {b}</strong>.<br />
+        The number of women who pass is <strong>{kWord}</strong> the number of
+        women who fail.
+      </p>
+
+      {/* --- frequency tree --- */}
+      <svg width="450" height="240" style={{overflow: "visible"}}>
+        {/* lines */}
+        <line x1="70" y1="60"  x2="170" y2="40"  stroke="black" />
+        <line x1="70" y1="60"  x2="170" y2="140" stroke="black" />
+        <line x1="170" y1="40" x2="300" y2="20"  stroke="black" />
+        <line x1="170" y1="40" x2="300" y2="70"  stroke="black" />
+        <line x1="170" y1="140" x2="300" y2="110" stroke="black" />
+        <line x1="170" y1="140" x2="300" y2="170" stroke="black" />
+
+        {/* root node – total (given) */}
+        <ellipse cx="70" cy="60" rx="30" ry="20" stroke="black" fill="white"/>
+        <text x="70" y="60" textAnchor="middle" dominantBaseline="middle">{N}</text>
+
+        {/* men / women intermediate nodes (inputs) */}
+        <ellipse cx="170" cy="40" rx="30" ry="20" stroke="black" fill="white"/>
+        <foreignObject x="140" y="25" width="60" height="30">
+          <input data-key="menTotal" className="treeInput" />
+        </foreignObject>
+
+        <ellipse cx="170" cy="140" rx="30" ry="20" stroke="black" fill="white"/>
+        <foreignObject x="140" y="125" width="60" height="30">
+          <input data-key="womenTotal" className="treeInput" />
+        </foreignObject>
+
+        {/* leaf nodes */}
+        {/* men pass */}
+        <ellipse cx="300" cy="20" rx="30" ry="20" stroke="black" fill="white"/>
+        <foreignObject x="270" y="5" width="60" height="30">
+          <input data-key="menPass" className="treeInput" />
+        </foreignObject>
+        {/* men fail */}
+        <ellipse cx="300" cy="70" rx="30" ry="20" stroke="black" fill="white"/>
+        <foreignObject x="270" y="55" width="60" height="30">
+          <input data-key="menFail" className="treeInput" />
+        </foreignObject>
+        {/* women pass */}
+        <ellipse cx="300" cy="110" rx="30" ry="20" stroke="black" fill="white"/>
+        <foreignObject x="270" y="95" width="60" height="30">
+          <input data-key="womenPass" className="treeInput" />
+        </foreignObject>
+        {/* women fail */}
+        <ellipse cx="300" cy="170" rx="30" ry="20" stroke="black" fill="white"/>
+        <foreignObject x="270" y="155" width="60" height="30">
+          <input data-key="womenFail" className="treeInput" />
+        </foreignObject>
+
+        {/* labels */}
+        <text x="105" y="36">men</text>
+        <text x="95" y="136">women</text>
+        <text x="335" y="16">pass</text>
+        <text x="335" y="66">fail</text>
+        <text x="335" y="106">pass</text>
+        <text x="335" y="166">fail</text>
+      </svg>
+
+      <p>Complete the frequency tree.</p>
+    </>
+  );
+
+
+  const answers = {
+    menTotal:   M,
+    womenTotal: W,
+    menPass:    Mp,
+    menFail:    Mf,
+    womenPass:  Wp,
+    womenFail:  Wf,
+  };
+
+  return [question, answers];
+};
+
+const answerSectionStyleProbability8 = (
+  <div>
+    {/*N/A - IGNORE THIS LINE*/}
+  </div>
+);
+
+const checkAnswerStyleProbability8 = correctObj => {
+  const keys = Object.keys(correctObj);
+  const wrong = [];
+
+  keys.forEach(k => {
+    const val = document.querySelector(`input[data-key="${k}"]`).value;
+    if (+val !== correctObj[k]) wrong.push({k, val});
+    document.querySelector(`input[data-key="${k}"]`).value = "";
+  });
+
+  if (wrong.length === 0) return true;
+
+  const msgLines = wrong.map(
+    ({k, val}) => `${k.replace(/([A-Z])/g," $1")}: entered ${val}, should be ${correctObj[k]}`
+  );
+  document.getElementById("answerFeedback").innerHTML =
+    "Incorrect.<br/>" + msgLines.join("<br/>");
+  return false;
+};
+
+export const probabilityQuestionStyle8 = [
+  setQuestionStyleProbability8,
+  answerSectionStyleProbability8,
+  checkAnswerStyleProbability8,
+];
+
+
+// Function to create the ninth question style for probability questions
+const setQuestionStyleProbability9 = () => {
+  /* Pick three probabilities that sum to < 1 so the red slot is left over.
+                */
+  let Pblue, Pyel, Pgreen, Pred;
+
+  while (true) {
+    const pool = [0.10,0.15,0.20,0.25,0.30,0.35,0.40];
+    Pblue  = pool[getRandomInt(0, pool.length - 1)];
+    Pyel   = pool[getRandomInt(0, pool.length - 1)];
+    Pgreen = pool[getRandomInt(0, pool.length - 1)];
+
+    if (Pblue + Pyel + Pgreen < 1) {
+      Pred = +(1 - (Pblue + Pyel + Pgreen)).toFixed(2);
+      if (Pred > 0) break;
+    }
+  }
+
+  const totals = [48, 60, 72, 80, 84, 96, 100, 120];
+  let N, blueCount;
+  while (true) {
+    N = totals[getRandomInt(0, totals.length - 1)];
+    blueCount = N * Pblue;
+    if (Number.isInteger(blueCount) && blueCount > 20 && blueCount < 100) break;
+  }
+
+  const redCount = N * Pred;   
+
+  /*JSX stem with the probability table                            */
+  const question = (
+    <>
+      <p>
+        A box contains counters that are red, blue, yellow or green. The table shows some information about picking a counter at random.
+      </p>
+
+      <table className={styles.probTable}>
+        <thead>
+          <tr>
+            <th></th>
+            <th>red</th>
+            <th>blue</th>
+            <th>yellow</th>
+            <th>green</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Probability</td>
+            <td>?</td>
+            <td>{Pblue.toFixed(2)}</td>
+            <td>{Pyel.toFixed(2)}</td>
+            <td>{Pgreen.toFixed(2)}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>There are {blueCount} blue counters.</p> <p><strong>How many red counters are there?</strong></p>
+    </>
+  );
+
+  return [question, redCount];
+};
+
+
+const answerSectionStyleProbability9 = (
+  <div className={styles.inputDiv}>
+    <label className={styles.normalQuizLabel}>Red counters: </label>
+    <input
+      className={styles.normalQuizInput}
+      type="number"
+      id="RedTableInput"
+      placeholder="Enter number"
+      onWheel={disableScroll}
+    />
+  </div>
+);
+
+
+const checkAnswerStyleProbability9 = correctRed => {
+  const val = document.getElementById("RedTableInput").value;
+  document.getElementById("RedTableInput").value = "";   
+
+  if (val === "") {
+    document.getElementById("answerFeedback").innerHTML =
+      "Incorrect. Please enter a number.";
+    return false;
+  }
+
+  if (+val === correctRed) return true;
+
+  document.getElementById("answerFeedback").innerHTML =
+    `Incorrect. Your answer is ${val}. <br/>` +
+    `The correct number of red counters is ${correctRed}.`;
+  return false;
+};
+
+export const probabilityQuestionStyle9 = [
+  setQuestionStyleProbability9,
+  answerSectionStyleProbability9,
+  checkAnswerStyleProbability9,
+];
+
+
+// Function to create the fifth question style for probability questions
+const setQuestionStyleProbability5 = () => {
+  const names = ["Temi", "Alex", "Ben", "Cara", "Dev", "Ella"];
+  const name  = names[getRandomInt(0, names.length - 1)];
+
+                            
+  const diceCount = 2;
+  const faces     = 6;
+
+  // Generate all possible totals and count the single-digit primes
+  const isPrime = n => {
+    if (n < 2) return false;
+    for (let i = 2; i * i <= n; i++) if (n % i === 0) return false;
+    return true;
+  };
+
+  let favourable = 0;
+  const totalOutcomes = faces ** diceCount; 
+
+  for (let d1 = 1; d1 <= faces; d1++) {
+    for (let d2 = 1; d2 <= faces; d2++) {
+      const sum = d1 + d2;
+      if (sum < 10 && isPrime(sum)) favourable++;
+    }
+  }
+
+  const gcd = (a, b) => (b ? gcd(b, a % b) : a);
+  const g   = gcd(favourable, totalOutcomes);
+  const simpNum = favourable / g;
+  const simpDen = totalOutcomes / g;
+
+  const question =
+    `${name} rolls two fair, six-sided dice. The two numbers are added ` +
+    `to give a total.\n\n` +
+    `Work out the probability that the total is a single-digit prime ` +
+    `number.`;
+
+  return [question, [simpNum, simpDen, favourable, totalOutcomes]];
+};
+
+const answerSectionStyleProbability5 = (
+  <div className={styles.inputDiv} style={{display:"flex",lineHeight:"3.5em",marginTop:"1em"}}>
+    <label className={styles.normalQuizLabel}>Probability: </label>
+    <div className={styles.fractionDiv}>
+      <input className={styles.fractionInput} type="number" id="Numerator"   onWheel={disableScroll}/>
+      <hr   className={styles.fractionBar}/>
+      <input className={styles.fractionInput} type="number" id="Denominator" onWheel={disableScroll}/>
+    </div>
+  </div>
+);
+
+const checkAnswerStyleProbability5 = correct => {
+  const [simpNum, simpDen, fav, tot] = correct;
+  const numInput = document.getElementById("Numerator").value;
+  const denInput = document.getElementById("Denominator").value;
+
+  document.getElementById("Numerator").value   = "";
+  document.getElementById("Denominator").value = "";
+
+  if (numInput === "" || denInput === "") {
+    document.getElementById("answerFeedback").innerHTML =
+      "Incorrect. Please fill in both numerator and denominator.";
+    return false;
+  }
+
+  if (+numInput === simpNum && +denInput === simpDen) return true;
+
+  document.getElementById("answerFeedback").innerHTML =
+    `Incorrect. Your answer is ${numInput}/${denInput}. ` +
+    `There are ${fav} favourable outcomes out of ${tot}, ` +
+    `so the probability simplifies to ${simpNum}/${simpDen}.`;
+  return false;
+};
+
+export const probabilityQuestionStyle5 = [
+  setQuestionStyleProbability5,
+  answerSectionStyleProbability5,
+  checkAnswerStyleProbability5,
+];
+
+
+// Function to create the tenth question style for probability questions
+const setQuestionStyleProbability10 = () => {
+  
+
+  //        Maths : Science
+  const ratioMS = [2, 3];   
+  const kOptions = [
+    [0.5, "half as many"],
+    [2,   "double"],
+    [3,   "triple"],
+  ];
+  let N, diff, k, kText,
+      B, G,             // totals
+      Tm, Ts,           // Maths / Science totals
+      Gm, Gs,           // girls maths / science
+      Bm, Bs;           // boys maths / science
+
+  while (true) {
+    
+    N = 5 * getRandomInt(14, 30);   
+
+ 
+    diff = 2 * getRandomInt(3, 10); 
+    B = (N + diff) / 2;
+    G = N - B;
+    if (!Number.isInteger(B)) continue;
+
+    [k, kText] = kOptions[getRandomInt(0, kOptions.length - 1)];
+
+    const denom = 1 + k;
+    if (Math.abs(denom - 1.5) < 1e-9) {           // k = 0.5 → denom 1.5
+      if (G % 3 !== 0) continue;                  // need G multiple of 3
+      Gs = (G * 2) / 3;                           //  G / 1.5
+    } else {
+      if (G % denom !== 0) continue;
+      Gs = G / denom;
+    }
+    Gm = Math.round(k * Gs);                      
+
+
+    Tm = (ratioMS[0] / 5) * N;                    
+    Ts = N - Tm;
+    if (!Number.isInteger(Tm)) continue;
+
+    Bm = Tm - Gm;
+    Bs = B - Bm;
+    if (Bm < 0 || Bs < 0) continue;              
+
+    break; 
+  }
+
+ 
+  const question = (
+    <>
+      <p>
+        {N} students have Maths or Science next lesson.<br />
+        There are <strong>{diff} more boys than girls</strong> altogether.<br />
+        The ratio&nbsp;&nbsp;<strong>Maths : Science = 2 : 3</strong>.<br />
+        {kText.charAt(0).toUpperCase() + kText.slice(1)} girls have Maths as have Science.
+      </p>
+
+      <p><strong>5 (a)</strong> Complete the table.</p>
+
+      <table className={styles.contTable}>
+        <thead>
+          <tr>
+            <th></th>
+            <th>Boys</th>
+            <th>Girls</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Maths</td>
+            <td><input data-key="Bm" className="contInp" /></td>
+            <td><input data-key="Gm" className="contInp" /></td>
+            <td><input data-key="Tm" className="contInp" /></td>
+          </tr>
+          <tr>
+            <td>Science</td>
+            <td><input data-key="Bs" className="contInp" /></td>
+            <td><input data-key="Gs" className="contInp" /></td>
+            <td><input data-key="Ts" className="contInp" /></td>
+          </tr>
+          <tr>
+            <td>Total</td>
+            <td><input data-key="B" className="contInp" /></td>
+            <td><input data-key="G" className="contInp" /></td>
+            <td>{N}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p><strong>5 (b)</strong> A student is chosen at random.</p>
+      <p>Work out the probability that it is a <strong>boy who has Maths</strong>.</p>
+    </>
+  );
+
+
+  const gcd = (a, b) => (b ? gcd(b, a % b) : a);
+  const fav = Bm;                
+  const g   = gcd(fav, N);
+  const num = fav / g;
+  const den = N   / g;
+
+  const answers = {
+    Bm, Gm, Tm, Bs, Gs, Ts, B, G,
+    num, den, fav, total: N,
+  };
+
+  return [question, answers];
+};
+
+const answerSectionStyleProbability10 = (
+  <div style={{marginTop: "1em"}}>
+    <div className={styles.inputDiv} style={{display:"flex",lineHeight:"3.5em"}}>
+      <label className={styles.normalQuizLabel}>Probability: </label>
+      <div className={styles.fractionDiv}>
+        <input className={styles.fractionInput} type="number" id="ProbNum" onWheel={disableScroll}/>
+        <hr   className={styles.fractionBar}/>
+        <input className={styles.fractionInput} type="number" id="ProbDen" onWheel={disableScroll}/>
+      </div>
+    </div>
+  </div>
+);
+
+const checkAnswerStyleProbability10 = correct => {
+  const keys = ["Bm","Gm","Tm","Bs","Gs","Ts","B","G"];
+  const wrong = [];
+
+  keys.forEach(k => {
+    const inp = document.querySelector(`input[data-key="${k}"]`).value;
+    if (+inp !== correct[k]) wrong.push(`${k}: ${inp} → ${correct[k]}`);
+    // clear
+    document.querySelector(`input[data-key="${k}"]`).value = "";
+  });
+
+  const nIn = document.getElementById("ProbNum").value;
+  const dIn = document.getElementById("ProbDen").value;
+  document.getElementById("ProbNum").value = "";
+  document.getElementById("ProbDen").value = "";
+
+  if (+nIn !== correct.num || +dIn !== correct.den)
+    wrong.push(`Probability: ${nIn}/${dIn} → ${correct.num}/${correct.den}`);
+
+  if (wrong.length === 0) return true;
+
+  document.getElementById("answerFeedback").innerHTML =
+    "Incorrect.<br/>" + wrong.join("<br/>");
+  return false;
+};
+
+export const probabilityQuestionStyle10 = [
+  setQuestionStyleProbability10,
+  answerSectionStyleProbability10,
+  checkAnswerStyleProbability10,
+];
