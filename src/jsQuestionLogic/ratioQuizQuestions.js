@@ -683,3 +683,102 @@ export const checkAnswerStyle7 = (correctAnswers) => {
 };
 
 export const ratioQuestionStyle7 = [setQuestionStyle7, answerSectionStyle7, checkAnswerStyle7];
+
+
+
+// Function to create the eighth question style for ratio questions
+export const setQuestionStyle8 = () => {
+  const boys   = ["Andrew", "Ben", "Chris", "Daniel", "Edward", "Felix"];
+  const namesC = ["Carl", "Dylan", "Ethan", "George", "Harry", "Ivan"];
+
+    // fractions to use in the question
+  const fracs = [
+    [1, 2], [1, 3], [1, 4],
+    [2, 3], [3, 4],
+  ];
+
+  let A, B, C;          // names
+  let rA, rB;           // ratio numbers
+  let num1, den1;       // fraction A gives
+  let num2, den2;       // fraction B gives
+  let unit;             // £ per ratio
+  let shareA, shareB;   // initial shares
+  let answer;           // money Carl receives
+
+  while (true) {
+    A = boys[getRandomInt(0, boys.length - 1)];
+    do { B = boys[getRandomInt(0, boys.length - 1)]; } while (B === A);
+    C = namesC[getRandomInt(0, namesC.length - 1)];
+
+    rA = getRandomInt(3, 9);
+    rB = getRandomInt(4, 10);
+    const hcf = (a, b) => (b ? hcf(b, a % b) : a);
+    if (hcf(rA, rB) !== 1) continue;
+
+    [num1, den1] = fracs[getRandomInt(0, fracs.length - 1)];
+    [num2, den2] = fracs[getRandomInt(0, fracs.length - 1)];
+
+    const lcm = (a, b) => (a * b) / hcf(a, b);
+    const mult = lcm(den1, den2);
+    unit = mult * getRandomInt(4, 12);        
+
+    shareA = rA * unit;
+    shareB = rB * unit;
+
+    const giveA = (shareA * num1) / den1;
+    const giveB = (shareB * num2) / den2;
+
+    if (Number.isInteger(giveA) && Number.isInteger(giveB)) {
+      answer = giveA + giveB;
+      break;
+    }
+  }
+
+  
+  const question = (
+    `\u200B${A} and ${B} share some money in the ratio ${rA} : ${rB}.\n` +
+    `${B} gets £${shareB}.\n\n` +
+    `${A} gives ${num1}/${den1} of his share to ${C}.\n` +
+    `${B} gives ${num2}/${den2} of his share to ${C}.\n\n` +
+    `How much money does ${C} receive?`
+  );
+
+  return [question, answer];
+};
+
+export const answerSectionStyle8 = (
+  <div className={styles.inputDiv}>
+    <label className={styles.normalQuizLabel}>Amount (£): </label>
+    <input
+      className={styles.normalQuizInput}
+      type="number"
+      id="CarlAmount"
+      placeholder="Enter amount"
+      onWheel={disableScroll}
+    />
+  </div>
+);
+
+export const checkAnswerStyle8 = correct => {
+  const val = document.getElementById("CarlAmount").value;
+  document.getElementById("CarlAmount").value = "";   // clear
+
+  if (val === "") {
+    document.getElementById("answerFeedback").innerHTML =
+      "Incorrect. Please enter an amount.";
+    return false;
+  }
+
+  if (+val === correct) return true;
+
+  document.getElementById("answerFeedback").innerHTML =
+    `Incorrect. The correct amount is £${correct}.`;
+  return false;
+};
+
+export const ratioQuestionStyle8 = [
+  setQuestionStyle8,
+  answerSectionStyle8,
+  checkAnswerStyle8,
+];
+
