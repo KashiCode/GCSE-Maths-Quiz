@@ -865,64 +865,62 @@ export const probabilityQuestionStyle5 = [
 ];
 
 
-// Function to create the tenth question style for probability questions
-const setQuestionStyleProbability10 = () => {
-  
-
-  //        Maths : Science
-  const ratioMS = [2, 3];   
+const makeContingencyData = () => {
+  const ratioMS = [2, 3];                 // Maths : Science
   const kOptions = [
     [0.5, "half as many"],
     [2,   "double"],
     [3,   "triple"],
   ];
+
   let N, diff, k, kText,
-      B, G,             // totals
-      Tm, Ts,           // Maths / Science totals
-      Gm, Gs,           // girls maths / science
-      Bm, Bs;           // boys maths / science
+      B, G, Tm, Ts, Gm, Gs, Bm, Bs;
 
   while (true) {
-    
-    N = 5 * getRandomInt(14, 30);   
-
- 
-    diff = 2 * getRandomInt(3, 10); 
-    B = (N + diff) / 2;
-    G = N - B;
-    if (!Number.isInteger(B)) continue;
+    N   = 5 * getRandomInt(14, 30);       // total pupils – multiple of 5
+    diff = 2 * getRandomInt(3, 10);       // boys – girls  (even number)
+    B   = (N + diff) / 2;
+    G   = N - B;
+    if (!Number.isInteger(B)) continue;   // keep looping until integer
 
     [k, kText] = kOptions[getRandomInt(0, kOptions.length - 1)];
 
-    const denom = 1 + k;
-    if (Math.abs(denom - 1.5) < 1e-9) {           // k = 0.5 → denom 1.5
-      if (G % 3 !== 0) continue;                  // need G multiple of 3
-      Gs = (G * 2) / 3;                           //  G / 1.5
+    // girls split k : 1 between Maths : Science
+    const denom = 1 + k;                  // e.g. 1.5, 3, 4
+    if (Math.abs(denom - 1.5) < 1e-9) {   // k = 0.5
+      if (G % 3) continue;
+      Gs = (G * 2) / 3;                   //  G / 1.5
     } else {
-      if (G % denom !== 0) continue;
+      if (G % denom) continue;
       Gs = G / denom;
     }
-    Gm = Math.round(k * Gs);                      
+    Gm = Math.round(k * Gs);
 
-
-    Tm = (ratioMS[0] / 5) * N;                    
+    Tm = (ratioMS[0] / 5) * N;            // total Maths
     Ts = N - Tm;
     if (!Number.isInteger(Tm)) continue;
 
     Bm = Tm - Gm;
     Bs = B - Bm;
-    if (Bm < 0 || Bs < 0) continue;              
+    if (Bm < 0 || Bs < 0) continue;       // reject impossible splits
 
-    break; 
+    break;
   }
 
- 
+  return { N, diff, kText, B, G, Tm, Ts, Gm, Gs, Bm, Bs };
+};
+
+// Function to create the tenth question style for probability questions
+const setQuestionStyleProbability10a = () => {
+  const data = makeContingencyData();
+  const { N, diff, kText } = data;
+
   const question = (
     <>
       <p>
-        {N} students have Maths or Science next lesson.<br />
-        There are <strong>{diff} more boys than girls</strong> altogether.<br />
-        The ratio&nbsp;&nbsp;<strong>Maths : Science = 2 : 3</strong>.<br />
+        {N} students have Maths or Science next lesson.<br/>
+        There are <strong>{diff} more boys than girls</strong> altogether.<br/>
+        The ratio&nbsp;<strong>Maths : Science = 2 : 3</strong>.<br/>
         {kText.charAt(0).toUpperCase() + kText.slice(1)} girls have Maths as have Science.
       </p>
 
@@ -930,12 +928,7 @@ const setQuestionStyleProbability10 = () => {
 
       <table className={styles.contTable}>
         <thead>
-          <tr>
-            <th></th>
-            <th>Boys</th>
-            <th>Girls</th>
-            <th>Total</th>
-          </tr>
+          <tr><th></th><th>Boys</th><th>Girls</th><th>Total</th></tr>
         </thead>
         <tbody>
           <tr>
@@ -958,68 +951,121 @@ const setQuestionStyleProbability10 = () => {
           </tr>
         </tbody>
       </table>
-
-      <p><strong>5 (b)</strong> A student is chosen at random.</p>
-      <p>Work out the probability that it is a <strong>boy who has Maths</strong>.</p>
     </>
   );
 
 
-  const gcd = (a, b) => (b ? gcd(b, a % b) : a);
-  const fav = Bm;                
-  const g   = gcd(fav, N);
-  const num = fav / g;
-  const den = N   / g;
-
-  const answers = {
-    Bm, Gm, Tm, Bs, Gs, Ts, B, G,
-    num, den, fav, total: N,
-  };
-
-  return [question, answers];
+  return [question, data];
 };
 
-const answerSectionStyleProbability10 = (
-  <div style={{marginTop: "1em"}}>
-    <div className={styles.inputDiv} style={{display:"flex",lineHeight:"3.5em"}}>
-      <label className={styles.normalQuizLabel}>Probability: </label>
-      <div className={styles.fractionDiv}>
-        <input className={styles.fractionInput} type="number" id="ProbNum" onWheel={disableScroll}/>
-        <hr   className={styles.fractionBar}/>
-        <input className={styles.fractionInput} type="number" id="ProbDen" onWheel={disableScroll}/>
-      </div>
-    </div>
-  </div>
-);
+const answerSectionStyleProbability10a = <></>;
 
-const checkAnswerStyleProbability10 = correct => {
+const checkAnswerStyleProbability10a = correct => {
   const keys = ["Bm","Gm","Tm","Bs","Gs","Ts","B","G"];
   const wrong = [];
 
   keys.forEach(k => {
-    const inp = document.querySelector(`input[data-key="${k}"]`).value;
-    if (+inp !== correct[k]) wrong.push(`${k}: ${inp} → ${correct[k]}`);
-    // clear
-    document.querySelector(`input[data-key="${k}"]`).value = "";
+    const el = document.querySelector(`input[data-key="${k}"]`);
+    if (+el.value !== correct[k]) wrong.push(`${k}: ${el.value} → ${correct[k]}`);
+    el.value = "";
   });
 
-  const nIn = document.getElementById("ProbNum").value;
-  const dIn = document.getElementById("ProbDen").value;
-  document.getElementById("ProbNum").value = "";
-  document.getElementById("ProbDen").value = "";
-
-  if (+nIn !== correct.num || +dIn !== correct.den)
-    wrong.push(`Probability: ${nIn}/${dIn} → ${correct.num}/${correct.den}`);
-
   if (wrong.length === 0) return true;
-
   document.getElementById("answerFeedback").innerHTML =
     "Incorrect.<br/>" + wrong.join("<br/>");
   return false;
 };
 
-export const probabilityQuestionStyle10 = [
-  setQuestionStyleProbability10,
-  answerSectionStyleProbability10,
-  checkAnswerStyleProbability10,
+export const probabilityQuestionStyle10a = [
+  setQuestionStyleProbability10a,
+  answerSectionStyleProbability10a,
+  checkAnswerStyleProbability10a,
+];
+
+
+const setQuestionStyleProbability10b = () => {
+  const d = makeContingencyData();
+
+  /* Static table (no inputs needed) */
+  const tableRow = (row, rKey) => (
+    <tr>
+      <td>{row}</td>
+      <td>{d[`${rKey}m`]}</td>
+      <td>{d[`${rKey}s`]}</td>
+      <td>{d[`T${rKey}`]}</td>
+    </tr>
+  );
+
+  /* randomly choose one of the four groups */
+  const opts = [
+    { fav: d.Bm, label: "a boy who has Maths" },
+    { fav: d.Bs, label: "a boy who has Science" },
+    { fav: d.Gm, label: "a girl who has Maths" },
+    { fav: d.Gs, label: "a girl who has Science" },
+  ];
+  const { fav, label } = opts[getRandomInt(0, opts.length - 1)];
+
+  const gcd = (a,b)=>b?gcd(b,a%b):a;
+  const g = gcd(fav, d.N);
+  const num = fav / g, den = d.N / g;
+
+  const question = (
+    <>
+      <p>
+        {d.N} students have Maths or Science next lesson.<br/>
+        There are <strong>{d.diff} more boys than girls</strong> altogether.<br/>
+        The ratio&nbsp;<strong>Maths : Science = 2 : 3</strong>.<br/>
+        {d.kText.charAt(0).toUpperCase() + d.kText.slice(1)} girls have Maths as have Science.
+      </p>
+
+      <table className={styles.contTable}>
+        <thead>
+          <tr><th></th><th>Boys</th><th>Girls</th><th>Total</th></tr>
+        </thead>
+        <tbody>
+          {tableRow("Maths",    "T")}   
+          {tableRow("Science",  "S")}
+          <tr><td>Total</td><td>{d.B}</td><td>{d.G}</td><td>{d.N}</td></tr>
+        </tbody>
+      </table>
+
+      <p>
+        A student is chosen at random.<br/>
+        Work out the probability that it is <strong>{label}</strong>.
+      </p>
+    </>
+  );
+
+  return [question, { num, den }];
+};
+
+const answerSectionStyleProbability10b = (
+  <div className={styles.inputDiv} style={{display:"flex",lineHeight:"3.5em"}}>
+    <label className={styles.normalQuizLabel}>Probability: </label>
+    <div className={styles.fractionDiv}>
+      <input className={styles.fractionInput} type="number" id="ProbNum" onWheel={disableScroll}/>
+      <hr className={styles.fractionBar}/>
+      <input className={styles.fractionInput} type="number" id="ProbDen" onWheel={disableScroll}/>
+    </div>
+  </div>
+);
+
+const checkAnswerStyleProbability10b = correct => {
+  const n = +document.getElementById("ProbNum").value;
+  const d = +document.getElementById("ProbDen").value;
+  document.getElementById("ProbNum").value = "";
+  document.getElementById("ProbDen").value = "";
+
+  if (n === correct.num && d === correct.den) return true;
+
+  document.getElementById("answerFeedback").innerHTML =
+    `Incorrect. Your answer is ${n}/${d}. The correct probability is ` +
+    `${correct.num}/${correct.den}.`;
+  return false;
+};
+
+export const probabilityQuestionStyle10b = [
+  setQuestionStyleProbability10b,
+  answerSectionStyleProbability10b,
+  checkAnswerStyleProbability10b,
 ];
