@@ -500,34 +500,35 @@ export const factorisationQuestionStyle6 = [
 // Question Style 7: Identify a factor (user types A, B, C, etc.)
 export const setQuestionStyleFactor7 = () => {
     const a = getRandomInt(1, 5);  
-    const b = getRandomInt(1, 7);  
+    const b = getRandomInt(1, 6);  
+    const ab = a * b;
 
-    const expression = `${a * b}x² - ${a * b}xy`;
-
-    const correctFactor = `(${a}x - ${b}y)`;
+    const expression = `${ab}x² - ${ab}xy`;
 
     
-    const options = [
-        correctFactor,
-        `(${b}x - ${b}y)`,
-        `(${a}x + ${b}y)`,
-        `(${a * b}xy)`,
-        `(${a}x - ${b}xy)`
+    const trueFactors = [`${ab}x`, `(x - y)`];
+    const correctFactor = trueFactors[Math.floor(Math.random() * trueFactors.length)];
+
+    const labels = ["A", "B", "C", "D", "E"];
+
+    
+    const distractors = [
+        `(${a}x - ${b}xy)`,
+        `(${ab}xy)`,
+        `(${a}x - ${b}y)`,
+        `(${a + 1}x - ${b}y)`
     ];
 
     
-    const labels = ["A", "B", "C", "D", "E"];
-    const shuffled = options.sort(() => 0.5 - Math.random());
+    const allOptions = [correctFactor, ...distractors].sort(() => 0.5 - Math.random());
 
-    const labeledOptions = shuffled.map((opt, i) => ({
-        label: labels[i],
-        value: opt
+    const labeledOptions = allOptions.map((value, idx) => ({
+        label: labels[idx],
+        value
     }));
 
-    
     const correctLabel = labeledOptions.find(o => o.value === correctFactor)?.label;
 
-   
     const question = (
         <div className={factorisationStyles.inputDiv}>
             <div style={{ fontSize: "1.5em", marginBottom: "0.5em" }}>
@@ -543,6 +544,7 @@ export const setQuestionStyleFactor7 = () => {
 
     return [question, [correctLabel]];
 };
+
 
 export const answerSectionStyleFactor7 = (
     <div className={factorisationStyles.inputDiv}>
