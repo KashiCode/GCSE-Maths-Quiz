@@ -361,3 +361,174 @@ export const checkAnswerStyleFactor4 = (correctAnswers) => {
 };
 
 export const factorisationQuestionStyle4 = [setQuestionStyleFactor4, answerSectionStyleFactor4, checkAnswerStyleFactor4];
+
+
+
+
+
+// Question Style 6: Simplifying a rational expression
+export const setQuestionStyleFactor6 = () => {
+    const a = getRandomInt(1, 5); 
+    const b = getRandomInt(1, 9); 
+
+    const num = `${a * a}x² - ${a * b}x`;
+    const denom = `${a * a}x² - ${b * b}`;
+
+    const question = (
+        <div className={factorisationStyles.simplifyQuestion}>
+            Simplify fully:
+            <div style={{ fontSize: "1.5em", marginTop: "0.5em" }}>
+                <div>{num}</div>
+                <div style={{ borderTop: "1px solid white", width: "fit-content" }}>{denom}</div>
+            </div>
+        </div>
+    );
+
+    const simplified = `${a}x/(${a}x + ${b})`; 
+    return [question, [simplified]];
+};
+
+export const answerSectionStyleFactor6 = (
+    <div>
+        <div className={factorisationStyles.inputDiv}>
+            <input
+                id="simplifyInput"
+                className={factorisationStyles.boxInput}
+                type="text"
+                placeholder=""
+            />
+        </div>
+    </div>
+);
+
+export const checkAnswerStyleFactor6 = (correctAnswers) => {
+    const [expected] = correctAnswers;
+    let input = document.getElementById("simplifyInput").value.trim().replace(/\s/g, '');
+
+    document.getElementById("simplifyInput").value = "";
+
+    if (!input) {
+        document.getElementById("answerFeedback").innerHTML =
+            "Incorrect. Please enter a simplified expression.";
+        return false;
+    }
+
+    
+    const normalize = (expr) =>
+        expr.replace(/(?<!\d)1x/g, 'x')   
+            .replace(/\((.*?)\)/g, '$1'); 
+
+    const normInput = normalize(input);
+    const normExpected = normalize(expected);
+
+    if (normInput === normExpected) {
+        return true;
+    }
+
+    document.getElementById("answerFeedback").innerHTML =
+        `Incorrect. Your answer was "${input}". The correct simplified form is ${expected}.`;
+    return false;
+};
+
+
+
+
+export const factorisationQuestionStyle6 = [
+    setQuestionStyleFactor6,
+    answerSectionStyleFactor6,
+    checkAnswerStyleFactor6
+];
+
+
+// Question Style 7: Identify a factor (user types A, B, C, etc.)
+export const setQuestionStyleFactor7 = () => {
+    const a = getRandomInt(1, 5);  
+    const b = getRandomInt(1, 6);  
+    const ab = a * b;
+
+    const expression = `${ab}x² - ${ab}xy`;
+
+    
+    const trueFactors = [`${ab}x`, `(x - y)`];
+    const correctFactor = trueFactors[Math.floor(Math.random() * trueFactors.length)];
+
+    const labels = ["A", "B", "C", "D", "E"];
+
+    
+    const distractors = [
+        `(${a}x - ${b}xy)`,
+        `(${ab}xy)`,
+        `(${a}x - ${b}y)`,
+        `(${a + 1}x - ${b}y)`
+    ];
+
+    
+    const allOptions = [correctFactor, ...distractors].sort(() => 0.5 - Math.random());
+
+    const labeledOptions = allOptions.map((value, idx) => ({
+        label: labels[idx],
+        value
+    }));
+
+    const correctLabel = labeledOptions.find(o => o.value === correctFactor)?.label;
+
+    const question = (
+        <div className={factorisationStyles.inputDiv}>
+            <div style={{ fontSize: "1.5em", marginBottom: "0.5em" }}>
+                One of the factors of <strong>{expression}</strong> is:
+            </div>
+            {labeledOptions.map((opt, i) => (
+                <div key={i} style={{ marginBottom: "0.3em" }}>
+                    <strong>{opt.label})</strong> {opt.value}
+                </div>
+            ))}
+        </div>
+    );
+
+    return [question, [correctLabel]];
+};
+
+
+export const answerSectionStyleFactor7 = (
+    <div className={factorisationStyles.inputDiv}>
+        <br />
+        <label htmlFor="mcqInput">  </label>
+        <input
+            id="mcqInput"
+            className={factorisationStyles.boxInput}
+            type="text"
+            placeholder=""
+            maxLength={1}
+        />
+    </div>
+);
+
+export const checkAnswerStyleFactor7 = (correctAnswers) => {
+    const correctLabel = correctAnswers[0].toUpperCase();
+    const userInput = document.getElementById("mcqInput").value.trim().toUpperCase();
+
+    document.getElementById("mcqInput").value = "";
+
+    if (!userInput || !"ABCDE".includes(userInput)) {
+        document.getElementById("answerFeedback").innerHTML =
+            "Incorrect. Please enter a valid option (A, B, C, D, or E).";
+        return false;
+    }
+
+    if (userInput === correctLabel) {
+        return true;
+    }
+
+    document.getElementById("answerFeedback").innerHTML =
+        `Incorrect. The correct answer was "${correctLabel}".`;
+    return false;
+};
+
+export const factorisationQuestionStyle7 = [
+    setQuestionStyleFactor7,
+    answerSectionStyleFactor7,
+    checkAnswerStyleFactor7
+];
+
+
+
