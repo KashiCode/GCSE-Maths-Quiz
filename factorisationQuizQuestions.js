@@ -497,6 +497,93 @@ export const factorisationQuestionStyle6 = [
 ];
 
 
+// Question Style 7: Identify a factor (user types A, B, C, etc.)
+export const setQuestionStyleFactor7 = () => {
+    const a = getRandomInt(1, 5);  
+    const b = getRandomInt(1, 7);  
+
+    const expression = `${a * b}x² - ${a * b}xy`;
+
+    const correctFactor = `(${a}x - ${b}y)`;
+
+    
+    const options = [
+        correctFactor,
+        `(${b}x - ${b}y)`,
+        `(${a}x + ${b}y)`,
+        `(${a * b}xy)`,
+        `(${a}x - ${b}xy)`
+    ];
+
+    
+    const labels = ["A", "B", "C", "D", "E"];
+    const shuffled = options.sort(() => 0.5 - Math.random());
+
+    const labeledOptions = shuffled.map((opt, i) => ({
+        label: labels[i],
+        value: opt
+    }));
+
+    
+    const correctLabel = labeledOptions.find(o => o.value === correctFactor)?.label;
+
+   
+    const question = (
+        <div className={factorisationStyles.inputDiv}>
+            <div style={{ fontSize: "1.5em", marginBottom: "0.5em" }}>
+                One of the factors of <strong>{expression}</strong> is:
+            </div>
+            {labeledOptions.map((opt, i) => (
+                <div key={i} style={{ marginBottom: "0.3em" }}>
+                    <strong>{opt.label})</strong> {opt.value}
+                </div>
+            ))}
+        </div>
+    );
+
+    return [question, [correctLabel]];
+};
+
+export const answerSectionStyleFactor7 = (
+    <div className={factorisationStyles.inputDiv}>
+        <br />
+        <label htmlFor="mcqInput">  </label>
+        <input
+            id="mcqInput"
+            className={factorisationStyles.boxInput}
+            type="text"
+            placeholder=""
+            maxLength={1}
+        />
+    </div>
+);
+
+export const checkAnswerStyleFactor7 = (correctAnswers) => {
+    const correctLabel = correctAnswers[0].toUpperCase();
+    const userInput = document.getElementById("mcqInput").value.trim().toUpperCase();
+
+    document.getElementById("mcqInput").value = "";
+
+    if (!userInput || !"ABCDE".includes(userInput)) {
+        document.getElementById("answerFeedback").innerHTML =
+            "Incorrect. Please enter a valid option (A, B, C, D, or E).";
+        return false;
+    }
+
+    if (userInput === correctLabel) {
+        return true;
+    }
+
+    document.getElementById("answerFeedback").innerHTML =
+        `Incorrect. The correct answer was "${correctLabel}".`;
+    return false;
+};
+
+export const factorisationQuestionStyle7 = [
+    setQuestionStyleFactor7,
+    answerSectionStyleFactor7,
+    checkAnswerStyleFactor7
+];
 
 
 
