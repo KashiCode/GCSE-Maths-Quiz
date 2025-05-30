@@ -1069,3 +1069,70 @@ export const probabilityQuestionStyle10b = [
   answerSectionStyleProbability10b,
   checkAnswerStyleProbability10b,
 ];
+
+
+// Question Style 7: Probability with (n + k) tennis balls
+export const setQuestionStyleProbability7 = () => {
+    const whiteBalls = getRandomInt(1, 10);
+
+    const question = (
+      <span className={styles.probabilityQuestion}>
+
+            A bag contains <i>n</i> + {whiteBalls} tennis balls.
+            <br />
+            <i>n</i> of them are yellow and the other {whiteBalls} are white.
+            <br />
+            John takes a ball at random from the bag and returns it.
+            Write down an expression, in terms of <i>n</i>, for the probability that John takes a white ball.
+        </span>
+    );
+
+    return [question, [`${whiteBalls}/(n + ${whiteBalls})`, whiteBalls]];
+};
+
+export const answerSectionStyleProbability7 = (
+    <div>
+        <div className={styles.inputDiv}>
+            <label className={styles.normalQuizLabel}> </label>
+            <input
+                id="probExpr"
+                className={styles.normalQuizInput}
+                type="text"
+                placeholder=""
+            />
+        </div>
+    </div>
+);
+
+
+export const checkAnswerStyleProbability7 = (correctAnswers) => {
+    const [correctExpr, whiteBalls] = correctAnswers;
+    const userInput = document.getElementById("probExpr").value.trim().replace(/\s/g, '');
+
+    document.getElementById("probExpr").value = "";
+
+    if (!userInput) {
+        document.getElementById("answerFeedback").innerHTML = "Incorrect. Please enter an expression.";
+        return false;
+    }
+
+    const accepted = [
+        `${whiteBalls}/(n+${whiteBalls})`,
+        `(${whiteBalls})/(n+${whiteBalls})`,
+        `${whiteBalls}/(n + ${whiteBalls})`
+    ];
+
+    if (accepted.includes(userInput)) return true;
+
+    document.getElementById("answerFeedback").innerHTML =
+        `Incorrect. Your answer was "${userInput}". The correct expression is ${correctExpr}.`;
+    return false;
+};
+
+export const probabilityQuestionStyle7 = [
+    setQuestionStyleProbability7,
+    answerSectionStyleProbability7,
+    checkAnswerStyleProbability7
+];
+
+
