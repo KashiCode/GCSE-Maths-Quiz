@@ -434,7 +434,7 @@ export const setQuestionStyleFactor6 = () => {
     const question = (
         <div className={factorisationStyles.simplifyQuestion}>
             Simplify fully:
-            <div style={{ fontSize: "1.3em", marginTop: "0.5em" }}>
+            <div style={{ fontSize: "1.5em", marginTop: "0.5em" }}>
                 <div>{num}</div>
                 <div style={{ borderTop: "1px solid white", width: "fit-content" }}>{denom}</div>
             </div>
@@ -452,7 +452,7 @@ export const answerSectionStyleFactor6 = (
                 id="simplifyInput"
                 className={factorisationStyles.boxInput}
                 type="text"
-                placeholder="e.g. 2x/(2x + 3)"
+                placeholder=""
             />
         </div>
     </div>
@@ -460,7 +460,7 @@ export const answerSectionStyleFactor6 = (
 
 export const checkAnswerStyleFactor6 = (correctAnswers) => {
     const [expected] = correctAnswers;
-    const input = document.getElementById("simplifyInput").value.trim().replace(/\s/g, '');
+    let input = document.getElementById("simplifyInput").value.trim().replace(/\s/g, '');
 
     document.getElementById("simplifyInput").value = "";
 
@@ -470,16 +470,33 @@ export const checkAnswerStyleFactor6 = (correctAnswers) => {
         return false;
     }
 
-    const alt = expected.replace(/\((.*?)\)/g, '$1'); 
-    if (input === expected || input === alt) return true;
+    
+    const normalize = (expr) =>
+        expr.replace(/(?<!\d)1x/g, 'x')   
+            .replace(/\((.*?)\)/g, '$1'); 
+
+    const normInput = normalize(input);
+    const normExpected = normalize(expected);
+
+    if (normInput === normExpected) {
+        return true;
+    }
 
     document.getElementById("answerFeedback").innerHTML =
         `Incorrect. Your answer was "${input}". The correct simplified form is ${expected}.`;
     return false;
 };
 
+
+
+
 export const factorisationQuestionStyle6 = [
     setQuestionStyleFactor6,
     answerSectionStyleFactor6,
     checkAnswerStyleFactor6
 ];
+
+
+
+
+
