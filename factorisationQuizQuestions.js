@@ -422,3 +422,64 @@ export const factorisationQuestionStyle5 = [
     answerSectionStyleFactor5,
     checkAnswerStyleFactor5
 ];
+
+// Question Style 6: Simplifying a rational expression
+export const setQuestionStyleFactor6 = () => {
+    const a = getRandomInt(1, 5); 
+    const b = getRandomInt(1, 9); 
+
+    const num = `${a * a}x² - ${a * b}x`;
+    const denom = `${a * a}x² - ${b * b}`;
+
+    const question = (
+        <div className={factorisationStyles.simplifyQuestion}>
+            Simplify fully:
+            <div style={{ fontSize: "1.3em", marginTop: "0.5em" }}>
+                <div>{num}</div>
+                <div style={{ borderTop: "1px solid white", width: "fit-content" }}>{denom}</div>
+            </div>
+        </div>
+    );
+
+    const simplified = `${a}x/(${a}x + ${b})`; 
+    return [question, [simplified]];
+};
+
+export const answerSectionStyleFactor6 = (
+    <div>
+        <div className={factorisationStyles.inputDiv}>
+            <input
+                id="simplifyInput"
+                className={factorisationStyles.boxInput}
+                type="text"
+                placeholder="e.g. 2x/(2x + 3)"
+            />
+        </div>
+    </div>
+);
+
+export const checkAnswerStyleFactor6 = (correctAnswers) => {
+    const [expected] = correctAnswers;
+    const input = document.getElementById("simplifyInput").value.trim().replace(/\s/g, '');
+
+    document.getElementById("simplifyInput").value = "";
+
+    if (!input) {
+        document.getElementById("answerFeedback").innerHTML =
+            "Incorrect. Please enter a simplified expression.";
+        return false;
+    }
+
+    const alt = expected.replace(/\((.*?)\)/g, '$1'); 
+    if (input === expected || input === alt) return true;
+
+    document.getElementById("answerFeedback").innerHTML =
+        `Incorrect. Your answer was "${input}". The correct simplified form is ${expected}.`;
+    return false;
+};
+
+export const factorisationQuestionStyle6 = [
+    setQuestionStyleFactor6,
+    answerSectionStyleFactor6,
+    checkAnswerStyleFactor6
+];
