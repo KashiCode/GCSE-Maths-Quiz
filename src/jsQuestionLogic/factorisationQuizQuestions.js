@@ -389,34 +389,49 @@ export const answerSectionStyleFactor5 = (
             id="factoriseQ5"
             className={styles.normalQuizInput}
             type="text"
-            placeholder="e.g. 7(x + 2y - 3z)"
+            placeholder=""
         />
     </div>
 );
 
 export const checkAnswerStyleFactor5 = (correctAnswers) => {
     const [expected] = correctAnswers;
-    const input = document.getElementById("factoriseQ5").value.trim().replace(/\s/g, '');
-
+    const inputRaw = document.getElementById("factoriseQ5").value.trim();
     document.getElementById("factoriseQ5").value = "";
 
-    if (!input) {
+    if (!inputRaw) {
         document.getElementById("answerFeedback").innerHTML =
             "Incorrect. Please enter a factorised expression.";
         return false;
     }
 
-    const normalisedExpected = expected.replace(/\s/g, '');
-    const normalisedInput = input.replace(/\s/g, '');
+    const normalize = (expr) => {
+        expr = expr.replace(/\s+/g, '');             
+        expr = expr.replace(/1([a-zA-Z])/g, '$1');    
+        const match = expr.match(/^(\d+)\((.+)\)$/); 
+        if (!match) return expr;
 
-    if (normalisedInput === normalisedExpected) {
+        const coeff = match[1];
+        const body = match[2];
+
+        
+        const terms = body.match(/[+-]?[^+-]+/g);
+        const sorted = terms.map(t => t.trim()).sort();
+        return `${coeff}(${sorted.join('')})`;
+    };
+
+    const user = normalize(inputRaw);
+    const expectedNorm = normalize(expected);
+
+    if (user === expectedNorm) {
         return true;
     }
 
     document.getElementById("answerFeedback").innerHTML =
-        `Incorrect. Your answer was "${input}". The correct factorised form is ${expected}.`;
+        `Incorrect. Your answer was "${inputRaw}". The correct factorised form is ${expected}.`;
     return false;
 };
+
 
 export const factorisationQuestionStyle5 = [
     setQuestionStyleFactor5,
