@@ -363,6 +363,67 @@ export const checkAnswerStyleFactor4 = (correctAnswers) => {
 export const factorisationQuestionStyle4 = [setQuestionStyleFactor4, answerSectionStyleFactor4, checkAnswerStyleFactor4];
 
 
+// Question Style 5: identify a factor 
+export const setQuestionStyleFactor5 = () => {
+    const a = getRandomInt(2, 10);  
+    const b = getRandomInt(1, 6);   
+    const c = getRandomInt(1, 6);   
+
+    const expr = `${a}x + ${a * b}y - ${a * c}z`;
+
+    const question = (
+        <span className={styles.quizQuestion}>
+            Factorise fully:<br />
+            {expr}
+        </span>
+    );
+
+    const correctExpr = `${a}(x + ${b}y - ${c}z)`;
+
+    return [question, [correctExpr]];
+};
+
+export const answerSectionStyleFactor5 = (
+    <div className={styles.inputDiv}>
+        <input
+            id="factoriseQ5"
+            className={styles.normalQuizInput}
+            type="text"
+            placeholder="e.g. 7(x + 2y - 3z)"
+        />
+    </div>
+);
+
+export const checkAnswerStyleFactor5 = (correctAnswers) => {
+    const [expected] = correctAnswers;
+    const input = document.getElementById("factoriseQ5").value.trim().replace(/\s/g, '');
+
+    document.getElementById("factoriseQ5").value = "";
+
+    if (!input) {
+        document.getElementById("answerFeedback").innerHTML =
+            "Incorrect. Please enter a factorised expression.";
+        return false;
+    }
+
+    const normalisedExpected = expected.replace(/\s/g, '');
+    const normalisedInput = input.replace(/\s/g, '');
+
+    if (normalisedInput === normalisedExpected) {
+        return true;
+    }
+
+    document.getElementById("answerFeedback").innerHTML =
+        `Incorrect. Your answer was "${input}". The correct factorised form is ${expected}.`;
+    return false;
+};
+
+export const factorisationQuestionStyle5 = [
+    setQuestionStyleFactor5,
+    answerSectionStyleFactor5,
+    checkAnswerStyleFactor5
+];
+
 
 
 
